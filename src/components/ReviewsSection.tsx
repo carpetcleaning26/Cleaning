@@ -66,34 +66,35 @@ export default function ReviewsSection() {
           className="flex flex-col md:flex-row items-center justify-between gap-6"
         >
           <div className="space-y-3 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black uppercase tracking-wider shadow-xs">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-950 text-xs font-black uppercase tracking-wider shadow-xs">
               <Star className="w-4 h-4 fill-amber-400 text-amber-500" />
-              <span>Verified Customer Reviews</span>
+              <span>EXCELLENT — BASED ON 80+ REVIEWS</span>
             </div>
             <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
               Loved by 10,000+ Canberra Locals
             </h2>
-            <p className="text-slate-600 text-base font-medium">
-              Rated 5.0 Stars across Google Reviews and Local Canberra Directories.
+            <p className="text-slate-600 text-base font-medium flex items-center justify-center md:justify-start gap-2">
+              <span className="font-black text-amber-600">5.0★</span>
+              <span>Verified Google Reviews across all ACT suburbs.</span>
             </p>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="bg-white p-4 rounded-2xl border border-slate-200 flex items-center gap-3 shadow-md">
-              <div className="text-3xl font-black text-slate-900">{COMPANY_INFO.googleRating}</div>
+              <div className="text-3xl font-black text-slate-900">{COMPANY_INFO.googleRating}★</div>
               <div>
                 <div className="flex text-amber-400">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <div className="text-xs font-bold text-slate-500 mt-0.5">{COMPANY_INFO.reviewsCount} Google Reviews</div>
+                <div className="text-xs font-black text-slate-700 mt-0.5">80+ Verified Google Reviews</div>
               </div>
             </div>
 
             <button
               onClick={() => setIsWriteModalOpen(true)}
-              className="px-5 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm transition-all hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md"
+              className="px-5 py-3.5 rounded-full bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm transition-all hover:scale-105 active:scale-95 flex items-center gap-2 shadow-md"
             >
               <MessageSquarePlus className="w-4 h-4" />
               <span>Write a Review</span>
@@ -101,54 +102,68 @@ export default function ReviewsSection() {
           </div>
         </motion.div>
 
-        {/* Reviews Cards Grid with Large Decorative Quotes */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {reviews.map((rev, index) => (
-            <motion.div
-              key={rev.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="relative bg-white border border-slate-200/80 rounded-3xl p-6 flex flex-col justify-between space-y-4 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group overflow-hidden"
-            >
-              {/* Background Decorative Quote Mark */}
-              <Quote className="absolute -top-2 -right-2 w-20 h-20 text-sky-100 fill-sky-50 opacity-60 group-hover:scale-110 transition-transform pointer-events-none" />
+        {/* Reviews Horizontal Continuous Marquee Slider */}
+        <div className="relative overflow-hidden py-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 group">
+          
+          {/* Left & Right Gradient Fade Masks */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#f0f9ff] via-[#f0f9ff]/80 to-transparent z-20"></div>
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#f0f9ff] via-[#f0f9ff]/80 to-transparent z-20"></div>
 
-              <div className="space-y-3 relative z-10">
-                {/* Rating Stars & Date */}
-                <div className="flex items-center justify-between">
-                  <div className="flex text-amber-400">
-                    {[...Array(rev.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
+          {/* Marquee Track (Duplicated list for infinite loop, pause on hover) */}
+          <div className="flex gap-6 w-max animate-marquee group-hover:[animation-play-state:paused]">
+            {[...reviews, ...reviews].map((rev, index) => (
+              <motion.div
+                key={`${rev.id}-${index}`}
+                whileHover={{ y: -6, scale: 1.02 }}
+                className="relative w-80 sm:w-96 flex-shrink-0 bg-white border border-slate-200/80 rounded-3xl p-6 flex flex-col justify-between space-y-4 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+              >
+                {/* Background Decorative Quote Mark */}
+                <Quote className="absolute -top-2 -right-2 w-20 h-20 text-sky-100 fill-sky-50 opacity-60 pointer-events-none" />
+
+                <div className="space-y-3 relative z-10">
+                  {/* Rating Stars & Date */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex text-amber-400">
+                      {[...Array(rev.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                      ))}
+                    </div>
+                    <span className="text-xs text-slate-400 font-semibold">{rev.date}</span>
                   </div>
-                  <span className="text-xs text-slate-400 font-semibold">{rev.date}</span>
+
+                  <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed font-medium">
+                    "{rev.comment}"
+                  </p>
                 </div>
 
-                <p className="text-xs sm:text-sm text-slate-700 italic leading-relaxed font-medium">
-                  "{rev.comment}"
-                </p>
-              </div>
-
-              {/* Author Footer */}
-              <div className="pt-4 border-t border-slate-100 flex items-center gap-3 relative z-10">
-                <div className={`w-10 h-10 rounded-full bg-gradient-to-tr ${rev.avatarBg || 'from-sky-500 to-blue-600'} flex items-center justify-center font-bold text-white text-sm shadow-md`}>
-                  {rev.author.charAt(0)}
-                </div>
-                <div>
-                  <div className="text-sm font-black text-slate-900 flex items-center gap-1.5">
-                    {rev.author}
-                    <CheckCircle2 className="w-3.5 h-3.5 text-lime-600" />
+                {/* Author Footer with Profile Image */}
+                <div className="pt-4 border-t border-slate-100 flex items-center gap-3 relative z-10">
+                  {rev.avatarImg ? (
+                    <img
+                      src={rev.avatarImg}
+                      alt={rev.author}
+                      className="w-11 h-11 rounded-full object-cover border-2 border-sky-500 shadow-sm"
+                    />
+                  ) : (
+                    <div className={`w-11 h-11 rounded-full bg-gradient-to-tr ${rev.avatarBg || 'from-sky-500 to-blue-600'} flex items-center justify-center font-bold text-white text-sm shadow-md`}>
+                      {rev.author.charAt(0)}
+                    </div>
+                  )}
+                  <div>
+                    <div className="text-sm font-black text-slate-900 flex items-center gap-1.5">
+                      {rev.author}
+                      <CheckCircle2 className="w-3.5 h-3.5 text-lime-600" />
+                    </div>
+                    <div className="text-xs text-slate-500 font-medium">
+                      {rev.suburb} • <span className="text-sky-700 font-bold">{rev.service}</span>
+                    </div>
                   </div>
-                  <div className="text-xs text-slate-500 font-medium">
-                    {rev.suburb} • <span className="text-sky-700 font-bold">{rev.service}</span>
-                  </div>
                 </div>
-              </div>
 
-            </motion.div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+
         </div>
 
         {/* Write Review Modal */}

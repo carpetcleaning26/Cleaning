@@ -2,7 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import { SERVICES, ACT_SUBURBS, BookingRecord } from '@/data/cleaningData';
-import { Calculator, Check, Calendar as CalendarIcon, Clock, MapPin, Sparkles, User, Phone, Mail, X, ShieldCheck, ArrowRight, RefreshCw, AlertCircle } from 'lucide-react';
+import { Calculator, Check, Calendar as CalendarIcon, Clock, MapPin, Sparkles, User, Phone, Mail, X, ShieldCheck, ArrowRight, RefreshCw, AlertCircle, Bed, Armchair, Grid, Layers, Droplets, Bug, Plus, Minus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedCounter from './AnimatedCounter';
 
 interface QuoteCalculatorProps {
   isOpen?: boolean;
@@ -69,6 +71,20 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
     }
   };
 
+  const renderServiceIcon = (name: string) => {
+    switch (name) {
+      case 'Armchair': return <Armchair className="w-5 h-5" />;
+      case 'Grid': return <Grid className="w-5 h-5" />;
+      case 'Bed': return <Bed className="w-5 h-5" />;
+      case 'Layers': return <Layers className="w-5 h-5" />;
+      case 'Droplets': return <Droplets className="w-5 h-5" />;
+      case 'Bug': return <Bug className="w-5 h-5" />;
+      default: return <Sparkles className="w-5 h-5" />;
+    }
+  };
+
+  const progressPercent = step === 1 ? 33 : step === 2 ? 66 : 100;
+
   const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!customerName || !phone || !suburbSearch) {
@@ -115,20 +131,20 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
   };
 
   return (
-    <div id="calculator-section" className="py-12 bg-f0f9ff">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <div id="calculator-section" className="py-12 bg-[#f0f9ff]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         
         {/* Main Light Card Container */}
-        <div className="relative rounded-3xl bg-white border border-slate-200 shadow-xl p-6 sm:p-10 overflow-hidden">
+        <div className="relative rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 sm:p-10 overflow-hidden">
           
           {/* Top Decorative Blue Glow */}
-          <div className="absolute -top-24 right-0 w-96 h-96 bg-sky-300/20 rounded-full blur-3xl pointer-events-none"></div>
+          <div className="absolute -top-24 right-0 w-96 h-96 bg-sky-400/15 rounded-full blur-3xl pointer-events-none"></div>
 
           {/* Close Header (If Modal Mode) */}
           {onClose && (
             <button
               onClick={onClose}
-              className="absolute top-6 right-6 p-2 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors"
+              className="absolute top-6 right-6 p-2 rounded-full bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors z-20"
             >
               <X className="w-5 h-5" />
             </button>
@@ -136,8 +152,8 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
 
           {/* Header Title */}
           <div className="text-center max-w-2xl mx-auto space-y-3 mb-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 border border-sky-300 text-sky-800 text-xs font-black uppercase tracking-wider">
-              <Calculator className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-100 border border-sky-300 text-sky-800 text-xs font-black uppercase tracking-wider shadow-xs">
+              <Calculator className="w-4 h-4 text-sky-600" />
               <span>Instant Quote & Booking Wizard</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
@@ -150,8 +166,12 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
 
           {/* Booking Confirmation View */}
           {bookingSuccess ? (
-            <div className="py-8 text-center space-y-6 animate-in zoom-in-95 duration-300">
-              <div className="w-20 h-20 mx-auto rounded-full bg-lime-100 text-lime-700 border border-lime-300 flex items-center justify-center shadow-md">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="py-8 text-center space-y-6"
+            >
+              <div className="w-20 h-20 mx-auto rounded-full bg-lime-100 text-lime-700 border border-lime-300 flex items-center justify-center shadow-lg">
                 <Check className="w-10 h-10 animate-bounce" />
               </div>
 
@@ -168,7 +188,7 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
               </div>
 
               {/* Receipt Card */}
-              <div className="max-w-md mx-auto bg-slate-50 p-5 rounded-2xl border border-slate-200 text-left space-y-3 text-sm text-slate-700 shadow-xs">
+              <div className="max-w-md mx-auto bg-slate-50 p-5 rounded-2xl border border-slate-200 text-left space-y-3 text-sm text-slate-700 shadow-sm">
                 <div className="flex justify-between border-b border-slate-200 pb-2">
                   <span className="text-slate-500 font-semibold">Service:</span>
                   <span className="font-bold text-slate-900">{bookingSuccess.serviceTitle}</span>
@@ -197,65 +217,79 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
                     setBookingSuccess(null);
                     setStep(1);
                   }}
-                  className="px-6 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-sm transition-colors flex items-center gap-2"
+                  className="px-6 py-3 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold text-sm transition-colors flex items-center gap-2"
                 >
                   <RefreshCw className="w-4 h-4" />
                   <span>Book Another Service</span>
                 </button>
                 <a
                   href={`tel:0481734225`}
-                  className="px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-black text-sm transition-colors flex items-center gap-2 shadow-md"
+                  className="px-6 py-3 rounded-full bg-sky-600 hover:bg-sky-500 text-white font-black text-sm transition-colors flex items-center gap-2 shadow-md"
                 >
                   <Phone className="w-4 h-4" />
                   <span>Call Dispatch (0481 734 225)</span>
                 </a>
               </div>
-            </div>
+            </motion.div>
           ) : (
             /* Calculator Multi-Step Form */
             <div className="space-y-8">
               
-              {/* Stepper Tabs */}
-              <div className="flex items-center justify-between border-b border-slate-200 pb-4 max-w-xl mx-auto">
-                <button
-                  onClick={() => setStep(1)}
-                  className={`flex items-center gap-2 font-black text-xs sm:text-sm transition-colors ${
-                    step === 1 ? 'text-sky-700' : 'text-slate-400'
-                  }`}
-                >
-                  <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs ${
-                    step === 1 ? 'bg-sky-600 text-white font-black shadow-xs' : 'bg-slate-100 text-slate-500'
-                  }`}>1</span>
-                  <span>1. Service Type</span>
-                </button>
+              {/* Stepper Tabs with Framer Motion Sliding Pill */}
+              <div className="relative flex items-center justify-between bg-slate-100 p-1.5 rounded-2xl max-w-xl mx-auto border border-slate-200">
+                {[
+                  { num: 1, label: 'Service' },
+                  { num: 2, label: 'Schedule' },
+                  { num: 3, label: 'Confirm' }
+                ].map((s) => {
+                  const isCurrent = step === s.num;
+                  const isComplete = step > s.num;
+                  return (
+                    <button
+                      key={s.num}
+                      type="button"
+                      onClick={() => setStep(s.num)}
+                      className={`relative flex-1 py-2.5 rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 transition-colors z-10 ${
+                        isCurrent ? 'text-white' : isComplete ? 'text-sky-700' : 'text-slate-500'
+                      }`}
+                    >
+                      {isCurrent && (
+                        <motion.div
+                          layoutId="activeCalculatorTab"
+                          className="absolute inset-0 bg-sky-600 rounded-xl shadow-md z-0"
+                          transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                        />
+                      )}
+                      <span className="relative z-10 flex items-center gap-1.5">
+                        {isComplete ? (
+                          <Check className="w-4 h-4 text-lime-600 font-bold" />
+                        ) : (
+                          <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[11px] ${
+                            isCurrent ? 'bg-white text-sky-700 font-black' : 'bg-slate-200 text-slate-600'
+                          }`}>
+                            {s.num}
+                          </span>
+                        )}
+                        <span>{s.label}</span>
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
 
-                <div className="h-px w-8 bg-slate-200"></div>
-
-                <button
-                  onClick={() => setStep(2)}
-                  className={`flex items-center gap-2 font-black text-xs sm:text-sm transition-colors ${
-                    step === 2 ? 'text-sky-700' : 'text-slate-400'
-                  }`}
-                >
-                  <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs ${
-                    step === 2 ? 'bg-sky-600 text-white font-black shadow-xs' : 'bg-slate-100 text-slate-500'
-                  }`}>2</span>
-                  <span>2. Schedule & Addons</span>
-                </button>
-
-                <div className="h-px w-8 bg-slate-200"></div>
-
-                <button
-                  onClick={() => setStep(3)}
-                  className={`flex items-center gap-2 font-black text-xs sm:text-sm transition-colors ${
-                    step === 3 ? 'text-sky-700' : 'text-slate-400'
-                  }`}
-                >
-                  <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs ${
-                    step === 3 ? 'bg-sky-600 text-white font-black shadow-xs' : 'bg-slate-100 text-slate-500'
-                  }`}>3</span>
-                  <span>3. Confirm Details</span>
-                </button>
+              {/* Progress Indicator Bar */}
+              <div className="max-w-xl mx-auto space-y-1.5">
+                <div className="flex justify-between text-xs font-bold text-slate-500">
+                  <span>Wizard Progress</span>
+                  <span className="text-sky-700 font-black">{progressPercent}% Completed</span>
+                </div>
+                <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-sky-500 via-blue-600 to-lime-500 rounded-full shadow-xs"
+                    animate={{ width: `${progressPercent}%` }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </div>
               </div>
 
               {/* Error Alert */}
@@ -266,340 +300,426 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
                 </div>
               )}
 
-              {/* STEP 1: Select Service & Quantities */}
-              {step === 1 && (
-                <div className="space-y-6 animate-in fade-in duration-200">
-                  <label className="block text-sm font-extrabold text-slate-900">
-                    Choose Primary Cleaning Service:
-                  </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {SERVICES.map((srv) => {
-                      const isSelected = selectedService === srv.id;
-                      return (
-                        <button
-                          key={srv.id}
-                          type="button"
-                          onClick={() => setSelectedService(srv.id)}
-                          className={`p-4 rounded-2xl border text-left transition-all ${
-                            isSelected
-                              ? 'bg-sky-50 border-sky-600 shadow-md shadow-sky-600/10'
-                              : 'bg-white border-slate-200 hover:border-sky-300'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <Sparkles className={`w-5 h-5 ${isSelected ? 'text-sky-600' : 'text-slate-400'}`} />
-                            {isSelected && <Check className="w-4 h-4 text-sky-600 font-extrabold" />}
+              {/* Step Content Wrapper with AnimatePresence */}
+              <div className="grid lg:grid-cols-12 gap-8 items-start">
+                
+                {/* Left Step Input Panel */}
+                <div className="lg:col-span-8">
+                  <AnimatePresence mode="wait">
+                    
+                    {/* STEP 1: Select Service & Quantities */}
+                    {step === 1 && (
+                      <motion.div
+                        key="step1"
+                        initial={{ opacity: 0, x: -15 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 15 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-6"
+                      >
+                        <label className="block text-sm font-extrabold text-slate-900">
+                          Choose Primary Cleaning Service:
+                        </label>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                          {SERVICES.map((srv) => {
+                            const isSelected = selectedService === srv.id;
+                            return (
+                              <button
+                                key={srv.id}
+                                type="button"
+                                onClick={() => setSelectedService(srv.id)}
+                                className={`p-4 rounded-2xl border text-left transition-all ${
+                                  isSelected
+                                    ? 'bg-sky-50 border-sky-600 shadow-md shadow-sky-600/10'
+                                    : 'bg-white border-slate-200 hover:border-sky-300'
+                                }`}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <div className={`p-2 rounded-xl ${isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600'}`}>
+                                    {renderServiceIcon(srv.iconName)}
+                                  </div>
+                                  {isSelected && <Check className="w-4 h-4 text-sky-600 font-extrabold" />}
+                                </div>
+                                <div className="font-bold text-slate-900 text-sm mt-3">{srv.title}</div>
+                                <div className="text-xs text-lime-700 font-black mt-1">
+                                  From {srv.startingPrice}
+                                </div>
+                              </button>
+                            );
+                          })}
+                        </div>
+
+                        {/* Quantity Stepper with Circular Icon Buttons */}
+                        <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                          <div>
+                            <div className="font-black text-slate-900 text-sm">
+                              {selectedService === 'upholstery-couch' ? 'Number of Sofa Seats' : selectedService === 'tile-grout' ? 'Estimated Area (Sq Meters)' : 'Number of Rooms / Areas'}
+                            </div>
+                            <div className="text-xs text-slate-500 font-medium mt-0.5">
+                              Minimum 3 rooms for base deal ($89). Extra rooms +$27/ea.
+                            </div>
                           </div>
-                          <div className="font-bold text-slate-900 text-sm mt-3">{srv.title}</div>
-                          <div className="text-xs text-sky-700 font-extrabold mt-1">
-                            From {srv.startingPrice}
+
+                          <div className="flex items-center gap-3">
+                            <motion.button
+                              whileTap={{ scale: 0.9 }}
+                              whileHover={{ scale: 1.05 }}
+                              type="button"
+                              onClick={() => setRoomsCount(Math.max(1, roomsCount - 1))}
+                              className="w-10 h-10 rounded-full bg-white border border-slate-300 text-slate-800 font-black flex items-center justify-center hover:bg-slate-100 shadow-sm"
+                            >
+                              <Minus className="w-4 h-4" />
+                            </motion.button>
+                            
+                            <motion.span
+                              key={roomsCount}
+                              initial={{ scale: 1.3, color: '#0284c7' }}
+                              animate={{ scale: 1, color: '#0f172a' }}
+                              className="w-10 text-center text-2xl font-black"
+                            >
+                              {roomsCount}
+                            </motion.span>
+                            
+                            <motion.button
+                              whileTap={{ scale: 0.9 }}
+                              whileHover={{ scale: 1.05 }}
+                              type="button"
+                              onClick={() => setRoomsCount(roomsCount + 1)}
+                              className="w-10 h-10 rounded-full bg-white border border-slate-300 text-slate-800 font-black flex items-center justify-center hover:bg-slate-100 shadow-sm"
+                            >
+                              <Plus className="w-4 h-4" />
+                            </motion.button>
                           </div>
-                        </button>
-                      );
-                    })}
-                  </div>
+                        </div>
 
-                  {/* Quantity Slider / Stepper */}
-                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div>
-                      <div className="font-bold text-slate-900 text-sm">
-                        {selectedService === 'upholstery-couch' ? 'Number of Sofa Seats' : selectedService === 'tile-grout' ? 'Estimated Area (Sq Meters)' : 'Number of Rooms / Areas'}
-                      </div>
-                      <div className="text-xs text-slate-500">
-                        Minimum 3 rooms for base deal ($89). Extra rooms +$27/ea.
-                      </div>
-                    </div>
+                        {/* Next Step CTA */}
+                        <div className="flex items-center justify-end pt-4">
+                          <motion.button
+                            whileTap={{ scale: 0.96 }}
+                            whileHover={{ scale: 1.02 }}
+                            type="button"
+                            onClick={() => setStep(2)}
+                            className="px-7 py-3.5 rounded-full bg-lime-500 hover:bg-lime-400 text-slate-950 font-black text-sm uppercase tracking-wider transition-all flex items-center gap-2 shadow-md"
+                          >
+                            <span>Continue to Schedule</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </motion.button>
+                        </div>
+                      </motion.div>
+                    )}
 
-                    <div className="flex items-center gap-3">
-                      <button
-                        type="button"
-                        onClick={() => setRoomsCount(Math.max(1, roomsCount - 1))}
-                        className="w-10 h-10 rounded-xl bg-white border border-slate-300 text-slate-800 font-black hover:bg-slate-100 text-lg shadow-xs"
+                    {/* STEP 2: Schedule & Add-ons */}
+                    {step === 2 && (
+                      <motion.div
+                        key="step2"
+                        initial={{ opacity: 0, x: -15 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 15 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-6"
                       >
-                        -
-                      </button>
-                      <span className="w-12 text-center text-xl font-black text-sky-700">
-                        {roomsCount}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => setRoomsCount(roomsCount + 1)}
-                        className="w-10 h-10 rounded-xl bg-white border border-slate-300 text-slate-800 font-black hover:bg-slate-100 text-lg shadow-xs"
+                        <div className="space-y-3">
+                          <label className="block text-sm font-extrabold text-slate-900">
+                            Recommended Treatments & Add-ons:
+                          </label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <button
+                              type="button"
+                              onClick={() => toggleAddon('pet-odor')}
+                              className={`p-3.5 rounded-xl border text-left flex items-center justify-between transition-colors ${
+                                selectedAddons.includes('pet-odor')
+                                  ? 'bg-sky-50 border-sky-600 text-slate-900'
+                                  : 'bg-white border-slate-200 text-slate-700'
+                              }`}
+                            >
+                              <div>
+                                <div className="font-bold text-sm">Pet Stain & Odor Enzymatic Wash</div>
+                                <div className="text-xs text-slate-500">Deep urine enzyme breakdown</div>
+                              </div>
+                              <span className="text-xs font-black text-sky-700">+$25</span>
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => toggleAddon('fabric-protection')}
+                              className={`p-3.5 rounded-xl border text-left flex items-center justify-between transition-colors ${
+                                selectedAddons.includes('fabric-protection')
+                                  ? 'bg-sky-50 border-sky-600 text-slate-900'
+                                  : 'bg-white border-slate-200 text-slate-700'
+                              }`}
+                            >
+                              <div>
+                                <div className="font-bold text-sm">Scotchgard Stain Guard</div>
+                                <div className="text-xs text-slate-500">Spill repelling barrier</div>
+                              </div>
+                              <span className="text-xs font-black text-sky-700">+$35</span>
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => toggleAddon('deodorizer')}
+                              className={`p-3.5 rounded-xl border text-left flex items-center justify-between transition-colors ${
+                                selectedAddons.includes('deodorizer')
+                                  ? 'bg-sky-50 border-sky-600 text-slate-900'
+                                  : 'bg-white border-slate-200 text-slate-700'
+                              }`}
+                            >
+                              <div>
+                                <div className="font-bold text-sm">Fresh Jasmine Deodorizer</div>
+                                <div className="text-xs text-slate-500">Long-lasting room perfume</div>
+                              </div>
+                              <span className="text-xs font-black text-sky-700">+$15</span>
+                            </button>
+
+                            <button
+                              type="button"
+                              onClick={() => toggleAddon('flea-spray')}
+                              className={`p-3.5 rounded-xl border text-left flex items-center justify-between transition-colors ${
+                                selectedAddons.includes('flea-spray')
+                                  ? 'bg-sky-50 border-sky-600 text-slate-900'
+                                  : 'bg-white border-slate-200 text-slate-700'
+                              }`}
+                            >
+                              <div>
+                                <div className="font-bold text-sm">End of Lease Flea Spray</div>
+                                <div className="text-xs text-slate-500">Pet exit agreement certificate</div>
+                              </div>
+                              <span className="text-xs font-black text-sky-700">+$45</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Date & Time Selector */}
+                        <div className="grid sm:grid-cols-2 gap-4 pt-2">
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                              <CalendarIcon className="w-4 h-4 text-sky-600" />
+                              Preferred Date:
+                            </label>
+                            <input
+                              type="date"
+                              value={preferredDate}
+                              onChange={(e) => setPreferredDate(e.target.value)}
+                              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 font-bold text-sm focus:outline-none focus:border-sky-600 shadow-xs"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                              <Clock className="w-4 h-4 text-sky-600" />
+                              Preferred Time Slot:
+                            </label>
+                            <select
+                              value={preferredTime}
+                              onChange={(e) => setPreferredTime(e.target.value)}
+                              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 font-bold text-sm focus:outline-none focus:border-sky-600 shadow-xs"
+                            >
+                              <option value="Morning (8:00 AM - 12:00 PM)">Morning (8:00 AM - 12:00 PM)</option>
+                              <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
+                              <option value="Late Afternoon (4:00 PM - 7:00 PM)">Late Afternoon (4:00 PM - 7:00 PM)</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        {/* Navigation Buttons */}
+                        <div className="flex items-center justify-between pt-4">
+                          <button
+                            type="button"
+                            onClick={() => setStep(1)}
+                            className="px-5 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold"
+                          >
+                            Back
+                          </button>
+
+                          <motion.button
+                            whileTap={{ scale: 0.96 }}
+                            whileHover={{ scale: 1.02 }}
+                            type="button"
+                            onClick={() => setStep(3)}
+                            className="px-7 py-3.5 rounded-full bg-lime-500 hover:bg-lime-400 text-slate-950 font-black text-sm uppercase tracking-wider transition-all flex items-center gap-2 shadow-md"
+                          >
+                            <span>Final Step: Details</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </motion.button>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* STEP 3: Customer Details & Final Submit */}
+                    {step === 3 && (
+                      <motion.form
+                        key="step3"
+                        initial={{ opacity: 0, x: -15 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: 15 }}
+                        transition={{ duration: 0.2 }}
+                        onSubmit={handleBookingSubmit}
+                        className="space-y-6"
                       >
-                        +
-                      </button>
-                    </div>
-                  </div>
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                              <User className="w-4 h-4 text-sky-600" />
+                              Full Name *
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              placeholder="e.g. Sarah Jenkins"
+                              value={customerName}
+                              onChange={(e) => setCustomerName(e.target.value)}
+                              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
+                            />
+                          </div>
 
-                  {/* Next Step CTA */}
-                  <div className="flex items-center justify-between pt-4">
-                    <div>
-                      <span className="text-xs font-semibold text-slate-500">Estimated Total:</span>
-                      <div className="text-2xl font-black text-lime-700">${calculatedPrice} AUD</div>
-                    </div>
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                              <Phone className="w-4 h-4 text-sky-600" />
+                              Phone Number *
+                            </label>
+                            <input
+                              type="tel"
+                              required
+                              placeholder="e.g. 0481 734 225"
+                              value={phone}
+                              onChange={(e) => setPhone(e.target.value)}
+                              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
+                            />
+                          </div>
 
-                    <button
-                      type="button"
-                      onClick={() => setStep(2)}
-                      className="px-6 py-3 rounded-xl bg-gradient-to-r from-sky-600 via-blue-600 to-lime-600 hover:from-sky-500 hover:to-lime-500 text-white font-extrabold text-sm transition-all flex items-center gap-2 shadow-md"
-                    >
-                      <span>Continue to Schedule</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </div>
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                              <Mail className="w-4 h-4 text-sky-600" />
+                              Email Address (Optional)
+                            </label>
+                            <input
+                              type="email"
+                              placeholder="sarah@example.com"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
+                              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
+                            />
+                          </div>
+
+                          <div>
+                            <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
+                              <MapPin className="w-4 h-4 text-sky-600" />
+                              Canberra Suburb *
+                            </label>
+                            <select
+                              value={suburbSearch}
+                              onChange={(e) => setSuburbSearch(e.target.value)}
+                              className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
+                            >
+                              {ACT_SUBURBS.map((sub) => (
+                                <option key={sub.name} value={sub.name}>
+                                  {sub.name} ({sub.postcode}) - {sub.region}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                            Street Address (Optional)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. 14 Anketell St, Tuggeranong"
+                            value={address}
+                            onChange={(e) => setAddress(e.target.value)}
+                            className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
+                          />
+                        </div>
+
+                        <div className="flex items-center justify-between pt-2">
+                          <button
+                            type="button"
+                            onClick={() => setStep(2)}
+                            className="px-5 py-2.5 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold"
+                          >
+                            Back
+                          </button>
+
+                          <motion.button
+                            whileTap={{ scale: 0.96 }}
+                            whileHover={{ scale: 1.02 }}
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="px-8 py-3.5 rounded-full bg-lime-500 hover:bg-lime-400 text-slate-950 font-black text-sm uppercase tracking-wider transition-all shadow-md disabled:opacity-50 flex items-center gap-2"
+                          >
+                            {isSubmitting ? (
+                              <>
+                                <RefreshCw className="w-4 h-4 animate-spin" />
+                                <span>Confirming...</span>
+                              </>
+                            ) : (
+                              <>
+                                <Check className="w-5 h-5" />
+                                <span>Submit Booking</span>
+                              </>
+                            )}
+                          </motion.button>
+                        </div>
+                      </motion.form>
+                    )}
+
+                  </AnimatePresence>
                 </div>
-              )}
 
-              {/* STEP 2: Schedule & Add-ons */}
-              {step === 2 && (
-                <div className="space-y-6 animate-in fade-in duration-200">
-                  
-                  <div className="space-y-3">
-                    <label className="block text-sm font-extrabold text-slate-900">
-                      Recommended Treatments & Add-ons:
-                    </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <button
-                        type="button"
-                        onClick={() => toggleAddon('pet-odor')}
-                        className={`p-3.5 rounded-xl border text-left flex items-center justify-between transition-colors ${
-                          selectedAddons.includes('pet-odor')
-                            ? 'bg-sky-50 border-sky-600 text-slate-900'
-                            : 'bg-white border-slate-200 text-slate-700'
-                        }`}
-                      >
-                        <div>
-                          <div className="font-bold text-sm">Pet Stain & Odor Enzymatic Wash</div>
-                          <div className="text-xs text-slate-500">Deep urine enzyme breakdown</div>
-                        </div>
-                        <span className="text-xs font-black text-sky-700">+$25</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => toggleAddon('fabric-protection')}
-                        className={`p-3.5 rounded-xl border text-left flex items-center justify-between transition-colors ${
-                          selectedAddons.includes('fabric-protection')
-                            ? 'bg-sky-50 border-sky-600 text-slate-900'
-                            : 'bg-white border-slate-200 text-slate-700'
-                        }`}
-                      >
-                        <div>
-                          <div className="font-bold text-sm">Scotchgard Stain Guard</div>
-                          <div className="text-xs text-slate-500">Spill repelling barrier</div>
-                        </div>
-                        <span className="text-xs font-black text-sky-700">+$35</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => toggleAddon('deodorizer')}
-                        className={`p-3.5 rounded-xl border text-left flex items-center justify-between transition-colors ${
-                          selectedAddons.includes('deodorizer')
-                            ? 'bg-sky-50 border-sky-600 text-slate-900'
-                            : 'bg-white border-slate-200 text-slate-700'
-                        }`}
-                      >
-                        <div>
-                          <div className="font-bold text-sm">Fresh Jasmine Deodorizer</div>
-                          <div className="text-xs text-slate-500">Long-lasting room perfume</div>
-                        </div>
-                        <span className="text-xs font-black text-sky-700">+$15</span>
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => toggleAddon('flea-spray')}
-                        className={`p-3.5 rounded-xl border text-left flex items-center justify-between transition-colors ${
-                          selectedAddons.includes('flea-spray')
-                            ? 'bg-sky-50 border-sky-600 text-slate-900'
-                            : 'bg-white border-slate-200 text-slate-700'
-                        }`}
-                      >
-                        <div>
-                          <div className="font-bold text-sm">End of Lease Flea Spray</div>
-                          <div className="text-xs text-slate-500">Pet exit agreement certificate</div>
-                        </div>
-                        <span className="text-xs font-black text-sky-700">+$45</span>
-                      </button>
-                    </div>
+                {/* Right Dark Gradient Summary Card with Animated Total */}
+                <div className="lg:col-span-4 rounded-3xl bg-gradient-to-br from-slate-950 via-sky-950 to-slate-900 text-white p-6 shadow-2xl border border-slate-800 space-y-6">
+                  <div className="space-y-1 border-b border-slate-800 pb-4">
+                    <div className="text-[10px] font-black uppercase text-lime-400 tracking-wider">LIVE ESTIMATE</div>
+                    <h3 className="text-xl font-black text-white">Deal Summary</h3>
                   </div>
 
-                  {/* Date & Time Selector */}
-                  <div className="grid sm:grid-cols-2 gap-4 pt-2">
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                        <CalendarIcon className="w-4 h-4 text-sky-600" />
-                        Preferred Date:
-                      </label>
-                      <input
-                        type="date"
-                        value={preferredDate}
-                        onChange={(e) => setPreferredDate(e.target.value)}
-                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 font-bold text-sm focus:outline-none focus:border-sky-600 shadow-xs"
-                      />
+                  <div className="space-y-3 text-xs">
+                    <div className="flex justify-between text-slate-300">
+                      <span>Service:</span>
+                      <span className="font-bold text-white capitalize">{selectedService.replace('-', ' ')}</span>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                        <Clock className="w-4 h-4 text-sky-600" />
-                        Preferred Time Slot:
-                      </label>
-                      <select
-                        value={preferredTime}
-                        onChange={(e) => setPreferredTime(e.target.value)}
-                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 font-bold text-sm focus:outline-none focus:border-sky-600 shadow-xs"
-                      >
-                        <option value="Morning (8:00 AM - 12:00 PM)">Morning (8:00 AM - 12:00 PM)</option>
-                        <option value="Afternoon (12:00 PM - 4:00 PM)">Afternoon (12:00 PM - 4:00 PM)</option>
-                        <option value="Late Afternoon (4:00 PM - 7:00 PM)">Late Afternoon (4:00 PM - 7:00 PM)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Navigation Buttons */}
-                  <div className="flex items-center justify-between pt-4">
-                    <button
-                      type="button"
-                      onClick={() => setStep(1)}
-                      className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold"
-                    >
-                      Back
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setStep(3)}
-                      className="px-6 py-3 rounded-xl bg-gradient-to-r from-sky-600 to-lime-600 hover:from-sky-500 hover:to-lime-500 text-white font-extrabold text-sm transition-all flex items-center gap-2 shadow-md"
-                    >
-                      <span>Final Step: Contact Details</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* STEP 3: Customer Details & Final Submit */}
-              {step === 3 && (
-                <form onSubmit={handleBookingSubmit} className="space-y-6 animate-in fade-in duration-200">
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                        <User className="w-4 h-4 text-sky-600" />
-                        Full Name *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Sarah Jenkins"
-                        value={customerName}
-                        onChange={(e) => setCustomerName(e.target.value)}
-                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
-                      />
+                    <div className="flex justify-between text-slate-300">
+                      <span>Rooms / Seats:</span>
+                      <span className="font-bold text-white">{roomsCount}</span>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                        <Phone className="w-4 h-4 text-sky-600" />
-                        Phone Number *
-                      </label>
-                      <input
-                        type="tel"
-                        required
-                        placeholder="e.g. 0481 734 225"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                        <Mail className="w-4 h-4 text-sky-600" />
-                        Email Address (Optional)
-                      </label>
-                      <input
-                        type="email"
-                        placeholder="sarah@example.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1.5 flex items-center gap-1.5">
-                        <MapPin className="w-4 h-4 text-sky-600" />
-                        Canberra Suburb *
-                      </label>
-                      <select
-                        value={suburbSearch}
-                        onChange={(e) => setSuburbSearch(e.target.value)}
-                        className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
-                      >
-                        {ACT_SUBURBS.map((sub) => (
-                          <option key={sub.name} value={sub.name}>
-                            {sub.name} ({sub.postcode}) - {sub.region}
-                          </option>
+                    {selectedAddons.length > 0 && (
+                      <div className="space-y-1 pt-2 border-t border-slate-800">
+                        <span className="text-slate-400 text-[11px] font-semibold">Selected Add-ons:</span>
+                        {selectedAddons.map((a) => (
+                          <div key={a} className="flex justify-between text-[11px] text-slate-300 pl-2">
+                            <span>• {a.replace('-', ' ')}</span>
+                          </div>
                         ))}
-                      </select>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Big Focal Estimated Total Display */}
+                  <div className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-1 text-center">
+                    <div className="text-[11px] font-black uppercase tracking-wider text-slate-400">ESTIMATED TOTAL</div>
+                    <div className="text-4xl sm:text-5xl font-black text-lime-400">
+                      $<AnimatedCounter value={calculatedPrice} />
+                    </div>
+                    <div className="text-[10px] text-slate-400 font-semibold">Includes 20% Auto-Applied Discount</div>
+                  </div>
+
+                  <div className="text-[11px] text-slate-400 space-y-2 pt-2 border-t border-slate-800">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="w-4 h-4 text-lime-400 flex-shrink-0" />
+                      <span>100% Satisfaction Guarantee</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-sky-400 flex-shrink-0" />
+                      <span>Zero Upfront Credit Card Deposit</span>
                     </div>
                   </div>
+                </div>
 
-                  <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
-                      Street Address (Optional)
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="e.g. 14 Anketell St, Tuggeranong"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      className="w-full bg-white border border-slate-300 rounded-xl px-4 py-2.5 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
-                    />
-                  </div>
-
-                  {/* Summary & Submit */}
-                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
-                    <div className="flex justify-between text-sm">
-                      <span className="text-slate-600 font-bold">Total Price Estimate:</span>
-                      <span className="font-black text-lime-700 text-lg">${calculatedPrice} AUD</span>
-                    </div>
-                    <div className="text-xs text-slate-600 flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-sky-600" />
-                      <span>Zero upfront deposit required. Pay after job completion!</span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center justify-between pt-2">
-                    <button
-                      type="button"
-                      onClick={() => setStep(2)}
-                      className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold"
-                    >
-                      Back
-                    </button>
-
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-sky-600 via-blue-600 to-lime-600 hover:from-sky-500 hover:to-lime-500 text-white font-black text-sm transition-all shadow-md disabled:opacity-50 flex items-center gap-2"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <RefreshCw className="w-4 h-4 animate-spin" />
-                          <span>Confirming Booking...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Check className="w-5 h-5" />
-                          <span>Submit Booking Request</span>
-                        </>
-                      )}
-                    </button>
-                  </div>
-                </form>
-              )}
+              </div>
 
             </div>
           )}
@@ -609,3 +729,4 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
     </div>
   );
 }
+

@@ -2,7 +2,9 @@
 
 import { useState, useMemo } from 'react';
 import { BUSINESS_INFO, ACT_SUBURBS_LIST } from '@/data/canberraData';
-import { Calculator, Check, ArrowRight, RefreshCw, AlertCircle, Home, Building, ShieldCheck, Clock, User, Phone, Mail, MapPin } from 'lucide-react';
+import { Calculator, Check, ArrowRight, RefreshCw, AlertCircle, Home, Building, ShieldCheck, Clock, User, Phone, Mail, MapPin, Plus, Minus } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import AnimatedCounter from './AnimatedCounter';
 
 export default function InteractiveCalculator() {
   const [step, setStep] = useState<number>(1);
@@ -45,9 +47,9 @@ export default function InteractiveCalculator() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingRef, setBookingRef] = useState<string | null>(null);
 
-  // Pricing Logic (matches prompt specifics)
+  // Pricing Logic
   const priceMath = useMemo(() => {
-    const basePropertyFee = 73; // ~$73 base call-out fee
+    const basePropertyFee = 73;
     let servicesTotal = 0;
 
     servicesTotal += bedrooms * 27;
@@ -159,20 +161,35 @@ export default function InteractiveCalculator() {
             </p>
           </div>
 
-          {/* Stepper Tabs */}
-          <div className="grid grid-cols-4 gap-2 border-b border-slate-200 pb-4 mb-8 text-center text-xs font-black">
-            <button onClick={() => setStep(1)} className={`py-2 rounded-xl transition-colors ${step === 1 ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600'}`}>
-              1. Property
-            </button>
-            <button onClick={() => setStep(2)} className={`py-2 rounded-xl transition-colors ${step === 2 ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600'}`}>
-              2. Services
-            </button>
-            <button onClick={() => setStep(3)} className={`py-2 rounded-xl transition-colors ${step === 3 ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600'}`}>
-              3. Customer
-            </button>
-            <button onClick={() => setStep(4)} className={`py-2 rounded-xl transition-colors ${step === 4 ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-600'}`}>
-              4. Summary
-            </button>
+          {/* Stepper Tabs with Framer Motion Sliding Pill */}
+          <div className="relative flex items-center justify-between bg-slate-100 p-1.5 rounded-2xl border border-slate-200 mb-8">
+            {[
+              { num: 1, label: '1. Property' },
+              { num: 2, label: '2. Services' },
+              { num: 3, label: '3. Customer' },
+              { num: 4, label: '4. Summary' }
+            ].map((s) => {
+              const isCurrent = step === s.num;
+              return (
+                <button
+                  key={s.num}
+                  type="button"
+                  onClick={() => setStep(s.num)}
+                  className={`relative flex-1 py-2.5 rounded-xl text-xs font-black flex items-center justify-center transition-colors z-10 ${
+                    isCurrent ? 'text-white' : 'text-slate-600'
+                  }`}
+                >
+                  {isCurrent && (
+                    <motion.div
+                      layoutId="activeInteractiveTab"
+                      className="absolute inset-0 bg-sky-600 rounded-xl shadow-md z-0"
+                      transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                    />
+                  )}
+                  <span className="relative z-10">{s.label}</span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Confirmation Screen */}
@@ -200,10 +217,17 @@ export default function InteractiveCalculator() {
               </div>
             </div>
           ) : (
-            <>
+            <AnimatePresence mode="wait">
               {/* STEP 1: Property Info */}
               {step === 1 && (
-                <div className="space-y-6 animate-in fade-in duration-200">
+                <motion.div
+                  key="istep1"
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 15 }}
+                  transition={{ duration: 0.2 }}
+                  className="space-y-6"
+                >
                   <div className="space-y-3">
                     <label className="block text-xs font-black uppercase text-slate-700">Property Type</label>
                     <div className="grid grid-cols-2 gap-3">
@@ -293,12 +317,19 @@ export default function InteractiveCalculator() {
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* STEP 2: Service Quantities */}
               {step === 2 && (
-                <div className="space-y-4 animate-in fade-in duration-200">
+                <motion.div
+                  key="istep2"
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 15 }}
+                  transition={{ duration: 0.2 }}
+                  className="space-y-4"
+                >
                   <div className="text-xs font-bold text-slate-500 mb-2">
                     Adjust quantity (+/-) for your home. Prices update in real-time in the sidebar summary.
                   </div>
@@ -312,9 +343,9 @@ export default function InteractiveCalculator() {
                         <div className="text-[11px] text-slate-500">$27 / room after discount</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setBedrooms(Math.max(0, bedrooms - 1))} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">-</button>
+                        <button type="button" onClick={() => setBedrooms(Math.max(0, bedrooms - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
                         <span className="w-6 text-center font-black text-sm text-sky-700">{bedrooms}</span>
-                        <button type="button" onClick={() => setBedrooms(bedrooms + 1)} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">+</button>
+                        <button type="button" onClick={() => setBedrooms(bedrooms + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
 
@@ -324,9 +355,9 @@ export default function InteractiveCalculator() {
                         <div className="text-[11px] text-slate-500">$46 / area after discount</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setLivingRooms(Math.max(0, livingRooms - 1))} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">-</button>
+                        <button type="button" onClick={() => setLivingRooms(Math.max(0, livingRooms - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
                         <span className="w-6 text-center font-black text-sm text-sky-700">{livingRooms}</span>
-                        <button type="button" onClick={() => setLivingRooms(livingRooms + 1)} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">+</button>
+                        <button type="button" onClick={() => setLivingRooms(livingRooms + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
 
@@ -336,9 +367,9 @@ export default function InteractiveCalculator() {
                         <div className="text-[11px] text-slate-500">$27 / hallway</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setHallways(Math.max(0, hallways - 1))} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">-</button>
+                        <button type="button" onClick={() => setHallways(Math.max(0, hallways - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
                         <span className="w-6 text-center font-black text-sm text-sky-700">{hallways}</span>
-                        <button type="button" onClick={() => setHallways(hallways + 1)} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">+</button>
+                        <button type="button" onClick={() => setHallways(hallways + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
 
@@ -348,9 +379,9 @@ export default function InteractiveCalculator() {
                         <div className="text-[11px] text-slate-500">$27 / flight</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setStairs(Math.max(0, stairs - 1))} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">-</button>
+                        <button type="button" onClick={() => setStairs(Math.max(0, stairs - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
                         <span className="w-6 text-center font-black text-sm text-sky-700">{stairs}</span>
-                        <button type="button" onClick={() => setStairs(stairs + 1)} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">+</button>
+                        <button type="button" onClick={() => setStairs(stairs + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
 
@@ -360,9 +391,9 @@ export default function InteractiveCalculator() {
                         <div className="text-[11px] text-slate-500">$41 / seat</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setUpholsterySeats(Math.max(0, upholsterySeats - 1))} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">-</button>
+                        <button type="button" onClick={() => setUpholsterySeats(Math.max(0, upholsterySeats - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
                         <span className="w-6 text-center font-black text-sm text-sky-700">{upholsterySeats}</span>
-                        <button type="button" onClick={() => setUpholsterySeats(upholsterySeats + 1)} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">+</button>
+                        <button type="button" onClick={() => setUpholsterySeats(upholsterySeats + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
 
@@ -372,9 +403,9 @@ export default function InteractiveCalculator() {
                         <div className="text-[11px] text-slate-500">From $32 / rug</div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setRugs(Math.max(0, rugs - 1))} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">-</button>
+                        <button type="button" onClick={() => setRugs(Math.max(0, rugs - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
                         <span className="w-6 text-center font-black text-sm text-sky-700">{rugs}</span>
-                        <button type="button" onClick={() => setRugs(rugs + 1)} className="w-8 h-8 rounded-lg bg-white border border-slate-300 font-black text-sm text-slate-800">+</button>
+                        <button type="button" onClick={() => setRugs(rugs + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
                       </div>
                     </div>
 
@@ -400,12 +431,19 @@ export default function InteractiveCalculator() {
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* STEP 3: Customer Information */}
               {step === 3 && (
-                <div className="space-y-4 animate-in fade-in duration-200">
+                <motion.div
+                  key="istep3"
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 15 }}
+                  transition={{ duration: 0.2 }}
+                  className="space-y-4"
+                >
                   <div className="grid sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1">Full Name *</label>
@@ -502,12 +540,20 @@ export default function InteractiveCalculator() {
                       <ArrowRight className="w-4 h-4" />
                     </button>
                   </div>
-                </div>
+                </motion.div>
               )}
 
               {/* STEP 4: Booking Summary & Live Math */}
               {step === 4 && (
-                <form onSubmit={handleFinalBooking} className="space-y-4 animate-in fade-in duration-200">
+                <motion.form
+                  key="istep4"
+                  initial={{ opacity: 0, x: -15 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 15 }}
+                  transition={{ duration: 0.2 }}
+                  onSubmit={handleFinalBooking}
+                  className="space-y-4"
+                >
                   <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">
                     <div className="flex justify-between text-slate-600 font-semibold">
                       <span>Property Base Call-out Fee:</span>
@@ -566,39 +612,44 @@ export default function InteractiveCalculator() {
                       <span>BOOK THIS SERVICE NOW</span>
                     </button>
                   </div>
-                </form>
+                </motion.form>
               )}
-            </>
+            </AnimatePresence>
           )}
 
         </div>
 
         {/* Sticky Sidebar "Your Instant Estimate" */}
         <div className="lg:col-span-4 space-y-6">
-          <div className="sticky top-24 bg-slate-900 text-white rounded-3xl p-6 shadow-xl space-y-6 border border-slate-800">
+          <div className="sticky top-24 bg-gradient-to-br from-slate-950 via-sky-950 to-slate-900 text-white rounded-3xl p-6 shadow-2xl space-y-6 border border-slate-800">
             
-            <div className="space-y-1 border-b border-slate-800 pb-4">
-              <div className="text-[11px] font-black uppercase text-lime-400 tracking-wider">
-                Progress: {completionPercent}% Completed
+            <div className="space-y-1.5 border-b border-slate-800 pb-4">
+              <div className="flex justify-between text-xs font-black text-lime-400 uppercase tracking-wider">
+                <span>WIZARD PROGRESS</span>
+                <span>{completionPercent}%</span>
               </div>
-              <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                <div className="h-full bg-lime-400 transition-all duration-300" style={{ width: `${completionPercent}%` }}></div>
+              <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
+                <motion.div
+                  className="h-full bg-gradient-to-r from-sky-400 to-lime-400 rounded-full"
+                  animate={{ width: `${completionPercent}%` }}
+                  transition={{ duration: 0.3 }}
+                />
               </div>
-              <h3 className="text-xl font-black pt-2">Your Instant Estimate</h3>
+              <h3 className="text-xl font-black text-white pt-2">Your Instant Estimate</h3>
             </div>
 
             <div className="space-y-2 text-xs text-slate-300">
               <div className="flex justify-between">
                 <span>Bedrooms ({bedrooms}):</span>
-                <span className="font-bold">${bedrooms * 27}</span>
+                <span className="font-bold text-white">${bedrooms * 27}</span>
               </div>
               <div className="flex justify-between">
                 <span>Living Rooms ({livingRooms}):</span>
-                <span className="font-bold">${livingRooms * 46}</span>
+                <span className="font-bold text-white">${livingRooms * 46}</span>
               </div>
               <div className="flex justify-between">
                 <span>Hallways ({hallways}):</span>
-                <span className="font-bold">${hallways * 27}</span>
+                <span className="font-bold text-white">${hallways * 27}</span>
               </div>
               {upholsterySeats > 0 && (
                 <div className="flex justify-between text-sky-400 font-semibold">
@@ -612,18 +663,23 @@ export default function InteractiveCalculator() {
                   <span>$79</span>
                 </div>
               )}
-              <div className="flex justify-between text-lime-400 font-black pt-2 border-t border-slate-800 text-sm">
-                <span>Estimated Total:</span>
-                <span className="text-base">${priceMath.grandTotal} AUD</span>
-              </div>
             </div>
 
-            <div className="p-3 bg-slate-800 rounded-2xl text-[11px] text-slate-400 space-y-1">
-              <div className="font-bold text-white flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-lime-400" />
+            {/* Total Display with AnimatedCounter */}
+            <div className="p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-center space-y-1">
+              <div className="text-[10px] font-black uppercase tracking-wider text-slate-400">ESTIMATED TOTAL</div>
+              <div className="text-4xl font-black text-lime-400">
+                $<AnimatedCounter value={priceMath.grandTotal} />
+              </div>
+              <div className="text-[10px] text-slate-400 font-medium">AUD (inc GST)</div>
+            </div>
+
+            <div className="p-3 bg-slate-900/60 border border-slate-800 rounded-2xl text-[11px] text-slate-400 space-y-1">
+              <div className="font-bold text-white flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-lime-400" />
                 <span>100% Satisfaction Guarantee</span>
               </div>
-              <div>No credit card needed upfront. Pay after your clean is completed!</div>
+              <div>No credit card needed upfront. Pay after clean completion!</div>
             </div>
 
           </div>

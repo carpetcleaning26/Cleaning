@@ -29,6 +29,7 @@ export interface ReviewItem {
   service: string;
   comment: string;
   avatarBg: string;
+  avatarImg?: string;
 }
 
 export interface FaqItem {
@@ -413,7 +414,8 @@ export const REVIEWS: ReviewItem[] = [
     date: "3 days ago",
     service: "End of Lease Carpet Clean",
     comment: "Called Canberra Carpet Cleaning Deals last minute for our rental handover in Gungahlin. They came same-day, removed red wine stains our landlord complained about, and we got our full bond back! Outstanding service.",
-    avatarBg: "from-sky-500 to-blue-600"
+    avatarBg: "from-sky-500 to-blue-600",
+    avatarImg: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80"
   },
   {
     id: "r2",
@@ -423,7 +425,8 @@ export const REVIEWS: ReviewItem[] = [
     date: "1 week ago",
     service: "Carpet & Sofa Steam Cleaning",
     comment: "Remarkable job on our 5-seater corner lounge and 3 bedrooms. The carpets look brand new and smelled so fresh without harsh chemical odors. The technician was polite and super efficient.",
-    avatarBg: "from-lime-600 to-emerald-700"
+    avatarBg: "from-lime-600 to-emerald-700",
+    avatarImg: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80"
   },
   {
     id: "r3",
@@ -433,7 +436,8 @@ export const REVIEWS: ReviewItem[] = [
     date: "2 weeks ago",
     service: "Tile & Grout Cleaning",
     comment: "Our kitchen tile grout lines were completely blackened after years of cooking. Canberra Cleaners blasted away all the grime in under an hour. Highly recommend their tile steam service!",
-    avatarBg: "from-blue-600 to-sky-700"
+    avatarBg: "from-blue-600 to-sky-700",
+    avatarImg: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80"
   },
   {
     id: "r4",
@@ -443,7 +447,8 @@ export const REVIEWS: ReviewItem[] = [
     date: "3 weeks ago",
     service: "Pet Stain & Odor Removal",
     comment: "Our golden retriever had several accidents on our wool rug. They treated the stains with specialized pet enzymes and now there is zero smell. Very reasonable pricing too ($27/room).",
-    avatarBg: "from-lime-500 to-green-600"
+    avatarBg: "from-lime-500 to-green-600",
+    avatarImg: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80"
   },
   {
     id: "r5",
@@ -453,7 +458,30 @@ export const REVIEWS: ReviewItem[] = [
     date: "1 month ago",
     service: "Emergency Flood Restoration",
     comment: "Had a burst washing machine hose at 11pm. Their emergency water extraction unit was at my apartment within 35 minutes! Saved my wooden floorboards and carpets from permanent destruction.",
-    avatarBg: "from-sky-600 to-indigo-700"
+    avatarBg: "from-sky-600 to-indigo-700",
+    avatarImg: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    id: "r6",
+    author: "James Harrison",
+    suburb: "Woden Valley",
+    rating: 5,
+    date: "1 month ago",
+    service: "Mattress Sanitizing",
+    comment: "Great experience getting 3 mattresses sanitized for our kids' allergy concerns. Friendly technician, on time, and left no chemical smell. Noticeably better sleep quality!",
+    avatarBg: "from-emerald-500 to-teal-600",
+    avatarImg: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80"
+  },
+  {
+    id: "r7",
+    author: "Chloe Campbell",
+    suburb: "Barton",
+    rating: 5,
+    date: "1 month ago",
+    service: "Curtain & Blind Cleaning",
+    comment: "Flawless steam clean of our heavy blackout curtains without having to take them down! Extremely convenient service for Canberra apartments.",
+    avatarBg: "from-amber-500 to-orange-600",
+    avatarImg: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80"
   }
 ];
 

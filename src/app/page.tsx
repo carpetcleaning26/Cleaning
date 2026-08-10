@@ -3,6 +3,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSlider from '@/components/HeroSlider';
+import ReviewsSection from '@/components/ReviewsSection';
 import RemoteImage from '@/components/RemoteImage';
 import { BUSINESS_INFO, SERVICES, TESTIMONIALS } from '@/data/canberraData';
 import Link from 'next/link';
@@ -313,39 +314,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. Testimonials Carousel */}
-      <section className="py-20 bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-black uppercase tracking-widest text-lime-700">EXCELLENT — BASED ON 80+ REVIEWS</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900">5.0★ Verified Google Reviews</h2>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-6">
-            {TESTIMONIALS.slice(0, 4).map((t) => (
-              <div key={t.id} className="p-6 rounded-3xl bg-[#f0f9ff] border border-sky-100 space-y-3 flex flex-col justify-between shadow-xs hover:shadow-md transition-shadow">
-                <div className="space-y-2">
-                  <div className="flex text-amber-500">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-                  <p className="text-xs text-slate-700 italic font-medium leading-relaxed">
-                    "{t.comment}"
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-sky-200/60 flex items-center justify-between text-xs">
-                  <span className="font-black text-slate-900">{t.name}</span>
-                  <span className="text-slate-500 font-semibold">{t.suburb}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
+      {/* 7. Interactive Reviews Marquee Slider */}
+      <ReviewsSection />
 
       {/* 8. Modern Video/CTA Banner */}
       <section className="relative py-20 bg-gradient-to-r from-slate-950 via-sky-950 to-slate-950 text-white overflow-hidden">
