@@ -1,5 +1,20 @@
 import type { Metadata } from "next";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+  weight: ["500", "600", "700", "800"],
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-body",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Canberra Carpet Cleaning Deals | Top Rated Cleaners & 100% Bond Back",
@@ -30,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className={`${plusJakartaSans.variable} ${inter.variable} scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"
@@ -56,9 +71,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-slate-950 text-slate-100 min-h-screen flex flex-col antialiased selection:bg-teal-500 selection:text-slate-950">
+      <body className="bg-[#f0f9ff] text-slate-900 min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white font-sans">
         {children}
       </body>
     </html>
   );
 }
+
