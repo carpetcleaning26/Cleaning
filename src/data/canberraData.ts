@@ -73,7 +73,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "Our on-site curtain and blind steam cleaning service removes airborne dust, allergens, moisture stains, and odors directly while your drapes remain hanging. Eliminates the hassle of taking down heavy curtains or taking them to dry cleaners.",
     startingPrice: "$35",
     unit: "per panel / drop",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/curtains-full-service.jpg",
+    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80",
     differentiators: [
       "Cleaned directly on-site with zero drapes removal needed",
       "Removes trapped dust, mold spores, and pollen allergens",
@@ -104,7 +104,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "Looking for trusted carpet cleaning in Canberra? We've been steam-cleaning Canberra carpets since 2008 — that's over 17 years and 100,000+ jobs across every ACT suburb. Today, we're rated 5.0★ verified Google reviews, with prices starting from just $27 per room after our auto-applied 20% online booking discount. Whether you're a Canberra homeowner booking your annual carpet refresh, a busy family dealing with kids and pets, or a tenant preparing for end-of-lease inspection, our team delivers a deeper, faster-drying clean than portable cleaning equipment can achieve.",
     startingPrice: "$27",
     unit: "per room",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/carpet-full-service.jpg",
+    image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&auto=format&fit=crop&q=80",
     differentiators: [
       "Truck-mounted hot water extraction (deeper clean, walk-on dry in 1-2 hours)",
       "17 years cleaning Canberra carpets, knows local building & wool carpet styles",
@@ -140,7 +140,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "We spend a third of our lives in bed. Our specialized mattress steam extraction sanitizes deep into mattress foam, destroying dust mites, skin flakes, sweat stains, and allergens for healthier sleep.",
     startingPrice: "$59",
     unit: "per mattress",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/mattress-full-service.jpg",
+    image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&auto=format&fit=crop&q=80",
     differentiators: [
       "Thermal steam destroys 99.9% of dust mites and bacteria",
       "Specialized urine and sweat stain spot extraction",
@@ -171,7 +171,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "Revive your favorite living room furniture. Our upholstery steam cleaning removes food spills, body oils, pet dander, and odors from fabric sofas, sectional recliners, armchairs, and dining seats.",
     startingPrice: "$41",
     unit: "per seat",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/upholstery-full-service.jpg",
+    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&auto=format&fit=crop&q=80",
     differentiators: [
       "From $41 per seat after 20% online booking discount",
       "Zero call-out fee for upholstery-only bookings",
@@ -202,7 +202,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "Area rugs add warmth to your home but trap severe grit at the backing. We provide expert gentle washing for valuable wool, Persian, shag pile, and synthetic rugs.",
     startingPrice: "$32",
     unit: "per rug",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/rug-full-service.jpg",
+    image: "https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=800&auto=format&fit=crop&q=80",
     differentiators: [
       "Specialized dye-safe pH-balanced washing",
       "Suitable for fine wool, Persian, silk, and synthetic rugs",
@@ -233,7 +233,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "Immediate emergency response for burst pipes, roof leaks, or washing machine overflows. Our truck-mounted extractors remove standing water fast, followed by structural drying and dehumidification to prevent toxic black mold growth.",
     startingPrice: "Emergency Quote",
     unit: "24/7 Dispatch",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/flood-full-service.jpg",
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80",
     differentiators: [
       "24/7 Emergency rapid dispatch across Canberra ACT",
       "Industrial truck-mounted heavy water extraction units",
@@ -264,7 +264,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "Keep your commercial workplace presentable and healthy. We steam clean office carpet tiles, executive chairs, waiting room sofas, and boardroom floors across Canberra CBD, Belconnen, and Parliamentary zone offices.",
     startingPrice: "Custom Quote",
     unit: "commercial rate",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/office-full-service.jpg",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80",
     differentiators: [
       "Flexible after-hours & weekend scheduling (zero office disruption)",
       "High-output truck-mounted commercial steam extraction",
@@ -295,7 +295,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "Standard mopping only pushes dirty water into porous grout lines. Our specialized rotational tile cleaners use heated pressure up to 1000 PSI to strip years of buildup from kitchen tiles, bathrooms, and entryways.",
     startingPrice: "$4.50",
     unit: "per sq meter",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/tiles-full-service.jpg",
+    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop&q=80",
     differentiators: [
       "Rotational high-pressure steam scrubbing (up to 1000 PSI)",
       "Strips embedded grime from porous cement grout",

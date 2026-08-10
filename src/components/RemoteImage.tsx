@@ -13,19 +13,19 @@ export default function RemoteImage({ src, alt, className = '', fallbackSrc }: R
   const [imgSrc, setImgSrc] = useState(src);
   const [hasError, setHasError] = useState(false);
 
-  const defaultFallback = "/images/hero-carpet.png";
+  const defaultFallback = "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&auto=format&fit=crop&q=80";
 
   return (
     <img
       src={hasError ? (fallbackSrc || defaultFallback) : imgSrc}
       alt={alt}
-      className={className}
       onError={() => {
         if (!hasError) {
           setHasError(true);
           setImgSrc(fallbackSrc || defaultFallback);
         }
       }}
+      className={className}
     />
   );
 }

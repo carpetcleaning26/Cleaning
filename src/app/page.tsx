@@ -278,7 +278,7 @@ export default function HomePage() {
                 <div className="space-y-4">
                   <div className="relative h-48 w-full bg-slate-100">
                     <RemoteImage src={srv.image} alt={srv.name} className="w-full h-full object-cover" />
-                    <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-lime-400 text-slate-950 text-[10px] font-black uppercase shadow-xs">
+                    <span className="absolute top-3 left-3 z-20 px-2.5 py-1 rounded-full bg-lime-400 text-slate-950 text-[10px] font-black uppercase shadow-xs">
                       {srv.category}
                     </span>
                   </div>
