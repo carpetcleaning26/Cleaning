@@ -3,9 +3,9 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import RemoteImage from '@/components/RemoteImage';
-import { SERVICES } from '@/data/canberraData';
+import { BUSINESS_INFO, SERVICES } from '@/data/canberraData';
+import { CheckCircle2, ShieldCheck, Award, Users, Calendar, MapPin, Sparkles, Phone, ArrowRight, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
-import { CheckCircle2, Star, ShieldCheck, Sparkles, MapPin, Award, MessageSquare, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AnimatedCounter from '@/components/AnimatedCounter';
 
@@ -14,14 +14,14 @@ export default function AboutPage() {
     <main className="min-h-screen flex flex-col bg-white text-slate-900">
       <Header />
 
-      {/* Breadcrumb Header Banner */}
-      <div className="bg-[#043d22] text-white py-14 px-4 border-b border-emerald-900 shadow-md">
-        <div className="max-w-7xl mx-auto space-y-3">
-          <div className="text-xs text-[#facc15] font-bold uppercase tracking-wider">
-            <Link href="/" className="hover:underline text-emerald-200">Home</Link> / About Company
+      {/* Hero Header Banner */}
+      <div className="bg-gradient-to-r from-[#0b132b] via-[#0c4a6e] to-[#0b132b] text-white py-16 px-4 border-b border-sky-950 shadow-md">
+        <div className="max-w-4xl mx-auto space-y-4 text-center">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-900/60 text-[#10b981] text-xs font-black uppercase tracking-wider border border-sky-800">
+            <Sparkles className="w-3.5 h-3.5 text-[#10b981]" />
+            <span>FAMILY OWNED & OPERATED SINCE 2008</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">About Canberra Carpet Cleaning Deals</h1>
-          <p className="text-emerald-100 text-sm font-medium">Family-owned & operated in Taylor, ACT since 2008.</p>
         </div>
       </div>
 

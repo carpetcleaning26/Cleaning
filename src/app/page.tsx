@@ -19,16 +19,16 @@ export default function HomePage() {
     <main className="min-h-screen flex flex-col bg-white text-slate-900">
       <Header />
 
-      {/* 1. Hero Band (Full-width Brand Green #085032) */}
+      {/* 1. Hero Band (Bold Brand Blue #0c4a6e / #0284c7) */}
       <Hero />
 
       {/* 2. Trust/Value Strip (Electrodry-Inspired 4-Icon Row on White Background) */}
-      <section className="py-12 bg-white border-b border-emerald-100">
+      <section className="py-12 bg-white border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-emerald-50 text-[#085032] flex items-center justify-center flex-shrink-0 border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-sky-50 text-[#0284c7] flex items-center justify-center flex-shrink-0 border border-sky-200">
                 <Truck className="w-6 h-6 stroke-[1.75]" />
               </div>
               <div className="space-y-1">
@@ -38,7 +38,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-emerald-50 text-[#085032] flex items-center justify-center flex-shrink-0 border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-sky-50 text-[#0284c7] flex items-center justify-center flex-shrink-0 border border-sky-200">
                 <Award className="w-6 h-6 stroke-[1.75]" />
               </div>
               <div className="space-y-1">
@@ -48,7 +48,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-emerald-50 text-[#085032] flex items-center justify-center flex-shrink-0 border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-emerald-50 text-[#10b981] flex items-center justify-center flex-shrink-0 border border-emerald-200">
                 <Leaf className="w-6 h-6 stroke-[1.75]" />
               </div>
               <div className="space-y-1">
@@ -58,7 +58,7 @@ export default function HomePage() {
             </div>
 
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-emerald-50 text-[#085032] flex items-center justify-center flex-shrink-0 border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-sky-50 text-[#0284c7] flex items-center justify-center flex-shrink-0 border border-sky-200">
                 <ShieldCheck className="w-6 h-6 stroke-[1.75]" />
               </div>
               <div className="space-y-1">
@@ -78,33 +78,33 @@ export default function HomePage() {
       <ReviewsSection />
 
       {/* 5. "Trusted By" / Certified Quality Row */}
-      <section className="py-8 bg-white border-b border-emerald-100">
+      <section className="py-8 bg-white border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-around gap-6 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">
           <div className="flex items-center gap-2 text-slate-700">
-            <ShieldCheck className="w-4 h-4 text-[#085032]" />
+            <ShieldCheck className="w-4 h-4 text-[#10b981]" />
             <span>100% Bond Return Guarantee</span>
           </div>
           <div className="flex items-center gap-2 text-slate-700">
-            <Award className="w-4 h-4 text-[#085032]" />
+            <Award className="w-4 h-4 text-[#0284c7]" />
             <span>Certified ACT Technicians</span>
           </div>
           <div className="flex items-center gap-2 text-slate-700">
-            <Leaf className="w-4 h-4 text-[#085032]" />
+            <Leaf className="w-4 h-4 text-[#10b981]" />
             <span>Non-Toxic Eco Products</span>
           </div>
           <div className="flex items-center gap-2 text-slate-700">
-            <Truck className="w-4 h-4 text-[#085032]" />
+            <Truck className="w-4 h-4 text-[#0284c7]" />
             <span>Mobile Van Units Dispatched Daily</span>
           </div>
         </div>
       </section>
 
       {/* 6. "Who We Service" Section (Stain Busters 3-Column Grid) */}
-      <section className="py-20 bg-[#f4f8f5] border-b border-emerald-100">
+      <section className="py-20 bg-[#f8fafc] border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-black uppercase tracking-widest text-[#085032]">OUR CLIENT BASE</span>
+            <span className="text-xs font-black uppercase tracking-widest text-[#0284c7]">OUR CLIENT BASE</span>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900">
               Who We Service Across Canberra
             </h2>
@@ -115,8 +115,8 @@ export default function HomePage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             
-            <div className="bg-white p-7 rounded-3xl border border-emerald-100 shadow-xs space-y-3 hover:border-[#085032] transition-colors">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center">
+            <div className="bg-white p-7 rounded-3xl border border-sky-100 shadow-xs space-y-3 hover:border-[#0284c7] transition-colors">
+              <div className="w-11 h-11 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center">
                 <Home className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Homeowners</h3>
@@ -125,8 +125,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white p-7 rounded-3xl border border-emerald-100 shadow-xs space-y-3 hover:border-[#085032] transition-colors">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center">
+            <div className="bg-white p-7 rounded-3xl border border-sky-100 shadow-xs space-y-3 hover:border-[#0284c7] transition-colors">
+              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#10b981] flex items-center justify-center">
                 <KeyRound className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Renters & End-of-Lease</h3>
@@ -135,8 +135,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white p-7 rounded-3xl border border-emerald-100 shadow-xs space-y-3 hover:border-[#085032] transition-colors">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center">
+            <div className="bg-white p-7 rounded-3xl border border-sky-100 shadow-xs space-y-3 hover:border-[#0284c7] transition-colors">
+              <div className="w-11 h-11 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center">
                 <Building2 className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Real Estate Agencies</h3>
@@ -145,8 +145,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white p-7 rounded-3xl border border-emerald-100 shadow-xs space-y-3 hover:border-[#085032] transition-colors">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center">
+            <div className="bg-white p-7 rounded-3xl border border-sky-100 shadow-xs space-y-3 hover:border-[#0284c7] transition-colors">
+              <div className="w-11 h-11 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center">
                 <Briefcase className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Offices & Commercial</h3>
@@ -155,8 +155,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white p-7 rounded-3xl border border-emerald-100 shadow-xs space-y-3 hover:border-[#085032] transition-colors">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center">
+            <div className="bg-white p-7 rounded-3xl border border-sky-100 shadow-xs space-y-3 hover:border-[#0284c7] transition-colors">
+              <div className="w-11 h-11 rounded-2xl bg-sky-50 text-[#0284c7] flex items-center justify-center">
                 <Landmark className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Defence Housing</h3>
@@ -165,8 +165,8 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="bg-white p-7 rounded-3xl border border-emerald-100 shadow-xs space-y-3 hover:border-[#085032] transition-colors">
-              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center">
+            <div className="bg-white p-7 rounded-3xl border border-sky-100 shadow-xs space-y-3 hover:border-[#0284c7] transition-colors">
+              <div className="w-11 h-11 rounded-2xl bg-emerald-50 text-[#10b981] flex items-center justify-center">
                 <RefreshCw className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Repeat & Referral Clients</h3>
@@ -181,27 +181,27 @@ export default function HomePage() {
       </section>
 
       {/* 7. Stats Band (Electrodry Style 4-Column Hairline Band) */}
-      <section className="bg-white py-12 border-y border-emerald-100">
+      <section className="bg-white py-12 border-y border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             
             <div className="space-y-1">
-              <div className="text-4xl lg:text-5xl font-black text-[#085032]">2008</div>
+              <div className="text-4xl lg:text-5xl font-black text-[#0284c7]">2008</div>
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500">ESTABLISHED IN CANBERRA</div>
             </div>
 
             <div className="space-y-1 md:border-l md:border-slate-200">
-              <div className="text-4xl lg:text-5xl font-black text-[#085032]">100%</div>
+              <div className="text-4xl lg:text-5xl font-black text-[#10b981]">100%</div>
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500">BOND BACK GUARANTEE</div>
             </div>
 
             <div className="space-y-1 md:border-l md:border-slate-200">
-              <div className="text-4xl lg:text-5xl font-black text-[#085032]">100,000+</div>
+              <div className="text-4xl lg:text-5xl font-black text-[#0284c7]">100,000+</div>
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500">JOBS COMPLETED</div>
             </div>
 
             <div className="space-y-1 md:border-l md:border-slate-200">
-              <div className="text-4xl lg:text-5xl font-black text-[#085032]">5.0 ★</div>
+              <div className="text-4xl lg:text-5xl font-black text-[#10b981]">5.0 ★</div>
               <div className="text-xs font-bold uppercase tracking-wider text-slate-500">VERIFIED GOOGLE RATING</div>
             </div>
 
@@ -210,11 +210,11 @@ export default function HomePage() {
       </section>
 
       {/* 8. "Why Choose Us" Section (Stain Busters 3x2 Icon Grid) */}
-      <section className="py-20 bg-[#f4f8f5] border-b border-emerald-100">
+      <section className="py-20 bg-[#f8fafc] border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-black uppercase tracking-widest text-[#085032]">THE DIFFERENCE</span>
+            <span className="text-xs font-black uppercase tracking-widest text-[#0284c7]">THE DIFFERENCE</span>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900">
               Why Choose Us for Carpet Cleaning?
             </h2>
@@ -226,7 +226,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-8">
             
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#085032] flex items-center justify-center border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center border border-sky-200">
                 <Truck className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Advanced Truck-Mounted Vans</h3>
@@ -236,7 +236,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#085032] flex items-center justify-center border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center border border-sky-200">
                 <Award className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">17+ Years Local Experience</h3>
@@ -246,7 +246,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#085032] flex items-center justify-center border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center border border-sky-200">
                 <ShieldCheck className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Comprehensive ACT Coverage</h3>
@@ -256,7 +256,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#085032] flex items-center justify-center border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#10b981] flex items-center justify-center border border-emerald-200">
                 <Leaf className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Eco-Friendly & Pet Safe</h3>
@@ -266,7 +266,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#085032] flex items-center justify-center border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#10b981] flex items-center justify-center border border-emerald-200">
                 <RefreshCw className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">100% Satisfaction Guaranteed</h3>
@@ -276,7 +276,7 @@ export default function HomePage() {
             </div>
 
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-full bg-emerald-100 text-[#085032] flex items-center justify-center border border-emerald-200">
+              <div className="w-12 h-12 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center border border-sky-200">
                 <CreditCard className="w-6 h-6 stroke-[1.75]" />
               </div>
               <h3 className="text-lg font-black text-slate-900">Upfront Price Transparency</h3>
@@ -295,16 +295,16 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-black uppercase tracking-widest text-[#085032]">STEP-BY-STEP WORKFLOW</span>
+            <span className="text-xs font-black uppercase tracking-widest text-[#0284c7]">STEP-BY-STEP WORKFLOW</span>
             <h2 className="text-3xl sm:text-4xl font-black text-slate-900">Our Cleaning Process</h2>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             
-            <div className="p-6 rounded-3xl bg-[#f4f8f5] border border-emerald-100 space-y-4 shadow-xs relative">
+            <div className="p-6 rounded-3xl bg-[#f8fafc] border border-sky-100 space-y-4 shadow-xs relative">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase px-3 py-1 bg-emerald-100 text-[#085032] rounded-full border border-emerald-200">Step 1</span>
-                <PhoneCall className="w-5 h-5 text-[#085032]" />
+                <span className="text-xs font-black uppercase px-3 py-1 bg-sky-100 text-[#0284c7] rounded-full border border-sky-200">Step 1</span>
+                <PhoneCall className="w-5 h-5 text-[#0284c7]" />
               </div>
               <div className="space-y-1">
                 <h3 className="text-base font-black text-slate-900">Initial Contact & Quote</h3>
@@ -312,10 +312,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#f4f8f5] border border-emerald-100 space-y-4 shadow-xs relative">
+            <div className="p-6 rounded-3xl bg-[#f8fafc] border border-sky-100 space-y-4 shadow-xs relative">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase px-3 py-1 bg-emerald-100 text-[#085032] rounded-full border border-emerald-200">Step 2</span>
-                <CalendarCheck className="w-5 h-5 text-[#085032]" />
+                <span className="text-xs font-black uppercase px-3 py-1 bg-sky-100 text-[#0284c7] rounded-full border border-sky-200">Step 2</span>
+                <CalendarCheck className="w-5 h-5 text-[#0284c7]" />
               </div>
               <div className="space-y-1">
                 <h3 className="text-base font-black text-slate-900">Schedule & Inspection</h3>
@@ -323,10 +323,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#f4f8f5] border border-emerald-100 space-y-4 shadow-xs relative">
+            <div className="p-6 rounded-3xl bg-[#f8fafc] border border-sky-100 space-y-4 shadow-xs relative">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase px-3 py-1 bg-emerald-100 text-[#085032] rounded-full border border-emerald-200">Step 3</span>
-                <Sparkles className="w-5 h-5 text-[#085032]" />
+                <span className="text-xs font-black uppercase px-3 py-1 bg-emerald-100 text-[#10b981] rounded-full border border-emerald-200">Step 3</span>
+                <Sparkles className="w-5 h-5 text-[#10b981]" />
               </div>
               <div className="space-y-1">
                 <h3 className="text-base font-black text-slate-900">Truck-Mounted Steam Wash</h3>
@@ -334,10 +334,10 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-[#f4f8f5] border border-emerald-100 space-y-4 shadow-xs relative">
+            <div className="p-6 rounded-3xl bg-[#f8fafc] border border-sky-100 space-y-4 shadow-xs relative">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase px-3 py-1 bg-emerald-100 text-[#085032] rounded-full border border-emerald-200">Step 4</span>
-                <CreditCard className="w-5 h-5 text-[#085032]" />
+                <span className="text-xs font-black uppercase px-3 py-1 bg-sky-100 text-[#0284c7] rounded-full border border-sky-200">Step 4</span>
+                <CreditCard className="w-5 h-5 text-[#0284c7]" />
               </div>
               <div className="space-y-1">
                 <h3 className="text-base font-black text-slate-900">Inspection & Payment</h3>
@@ -350,11 +350,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. High-Contrast FAQ Preview & Closing CTA Band */}
-      <section className="py-20 bg-[#043d22] text-white border-t border-emerald-900">
+      {/* 10. High-Contrast Dark Navy Closing CTA Band (Matching Van Signage Black Service Panel) */}
+      <section className="py-20 bg-[#0b132b] text-white border-t border-sky-950">
         <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-800/80 text-[#facc15] text-xs font-black uppercase tracking-wider border border-emerald-700">
-            <Sparkles className="w-3.5 h-3.5 text-[#facc15]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-900/60 text-[#10b981] text-xs font-black uppercase tracking-wider border border-sky-800">
+            <Sparkles className="w-3.5 h-3.5 text-[#10b981]" />
             <span>Ready for Clean Carpets in Canberra?</span>
           </div>
 
@@ -362,14 +362,14 @@ export default function HomePage() {
             Get Your Instant Quote in 60 Seconds
           </h2>
 
-          <p className="text-emerald-100 font-medium text-base max-w-xl mx-auto">
+          <p className="text-sky-200 font-medium text-base max-w-xl mx-auto">
             Auto-apply your 20% online booking discount with zero deposit required. Prices start from $27/room.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
             <Link 
               href="/instant-quote" 
-              className="btn-yellow-pill px-8 py-4 text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2"
+              className="btn-primary-green px-8 py-4 text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2"
             >
               <span>Get Instant Quote</span>
               <ArrowRight className="w-4 h-4" />
@@ -390,6 +390,3 @@ export default function HomePage() {
     </main>
   );
 }
-
-
-
