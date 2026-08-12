@@ -100,11 +100,11 @@ export default function AboutPage() {
             className="lg:col-span-6 relative"
           >
             <div className="grid grid-cols-2 gap-4">
-              <div className="relative h-64 rounded-3xl overflow-hidden shadow-md border border-emerald-100">
-                <RemoteImage src="https://www.canberracarpetcleaningdeals.com.au/assets/images/about/about-v1-img1.jpg" alt="Cleaning Team 1" className="w-full h-full object-cover" fallbackSrc="/images/hero-carpet.png" />
+              <div className="relative h-64 rounded-3xl overflow-hidden shadow-md border border-sky-100">
+                <RemoteImage src="/pictures/real_image_20.jpeg" alt="Canberra Carpet Cleaning Deals van fleet at Taylor ACT base" className="w-full h-full object-cover" />
               </div>
-              <div className="relative h-64 rounded-3xl overflow-hidden shadow-md border border-emerald-100 mt-6">
-                <RemoteImage src="https://www.canberracarpetcleaningdeals.com.au/assets/images/about/about-v1-img2.jpg" alt="Cleaning Team 2" className="w-full h-full object-cover" fallbackSrc="/images/couch-clean.png" />
+              <div className="relative h-64 rounded-3xl overflow-hidden shadow-md border border-sky-100 mt-6">
+                <RemoteImage src="/pictures/real_image_1.jpeg" alt="Truck-mounted carpet steam cleaning in Canberra home" className="w-full h-full object-cover" />
               </div>
             </div>
           </motion.div>

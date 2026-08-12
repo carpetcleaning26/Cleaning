@@ -112,8 +112,8 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
               {/* Organic Corner Masked Container */}
               <div className="hero-organic-mask relative h-72 sm:h-96 lg:h-[460px] w-full overflow-hidden border-4 border-white/20 shadow-2xl bg-sky-950">
                 <Image
-                  src="/images/hero-carpet.png"
-                  alt="Canberra Professional Carpet Steam Cleaning"
+                  src="/pictures/real_image_7.jpeg"
+                  alt="Canberra Carpet Cleaning Deals branded service van and technician with high-pressure steam extraction equipment"
                   fill
                   className="object-cover object-center hover:scale-105 transition-transform duration-700"
                   priority

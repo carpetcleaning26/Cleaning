@@ -533,18 +533,41 @@ export const ACT_SUBURBS_LIST = [
 ];
 
 export const GALLERY_IMAGES = [
-  { url: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/carpet-full-service.jpg", caption: "Carpet Steam Cleaning in Belconnen Home" },
-  { url: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/upholstery-full-service.jpg", caption: "5-Seater Lounge Steam Clean in Kingston" },
-  { url: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/tiles-full-service.jpg", caption: "Kitchen Tile & Grout Scrubbing in Gungahlin" },
-  { url: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/mattress-full-service.jpg", caption: "Queen Mattress Allergy Sanitization" },
-  { url: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/rug-full-service.jpg", caption: "Persian Rug Dye-Safe Steam Restoration" },
-  { url: "https://www.canberracarpetcleaningdeals.com.au/assets/images/about/bigsize.jpg", caption: "Truck-Mounted Equipment Setup in Taylor" },
-  { url: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/curtains-full-service.jpg", caption: "On-Site Hanging Curtain Cleaning" },
-  { url: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/pest-full-service.jpg", caption: "End of Lease Flea Spray Certificate" }
+  { url: "/pictures/real_image_1.jpeg", caption: "Truck-Mounted Carpet Steam Extraction in Belconnen" },
+  { url: "/pictures/real_image_2.jpeg", caption: "5-Seater Lounge Steam Clean & Stain Removal in Gungahlin" },
+  { url: "/pictures/real_image_3.jpeg", caption: "High-Pressure Kitchen Tile & Grout Hydro-Scrubbing" },
+  { url: "/pictures/real_image_4.jpeg", caption: "Queen Mattress Allergy & Dust Mite Sanitization" },
+  { url: "/pictures/real_image_5.jpeg", caption: "Wool Area Rug Washing & Fringe Detail Restored" },
+  { url: "/pictures/real_image_6.jpeg", caption: "Emergency Water Damage Carpet Moisture Extraction" },
+  { url: "/pictures/real_image_7.jpeg", caption: "Canberra Branded Service Van & Technician Team" },
+  { url: "/pictures/real_image_8.jpeg", caption: "End of Lease Bond Clean Inspection Prep in Woden" },
+  { url: "/pictures/real_image_9.jpeg", caption: "Pet Urine & Odour Neutralisation Steam Treatment" },
+  { url: "/pictures/real_image_10.jpeg", caption: "Living Room Carpet Deep Fiber Cleaning in Tuggeranong" },
+  { url: "/pictures/real_image_11.jpeg", caption: "High-Traffic Commercial Office Carpet Steam Wash" },
+  { url: "/pictures/real_image_12.jpeg", caption: "Fabric Sofa Conditioning & Protection Treatment" },
+  { url: "/pictures/real_image_13.jpeg", caption: "Staircase Carpet Steam Clean & Edge Detailing" },
+  { url: "/pictures/real_image_14.jpeg", caption: "Hallway & Bedroom Carpet Steam Wash in Kingston" },
+  { url: "/pictures/real_image_15.jpeg", caption: "Bathroom & Shower Tile Grout Line Restoration" },
+  { url: "/pictures/real_image_16.jpeg", caption: "Shag Rug Deep Dust Extraction in Braddon" },
+  { url: "/pictures/real_image_17.jpeg", caption: "DHA Defence Relocation Carpet Steam Clean" },
+  { url: "/pictures/real_image_18.jpeg", caption: "Red Wine & Coffee Spot Removal Treatment" },
+  { url: "/pictures/real_image_19.jpeg", caption: "Armchair & Recline Seat Steam Washing" },
+  { url: "/pictures/real_image_20.jpeg", caption: "Canberra Service Van Dispatch at Taylor ACT Base" },
+  { url: "/pictures/real_image_21.jpeg", caption: "High-Pressure Rotary Tile Washing in Queanbeyan" },
+  { url: "/pictures/real_image_22.jpeg", caption: "Carpet Steam Wash Before & After Comparison" },
+  { url: "/pictures/real_image_23.jpeg", caption: "On-Site Drapery & Blind Steam Sanitizing" },
+  { url: "/pictures/real_image_24.jpeg", caption: "Certified Flea Spray & Pest Eradication" },
+  { url: "/pictures/real_image_25.jpeg", caption: "Final Carpet Pile Grooming & Fast Airflow Drying" }
 ];
 
 export const VIDEOS_LIST = [
-  { title: "Truck-Mounted Hot Water Extraction Demonstration", duration: "2:15", thumbnail: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/carpet-full-service.jpg" },
-  { title: "Red Wine Stain Removal On Living Room Wool Carpet", duration: "1:45", thumbnail: "https://www.canberracarpetcleaningdeals.com.au/assets/images/about/small.jpg" },
-  { title: "High-Pressure Rotational Tile & Grout Scrubbing", duration: "3:10", thumbnail: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/tiles-full-service.jpg" }
+  { id: "v1", title: "Industrial Truck-Mounted Carpet Steam Extraction Demonstration", duration: "1:45", videoUrl: "/pictures/video_26.mp4", thumbnail: "/pictures/real_image_1.jpeg" },
+  { id: "v2", title: "Deep Pet Stain & Urine Odour Neutralization In Action", duration: "1:15", videoUrl: "/pictures/video_27.mp4", thumbnail: "/pictures/real_image_2.jpeg" },
+  { id: "v3", title: "Rotational High-Pressure Tile & Grout Hydro-Scrubbing", duration: "2:10", videoUrl: "/pictures/video_28.mp4", thumbnail: "/pictures/real_image_3.jpeg" },
+  { id: "v4", title: "5-Seater Sofa & Lounge Upholstery Steam Wash", duration: "2:05", videoUrl: "/pictures/video_29.mp4", thumbnail: "/pictures/real_image_4.jpeg" },
+  { id: "v5", title: "End of Lease Bond Clean Final Walkthrough & Steam", duration: "3:15", videoUrl: "/pictures/video_30.mp4", thumbnail: "/pictures/real_image_5.jpeg" },
+  { id: "v6", title: "Persian & Wool Rug Dye-Safe Steam Restoration", duration: "2:40", videoUrl: "/pictures/video_31.mp4", thumbnail: "/pictures/real_image_6.jpeg" },
+  { id: "v7", title: "Emergency Water Damage & Carpet Moisture Extraction", duration: "3:50", videoUrl: "/pictures/video_32.mp4", thumbnail: "/pictures/real_image_7.jpeg" },
+  { id: "v8", title: "Commercial Office Carpet Tile Steam Wash Night Dispatch", duration: "4:10", videoUrl: "/pictures/video_33.mp4", thumbnail: "/pictures/real_image_8.jpeg" }
 ];
+

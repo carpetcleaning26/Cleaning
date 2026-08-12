@@ -71,6 +71,58 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* NEW ADDITIVE SECTION 2B: Our Branded Mobile Fleet */}
+      <section className="py-16 bg-[#0b132b] text-white border-b border-sky-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
+            
+            <div className="lg:col-span-6 space-y-5">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-sky-900/60 text-[#10b981] text-xs font-black uppercase tracking-wider border border-sky-800">
+                <Truck className="w-3.5 h-3.5 text-[#10b981]" />
+                <span>AUTHENTIC CANBERRA FLEET PROOF</span>
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                Our Branded Mobile Service Vans Dispatched Daily Across ACT
+              </h2>
+
+              <p className="text-sky-200 text-sm font-medium leading-relaxed">
+                When you book with Canberra Carpet Cleaning Deals, our official branded service vans arrive fully equipped with truck-mounted steam extractors, bio-degradable solutions, and trained local technicians.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-4 pt-2">
+                <div className="p-4 rounded-2xl bg-sky-950/70 border border-sky-800 space-y-1">
+                  <div className="text-sm font-black text-[#10b981]">Taylor ACT Base</div>
+                  <div className="text-xs text-sky-200 font-medium">Fast dispatch to Gungahlin, Belconnen, City & Woden.</div>
+                </div>
+                <div className="p-4 rounded-2xl bg-sky-950/70 border border-sky-800 space-y-1">
+                  <div className="text-sm font-black text-[#10b981]">100% Mobile Power</div>
+                  <div className="text-xs text-sky-200 font-medium">Self-contained hot water steam generation on board.</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="lg:col-span-6 grid grid-cols-2 gap-4">
+              <div className="relative h-60 sm:h-72 rounded-3xl overflow-hidden border-2 border-sky-700 shadow-xl group">
+                <img
+                  src="/pictures/real_image_7.jpeg"
+                  alt="Canberra Carpet Cleaning Deals branded service van and technician team"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="relative h-60 sm:h-72 rounded-3xl overflow-hidden border-2 border-sky-700 shadow-xl group mt-4 sm:mt-8">
+                <img
+                  src="/pictures/real_image_20.jpeg"
+                  alt="Canberra Carpet Cleaning Deals mobile van dispatch setup"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* 3. Services Grid (Stain Busters Style A Minimal Text-Led Cards) */}
       <ServiceCatalog />
 
@@ -283,6 +335,83 @@ export default function HomePage() {
               <p className="text-xs text-slate-600 font-medium leading-relaxed">
                 Prices start from $27/room with our 20% online booking discount auto-applied. Zero hidden fees or deposit requirements.
               </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* NEW ADDITIVE SECTION 8B: Behind The Scenes & Equipment in Action */}
+      <section className="py-20 bg-white border-b border-sky-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-black uppercase tracking-widest text-[#0284c7]">BEHIND THE SCENES</span>
+            <h2 className="text-3xl sm:text-4xl font-black text-slate-900">
+              Our Equipment & Technicians in Action
+            </h2>
+            <p className="text-slate-600 text-sm font-medium">
+              Real photos showing hot water steam extraction, lounge upholstery care, and rotational tile scrubbing across Canberra homes.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
+              <div className="relative h-56 w-full">
+                <img
+                  src="/pictures/real_image_1.jpeg"
+                  alt="Truck-mounted carpet steam extraction in Belconnen"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-4 space-y-1">
+                <div className="text-xs font-black text-[#0284c7]">CARPET STEAM WASH</div>
+                <div className="text-xs text-slate-700 font-bold">Truck-mounted steam flushing out ground-in soil.</div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
+              <div className="relative h-56 w-full">
+                <img
+                  src="/pictures/real_image_2.jpeg"
+                  alt="5-seater lounge upholstery steam clean"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-4 space-y-1">
+                <div className="text-xs font-black text-[#10b981]">LOUNGE RESTORATION</div>
+                <div className="text-xs text-slate-700 font-bold">Deep fabric extraction removing body oils & stains.</div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
+              <div className="relative h-56 w-full">
+                <img
+                  src="/pictures/real_image_3.jpeg"
+                  alt="Tile and grout rotational steam hydro-scrubbing"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-4 space-y-1">
+                <div className="text-xs font-black text-[#0284c7]">TILE & GROUT SCRUB</div>
+                <div className="text-xs text-slate-700 font-bold">1000 PSI hydro-scrubbing restoring white grout lines.</div>
+              </div>
+            </div>
+
+            <div className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
+              <div className="relative h-56 w-full">
+                <img
+                  src="/pictures/real_image_10.jpeg"
+                  alt="Living room carpet deep fiber cleaning in Tuggeranong"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-4 space-y-1">
+                <div className="text-xs font-black text-[#10b981]">BOND CLEAN PREP</div>
+                <div className="text-xs text-slate-700 font-bold">100% bond return guarantee inspection handover.</div>
+              </div>
             </div>
 
           </div>
