@@ -13,17 +13,17 @@ export const metadata: Metadata = {
 
 export default function BlogListingPage() {
   return (
-    <main className="min-h-screen flex flex-col bg-[#f0f9ff] text-slate-900">
+    <main className="min-h-screen flex flex-col bg-white text-slate-900">
       <Header />
 
-      <div className="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white py-14 px-4 border-b border-slate-800 shadow-md">
+      <div className="bg-[#043d22] text-white py-14 px-4 border-b border-emerald-900 shadow-md">
         <div className="max-w-4xl mx-auto space-y-3 text-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime-400 text-slate-950 text-xs font-black uppercase shadow-xs">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-800/80 text-[#facc15] text-xs font-black uppercase border border-emerald-700">
+            <Sparkles className="w-3.5 h-3.5 text-[#facc15]" />
             <span>Cleaning Blog & Advice</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">Canberra Cleaning Guides (2026)</h1>
-          <p className="text-slate-300 text-sm max-w-xl mx-auto font-medium">
+          <p className="text-emerald-100 text-sm max-w-xl mx-auto font-medium">
             Expert advice from 17+ years cleaning carpets across the Australian Capital Territory.
           </p>
         </div>
@@ -32,12 +32,12 @@ export default function BlogListingPage() {
       <div className="max-w-5xl mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-8">
           {BLOG_POSTS.map((post) => (
-            <article key={post.id} className="bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-md flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <article key={post.id} className="bg-[#f4f8f5] border border-emerald-100 rounded-3xl overflow-hidden shadow-xs flex flex-col justify-between hover:shadow-md hover:-translate-y-1 transition-all duration-300 group">
               
               <div className="space-y-4">
                 <div className="relative h-48 w-full bg-slate-100">
                   <RemoteImage src={post.image} alt={post.title} className="w-full h-full object-cover" />
-                  <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-sky-600 text-white text-[10px] font-black uppercase shadow-xs">
+                  <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#085032] text-white text-[10px] font-black uppercase shadow-xs">
                     Guide
                   </span>
                 </div>
@@ -45,16 +45,16 @@ export default function BlogListingPage() {
                 <div className="p-6 space-y-2">
                   <div className="flex items-center gap-3 text-xs text-slate-500 font-semibold">
                     <span className="flex items-center gap-1">
-                      <Calendar className="w-3.5 h-3.5 text-sky-600" />
+                      <Calendar className="w-3.5 h-3.5 text-[#085032]" />
                       {post.date}
                     </span>
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-sky-600" />
+                      <Clock className="w-3.5 h-3.5 text-[#085032]" />
                       {post.readTime}
                     </span>
                   </div>
 
-                  <h2 className="text-xl font-black text-slate-900 hover:text-sky-700">
+                  <h2 className="text-xl font-black text-slate-900 group-hover:text-[#085032] transition-colors">
                     <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                   </h2>
 
@@ -67,10 +67,10 @@ export default function BlogListingPage() {
               <div className="p-6 pt-0">
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="w-full py-2.5 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-black text-xs uppercase flex items-center justify-center gap-2 shadow-sm transition-colors"
+                  className="btn-primary-green w-full py-3 text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm"
                 >
                   <span>Read Article</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-lime-400" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[#facc15]" />
                 </Link>
               </div>
 
@@ -83,3 +83,4 @@ export default function BlogListingPage() {
     </main>
   );
 }
+

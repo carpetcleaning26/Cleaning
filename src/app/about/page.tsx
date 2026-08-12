@@ -3,25 +3,25 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import RemoteImage from '@/components/RemoteImage';
-import { BUSINESS_INFO, SERVICES, TESTIMONIALS } from '@/data/canberraData';
+import { SERVICES } from '@/data/canberraData';
 import Link from 'next/link';
-import { CheckCircle2, Phone, Star, ShieldCheck, Sparkles, MapPin, Award, MessageSquare, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Star, ShieldCheck, Sparkles, MapPin, Award, MessageSquare, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AnimatedCounter from '@/components/AnimatedCounter';
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen flex flex-col bg-[#f0f9ff] text-slate-900">
+    <main className="min-h-screen flex flex-col bg-white text-slate-900">
       <Header />
 
       {/* Breadcrumb Header Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white py-14 px-4 border-b border-slate-800 shadow-md">
+      <div className="bg-[#043d22] text-white py-14 px-4 border-b border-emerald-900 shadow-md">
         <div className="max-w-7xl mx-auto space-y-3">
-          <div className="text-xs text-lime-400 font-bold uppercase tracking-wider">
-            <Link href="/" className="hover:underline text-slate-300">Home</Link> / About Company
+          <div className="text-xs text-[#facc15] font-bold uppercase tracking-wider">
+            <Link href="/" className="hover:underline text-emerald-200">Home</Link> / About Company
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">About Canberra Carpet Cleaning Deals</h1>
-          <p className="text-slate-300 text-sm font-medium">Family-owned & operated in Taylor, ACT since 2008.</p>
+          <p className="text-emerald-100 text-sm font-medium">Family-owned & operated in Taylor, ACT since 2008.</p>
         </div>
       </div>
 
@@ -38,8 +38,8 @@ export default function AboutPage() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-6 space-y-6"
           >
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime-100 text-lime-800 text-xs font-black uppercase border border-lime-200">
-              <Award className="w-4 h-4 text-lime-700" />
+            <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-50 text-[#085032] text-xs font-black uppercase border border-emerald-200">
+              <Award className="w-4 h-4 text-[#085032]" />
               <span>OUR COMPANY</span>
             </div>
 
@@ -57,32 +57,32 @@ export default function AboutPage() {
 
             {/* 4 Checklist Badges */}
             <div className="grid sm:grid-cols-2 gap-3 pt-2">
-              <div className="p-3.5 rounded-2xl bg-white border border-sky-100 shadow-xs flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-lime-600 flex-shrink-0" />
+              <div className="p-3.5 rounded-2xl bg-[#f4f8f5] border border-emerald-100 shadow-xs flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#085032] flex-shrink-0" />
                 <div>
                   <div className="text-xs font-black text-slate-900">Family Owned</div>
                   <div className="text-[11px] text-slate-500 font-semibold">Serving Canberra Since 2008</div>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-white border border-sky-100 shadow-xs flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-sky-600 flex-shrink-0" />
+              <div className="p-3.5 rounded-2xl bg-[#f4f8f5] border border-emerald-100 shadow-xs flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#085032] flex-shrink-0" />
                 <div>
                   <div className="text-xs font-black text-slate-900">Truck Mounted Equipment</div>
                   <div className="text-[11px] text-slate-500 font-semibold">Deep Cleaning Technology</div>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-white border border-sky-100 shadow-xs flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-lime-600 flex-shrink-0" />
+              <div className="p-3.5 rounded-2xl bg-[#f4f8f5] border border-emerald-100 shadow-xs flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#085032] flex-shrink-0" />
                 <div>
                   <div className="text-xs font-black text-slate-900">Eco Friendly</div>
                   <div className="text-[11px] text-slate-500 font-semibold">Safe For Kids & Pets</div>
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-white border border-sky-100 shadow-xs flex items-center gap-3">
-                <CheckCircle2 className="w-5 h-5 text-sky-600 flex-shrink-0" />
+              <div className="p-3.5 rounded-2xl bg-[#f4f8f5] border border-emerald-100 shadow-xs flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-[#085032] flex-shrink-0" />
                 <div>
                   <div className="text-xs font-black text-slate-900">100% Satisfaction</div>
                   <div className="text-[11px] text-slate-500 font-semibold">Guaranteed Every Time</div>
@@ -100,10 +100,10 @@ export default function AboutPage() {
             className="lg:col-span-6 relative"
           >
             <div className="grid grid-cols-2 gap-4">
-              <div className="relative h-64 rounded-3xl overflow-hidden shadow-md">
+              <div className="relative h-64 rounded-3xl overflow-hidden shadow-md border border-emerald-100">
                 <RemoteImage src="https://www.canberracarpetcleaningdeals.com.au/assets/images/about/about-v1-img1.jpg" alt="Cleaning Team 1" className="w-full h-full object-cover" fallbackSrc="/images/hero-carpet.png" />
               </div>
-              <div className="relative h-64 rounded-3xl overflow-hidden shadow-md mt-6">
+              <div className="relative h-64 rounded-3xl overflow-hidden shadow-md border border-emerald-100 mt-6">
                 <RemoteImage src="https://www.canberracarpetcleaningdeals.com.au/assets/images/about/about-v1-img2.jpg" alt="Cleaning Team 2" className="w-full h-full object-cover" fallbackSrc="/images/couch-clean.png" />
               </div>
             </div>
@@ -117,35 +117,35 @@ export default function AboutPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="grid grid-cols-3 gap-4 p-8 bg-white rounded-3xl border border-sky-100 text-center shadow-md"
+          className="grid grid-cols-3 gap-4 p-8 bg-[#f4f8f5] rounded-3xl border border-emerald-100 text-center shadow-xs"
         >
           <div>
-            <div className="text-3xl sm:text-5xl font-black text-slate-900">
+            <div className="text-3xl sm:text-5xl font-black text-[#085032]">
               <AnimatedCounter value={17} suffix="+" />
             </div>
-            <div className="text-xs text-slate-500 font-bold uppercase mt-1">Years Experience</div>
+            <div className="text-xs text-slate-600 font-bold uppercase mt-1">Years Experience</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-5xl font-black text-lime-700">
+            <div className="text-3xl sm:text-5xl font-black text-[#085032]">
               <AnimatedCounter value={100000} suffix="+" />
             </div>
-            <div className="text-xs text-slate-500 font-bold uppercase mt-1">Jobs Completed</div>
+            <div className="text-xs text-slate-600 font-bold uppercase mt-1">Jobs Completed</div>
           </div>
           <div>
-            <div className="text-3xl sm:text-5xl font-black text-sky-700">
+            <div className="text-3xl sm:text-5xl font-black text-[#085032]">
               <AnimatedCounter value={5.0} decimals={1} suffix="★" />
             </div>
-            <div className="text-xs text-slate-500 font-bold uppercase mt-1">Google Rating</div>
+            <div className="text-xs text-slate-600 font-bold uppercase mt-1">Google Rating</div>
           </div>
         </motion.div>
 
-        {/* Feature Cards with Top Border Accents & Colored Icon Badges */}
+        {/* Feature Cards with Top Border Accents */}
         <div className="grid md:grid-cols-3 gap-8">
           <motion.div
-            whileHover={{ y: -6, scale: 1.02 }}
-            className="p-6 rounded-3xl bg-white border border-slate-200 border-t-4 border-t-sky-500 space-y-3 shadow-md transition-all duration-300"
+            whileHover={{ y: -4 }}
+            className="p-6 rounded-3xl bg-white border border-emerald-100 border-t-4 border-t-[#085032] space-y-3 shadow-xs transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-2xl bg-sky-100 text-sky-700 flex items-center justify-center font-bold shadow-xs">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center font-bold shadow-xs">
               <MapPin className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-black text-slate-900">Service Across All ACT Suburbs</h3>
@@ -155,10 +155,10 @@ export default function AboutPage() {
           </motion.div>
 
           <motion.div
-            whileHover={{ y: -6, scale: 1.02 }}
-            className="p-6 rounded-3xl bg-white border border-slate-200 border-t-4 border-t-lime-500 space-y-3 shadow-md transition-all duration-300"
+            whileHover={{ y: -4 }}
+            className="p-6 rounded-3xl bg-white border border-emerald-100 border-t-4 border-t-[#085032] space-y-3 shadow-xs transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-2xl bg-lime-100 text-lime-700 flex items-center justify-center font-bold shadow-xs">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center font-bold shadow-xs">
               <ShieldCheck className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-black text-slate-900">Our Guarantee</h3>
@@ -168,10 +168,10 @@ export default function AboutPage() {
           </motion.div>
 
           <motion.div
-            whileHover={{ y: -6, scale: 1.02 }}
-            className="p-6 rounded-3xl bg-white border border-slate-200 border-t-4 border-t-amber-500 space-y-3 shadow-md transition-all duration-300"
+            whileHover={{ y: -4 }}
+            className="p-6 rounded-3xl bg-white border border-emerald-100 border-t-4 border-t-[#085032] space-y-3 shadow-xs transition-all duration-300"
           >
-            <div className="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold shadow-xs">
+            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#085032] flex items-center justify-center font-bold shadow-xs">
               <MessageSquare className="w-6 h-6" />
             </div>
             <h3 className="text-lg font-black text-slate-900">Get In Touch</h3>
@@ -184,7 +184,7 @@ export default function AboutPage() {
         {/* Discover All 9 Mini Service Cards Grid */}
         <div className="space-y-6 pt-6">
           <div className="text-center space-y-2">
-            <span className="text-xs font-black uppercase tracking-wider text-sky-700">SPECIALIZED CARE</span>
+            <span className="text-xs font-black uppercase tracking-wider text-[#085032]">SPECIALIZED CARE</span>
             <h2 className="text-2xl sm:text-4xl font-black text-slate-900">Discover All 9 Cleaning Services</h2>
           </div>
 
@@ -196,23 +196,23 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                whileHover={{ y: -4, scale: 1.02 }}
+                whileHover={{ y: -3 }}
               >
                 <Link
                   href={`/services/${s.slug}`}
-                  className="p-5 rounded-3xl bg-white border border-slate-200 hover:border-sky-500 transition-all shadow-sm hover:shadow-lg group flex flex-col justify-between h-full space-y-3"
+                  className="p-5 rounded-3xl bg-white border border-emerald-100 hover:border-[#085032] transition-all shadow-xs hover:shadow-md group flex flex-col justify-between h-full space-y-3"
                 >
                   <div className="flex items-center justify-between">
-                    <div className="w-10 h-10 rounded-xl bg-sky-100 group-hover:bg-sky-600 text-sky-700 group-hover:text-white flex items-center justify-center font-bold transition-colors">
-                      <Sparkles className="w-5 h-5" />
+                    <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#085032] flex items-center justify-center font-bold transition-colors">
+                      <Sparkles className="w-5 h-5 text-[#085032]" />
                     </div>
-                    <span className="text-xs font-black text-lime-700 bg-lime-100 px-2.5 py-0.5 rounded-full">
+                    <span className="text-xs font-black text-[#085032] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
                       From {s.startingPrice}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="text-base font-black text-slate-900 group-hover:text-sky-600 transition-colors">
+                    <h3 className="text-base font-black text-slate-900 group-hover:text-[#085032] transition-colors">
                       {s.navTitle || s.name}
                     </h3>
                     <p className="text-xs text-slate-600 line-clamp-2 mt-1 font-medium leading-relaxed">
@@ -220,9 +220,9 @@ export default function AboutPage() {
                     </p>
                   </div>
 
-                  <div className="pt-2 border-t border-slate-100 flex items-center text-xs font-black text-sky-700 group-hover:text-sky-600 gap-1">
+                  <div className="pt-2 border-t border-slate-100 flex items-center text-xs font-black text-[#085032] justify-between">
                     <span>Learn more</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#085032]" />
                   </div>
                 </Link>
               </motion.div>
@@ -236,5 +236,6 @@ export default function AboutPage() {
     </main>
   );
 }
+
 
 

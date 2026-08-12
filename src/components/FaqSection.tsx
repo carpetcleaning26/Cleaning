@@ -31,8 +31,8 @@ export default function FaqSection() {
         
         {/* Header */}
         <div className="text-center space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 border border-sky-300 text-sky-800 text-xs font-black uppercase tracking-wider">
-            <HelpCircle className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-[#085032] text-xs font-black uppercase tracking-wider">
+            <HelpCircle className="w-3.5 h-3.5 text-[#085032]" />
             <span>Got Questions? We Have Answers</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
@@ -52,7 +52,7 @@ export default function FaqSection() {
               placeholder="Search FAQ keywords (e.g. dry time, bond, pets, price)..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-300 rounded-2xl pl-11 pr-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-sky-600 shadow-xs font-medium"
+              className="w-full bg-[#f4f8f5] border border-emerald-100 rounded-2xl pl-11 pr-4 py-3 text-slate-900 text-sm focus:outline-none focus:border-[#085032] shadow-xs font-medium"
             />
           </div>
 
@@ -63,8 +63,8 @@ export default function FaqSection() {
                 onClick={() => setActiveCategory(cat.id)}
                 className={`px-4 py-1.5 rounded-full text-xs font-black transition-all ${
                   activeCategory === cat.id
-                    ? 'bg-sky-600 text-white shadow-md'
-                    : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
+                    ? 'bg-[#085032] text-white shadow-md'
+                    : 'bg-[#f4f8f5] text-slate-700 hover:bg-emerald-100 border border-emerald-100'
                 }`}
               >
                 {cat.label}
@@ -80,22 +80,22 @@ export default function FaqSection() {
             return (
               <div
                 key={faq.id}
-                className="rounded-2xl bg-slate-50 border border-slate-200 overflow-hidden transition-colors shadow-xs"
+                className="rounded-2xl bg-[#f4f8f5] border border-emerald-100 overflow-hidden transition-colors shadow-xs"
               >
                 <button
                   onClick={() => setOpenId(isOpen ? null : faq.id)}
-                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-black text-slate-900 text-sm sm:text-base hover:text-sky-700 transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between gap-4 font-black text-slate-900 text-sm sm:text-base hover:text-[#085032] transition-colors"
                 >
                   <span>{faq.question}</span>
                   <ChevronDown
-                    className={`w-5 h-5 text-sky-600 flex-shrink-0 transition-transform duration-200 ${
+                    className={`w-5 h-5 text-[#085032] flex-shrink-0 transition-transform duration-200 ${
                       isOpen ? 'rotate-180' : ''
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 text-slate-700 text-xs sm:text-sm leading-relaxed border-t border-slate-200 pt-3 animate-in fade-in duration-200 font-medium">
+                  <div className="px-5 pb-5 text-slate-700 text-xs sm:text-sm leading-relaxed border-t border-emerald-200/60 pt-3 animate-in fade-in duration-200 font-medium">
                     {faq.answer}
                   </div>
                 )}
@@ -108,3 +108,4 @@ export default function FaqSection() {
     </section>
   );
 }
+

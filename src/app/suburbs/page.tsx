@@ -10,7 +10,8 @@ export const metadata: Metadata = {
 
 export default function SuburbsPage() {
   return (
-    <main className="min-h-screen flex flex-col bg-[#f0f9ff] text-slate-900">
+    <main className="min-h-screen flex flex-col bg-white text-slate-900">
+
       <Header />
       <div className="py-8">
         <SuburbFinder />

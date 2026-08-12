@@ -1,7 +1,6 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { BUSINESS_INFO } from '@/data/canberraData';
-import { ShieldCheck, FileText } from 'lucide-react';
+import { FileText } from 'lucide-react';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -11,24 +10,24 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen flex flex-col bg-[#f0f9ff] text-slate-900">
+    <main className="min-h-screen flex flex-col bg-white text-slate-900">
       <Header />
 
-      <div className="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white py-14 px-4 border-b border-slate-800 shadow-md">
+      <div className="bg-[#043d22] text-white py-14 px-4 border-b border-emerald-900 shadow-md">
         <div className="max-w-4xl mx-auto space-y-3 text-center">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-lime-400 text-slate-950 text-xs font-black uppercase shadow-xs">
-            <FileText className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-800/80 text-[#facc15] text-xs font-black uppercase border border-emerald-700">
+            <FileText className="w-3.5 h-3.5 text-[#facc15]" />
             <span>Policy Terms & Guarantees</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">Terms & Conditions</h1>
-          <p className="text-slate-300 text-sm max-w-xl mx-auto font-medium">
+          <p className="text-emerald-100 text-sm max-w-xl mx-auto font-medium">
             Booking policies, 100% satisfaction guarantee guidelines, and service conditions.
           </p>
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-16">
-        <article className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-md space-y-6 text-slate-700 text-xs sm:text-sm font-medium leading-relaxed">
+        <article className="bg-[#f4f8f5] border border-emerald-100 rounded-3xl p-6 sm:p-10 shadow-xs space-y-6 text-slate-700 text-xs sm:text-sm font-medium leading-relaxed">
           
           <div className="space-y-2">
             <h2 className="text-lg font-black text-slate-900">1. Booking & Pricing Policy</h2>
@@ -58,7 +57,7 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div className="space-y-2 border-t border-slate-200 pt-4">
+          <div className="space-y-2 border-t border-emerald-200/80 pt-4">
             <h2 className="text-lg font-black text-slate-900">5. Contact Information</h2>
             <p>
               Canberra Carpet Cleaning Deals <br />
@@ -75,3 +74,4 @@ export default function TermsPage() {
     </main>
   );
 }
+

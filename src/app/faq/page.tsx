@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { FAQS, BUSINESS_INFO } from '@/data/canberraData';
-import { ChevronDown, HelpCircle, Phone, Calendar, DollarSign, Sparkles, Layers, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, HelpCircle, DollarSign, Sparkles, Layers } from 'lucide-react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -15,18 +15,18 @@ export default function FaqPage() {
   const filteredFaqs = FAQS.filter((f) => activeCategory === 'all' || f.category === activeCategory);
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#f0f9ff] text-slate-900">
+    <main className="min-h-screen flex flex-col bg-white text-slate-900">
       <Header />
 
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white py-16 px-4 border-b border-slate-800 shadow-md">
+      <div className="bg-[#043d22] text-white py-16 px-4 border-b border-emerald-900 shadow-md">
         <div className="max-w-4xl mx-auto space-y-4 text-center">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-lime-400 text-slate-950 text-xs font-black uppercase shadow-xs">
-            <HelpCircle className="w-4 h-4 text-slate-950" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-800/80 text-[#facc15] text-xs font-black uppercase tracking-wider border border-emerald-700">
+            <HelpCircle className="w-4 h-4 text-[#facc15]" />
             <span>Help & Answers</span>
           </div>
           <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight">Carpet Cleaning Canberra — FAQs</h1>
-          <p className="text-slate-300 text-sm sm:text-base font-medium max-w-2xl mx-auto leading-relaxed">
+          <p className="text-emerald-100 text-sm sm:text-base font-medium max-w-2xl mx-auto leading-relaxed">
             Everything you need to know about our carpet, rug, upholstery, tile, curtain and pest cleaning services across Canberra ACT.
           </p>
         </div>
@@ -34,8 +34,8 @@ export default function FaqPage() {
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 space-y-10">
         
-        {/* Category Filter Pills with Lucide Icons & Framer Motion layoutId */}
-        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-slate-200/60 rounded-full max-w-md mx-auto border border-slate-300">
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 p-1.5 bg-[#f4f8f5] rounded-full max-w-md mx-auto border border-emerald-100">
           {[
             { id: 'all', label: 'All Questions', icon: Layers },
             { id: 'pricing', label: 'Pricing & Value', icon: DollarSign },
@@ -54,7 +54,7 @@ export default function FaqPage() {
                 {isCurrent && (
                   <motion.div
                     layoutId="activeFaqCategory"
-                    className="absolute inset-0 bg-sky-600 rounded-full shadow-md z-0"
+                    className="absolute inset-0 bg-[#085032] rounded-full shadow-xs z-0"
                     transition={{ type: "spring", stiffness: 350, damping: 30 }}
                   />
                 )}
@@ -67,7 +67,7 @@ export default function FaqPage() {
           })}
         </div>
 
-        {/* Accordion List with Framer Motion Height & Opacity */}
+        {/* Accordion List */}
         <div className="space-y-4">
           {filteredFaqs.map((faq, index) => {
             const isOpen = openId === faq.id;
@@ -79,8 +79,8 @@ export default function FaqPage() {
                 transition={{ duration: 0.3, delay: index * 0.05 }}
                 className={`rounded-3xl transition-all duration-300 overflow-hidden ${
                   isOpen
-                    ? 'bg-white border-2 border-sky-500 shadow-lg'
-                    : 'bg-white border border-slate-200/80 hover:border-sky-300 shadow-sm'
+                    ? 'bg-[#f4f8f5] border-2 border-[#085032] shadow-sm'
+                    : 'bg-white border border-emerald-100 hover:border-[#085032] shadow-xs'
                 }`}
               >
                 <button
@@ -89,7 +89,7 @@ export default function FaqPage() {
                 >
                   <div className="flex items-center gap-3.5">
                     <div className={`w-9 h-9 rounded-2xl flex items-center justify-center flex-shrink-0 transition-colors ${
-                      isOpen ? 'bg-sky-600 text-white' : 'bg-sky-50 text-sky-700 group-hover:bg-sky-100'
+                      isOpen ? 'bg-[#085032] text-white' : 'bg-emerald-50 text-[#085032] group-hover:bg-emerald-100'
                     }`}>
                       {faq.category === 'pricing' ? (
                         <DollarSign className="w-4 h-4" />
@@ -103,7 +103,7 @@ export default function FaqPage() {
                   <motion.div
                     animate={{ rotate: isOpen ? 180 : 0 }}
                     transition={{ duration: 0.2 }}
-                    className="p-1 rounded-full bg-slate-100 text-sky-600 flex-shrink-0"
+                    className="p-1 rounded-full bg-emerald-50 text-[#085032] flex-shrink-0"
                   >
                     <ChevronDown className="w-5 h-5" />
                   </motion.div>
@@ -118,7 +118,7 @@ export default function FaqPage() {
                       transition={{ duration: 0.3, ease: 'easeInOut' }}
                       className="overflow-hidden"
                     >
-                      <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-slate-700 font-medium leading-relaxed border-t border-slate-100/80">
+                      <div className="px-6 pb-6 pt-2 text-xs sm:text-sm text-slate-700 font-medium leading-relaxed border-t border-emerald-200/60">
                         {faq.answer}
                       </div>
                     </motion.div>
@@ -131,23 +131,23 @@ export default function FaqPage() {
 
         {/* Closing CTA Box */}
         <motion.div
-          whileHover={{ y: -4, scale: 1.01 }}
-          className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-slate-950 via-sky-950 to-slate-950 text-white text-center space-y-4 border-l-8 border-lime-500 shadow-2xl"
+          whileHover={{ y: -3 }}
+          className="p-8 sm:p-10 rounded-3xl bg-[#043d22] text-white text-center space-y-4 border-l-8 border-[#facc15] shadow-xl"
         >
           <h3 className="text-2xl font-black text-white">Still have a question?</h3>
-          <p className="text-slate-300 text-sm max-w-lg mx-auto font-medium">
+          <p className="text-emerald-100 text-sm max-w-lg mx-auto font-medium">
             Get an instant price estimate in 60 seconds, or speak directly with our Canberra-based cleaning dispatch team.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
             <Link
               href="/instant-quote"
-              className="px-7 py-3.5 rounded-full bg-lime-500 hover:bg-lime-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-md transition-all hover:scale-105 active:scale-95"
+              className="btn-yellow-pill px-7 py-3.5 text-xs uppercase tracking-wider shadow-md"
             >
               Instant Quote
             </Link>
             <a
               href={BUSINESS_INFO.telLink}
-              className="px-7 py-3.5 rounded-full bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs uppercase tracking-wider shadow-md transition-all hover:scale-105 active:scale-95"
+              className="btn-white-ghost-pill px-7 py-3.5 text-xs uppercase tracking-wider"
             >
               Call {BUSINESS_INFO.phone}
             </a>
@@ -160,4 +160,5 @@ export default function FaqPage() {
     </main>
   );
 }
+
 

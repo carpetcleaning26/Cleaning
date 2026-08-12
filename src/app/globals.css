@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --brand-green: #085032;
+    --brand-green-dark: #043d22;
+    --brand-green-light: #f4f8f5;
+    --brand-yellow: #facc15;
+  }
+
   :root, html, body {
     color-scheme: light !important;
   }
@@ -11,8 +18,8 @@
   }
 
   body {
-    background-color: #f0f9ff;
-    color: #0f172a;
+    background-color: #ffffff;
+    color: #1e293b;
     font-family: var(--font-body), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
   }
@@ -28,23 +35,120 @@
 }
 
 /* Fallback color class helpers & Design System tokens */
+.bg-brand-green {
+  background-color: #085032 !important;
+}
+
+.bg-brand-green-dark {
+  background-color: #043d22 !important;
+}
+
+.bg-brand-light {
+  background-color: #f4f8f5 !important;
+}
+
+.text-brand-green {
+  color: #085032 !important;
+}
+
+.text-brand-yellow {
+  color: #facc15 !important;
+}
+
+.border-brand-green {
+  border-color: #085032 !important;
+}
+
+/* Organic Swooped Hero Image Mask */
+.hero-organic-mask {
+  border-radius: 70px 16px 16px 70px;
+}
+
+@media (max-width: 1024px) {
+  .hero-organic-mask {
+    border-radius: 36px 16px 16px 36px;
+  }
+}
+
+/* Standard Pill Buttons */
+.btn-primary-green {
+  background-color: #085032;
+  color: #ffffff;
+  font-weight: 800;
+  border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
+}
+.btn-primary-green:hover {
+  background-color: #043d22;
+  box-shadow: 0 10px 15px -3px rgba(8, 80, 50, 0.2);
+  transform: translateY(-2px);
+}
+.btn-primary-green:active {
+  transform: translateY(0);
+}
+
+.btn-ghost-pill {
+  border: 2px solid #085032;
+  color: #085032;
+  font-weight: 700;
+  border-radius: 9999px;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+.btn-ghost-pill:hover {
+  background-color: #085032;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+.btn-ghost-pill:active {
+  transform: translateY(0);
+}
+
+.btn-white-ghost-pill {
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  font-weight: 700;
+  border-radius: 9999px;
+  background-color: transparent;
+  transition: all 0.2s ease-in-out;
+}
+.btn-white-ghost-pill:hover {
+  background-color: #ffffff;
+  color: #085032;
+  transform: translateY(-2px);
+}
+
+.btn-yellow-pill {
+  background-color: #facc15;
+  color: #043d22;
+  font-weight: 900;
+  border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
+}
+.btn-yellow-pill:hover {
+  background-color: #fef08a;
+  box-shadow: 0 10px 15px -3px rgba(250, 204, 21, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Glass & Card Tokens */
 .bg-ice {
-  background-color: #f0f9ff !important;
+  background-color: #f4f8f5 !important;
 }
 
 .bg-ice-card {
   background-color: #ffffff;
-  border: 1px solid #e0f2fe;
+  border: 1px solid #e2e8f0;
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(224, 242, 254, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .glass-dark {
-  background: rgba(15, 23, 42, 0.9);
+  background: rgba(4, 61, 34, 0.95);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -62,19 +166,20 @@
   animation: marquee 35s linear infinite;
 }
 
-/* Custom Scrollbar for Light Theme */
+/* Custom Scrollbar for Green Theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #e0f2fe;
+  background: #f4f8f5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0284c7;
+  background: #085032;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #0369a1;
+  background: #043d22;
 }
+
 
 

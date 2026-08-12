@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { COMPANY_INFO } from '@/data/cleaningData';
-import { Star, Phone, ArrowRight, CheckCircle2, Clock, MapPin, Zap, Fan } from 'lucide-react';
+import { Star, Phone, ArrowRight, CheckCircle2, ShieldCheck, Zap, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface HeroProps {
@@ -12,169 +12,136 @@ interface HeroProps {
 
 export default function Hero({ onOpenCalculator }: HeroProps) {
   return (
-    <section id="hero" className="relative overflow-hidden pt-8 pb-16 lg:pt-16 lg:pb-24 bg-[#f0f9ff] border-b border-slate-200">
+    <section id="hero" className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24 bg-[#085032] text-white border-b border-emerald-900">
       
+      {/* Background Decorative Pattern */}
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* Left Hero Text Column with Motion */}
+          {/* Left Hero Content */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="lg:col-span-7 space-y-6 text-center lg:text-left"
+            className="lg:col-span-7 space-y-6 text-left"
           >
             
-            {/* Tagline Pill */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-950 text-lime-400 border border-lime-400/30 text-xs font-black uppercase tracking-wider shadow-md">
-              <Fan className="w-4 h-4 text-lime-400 animate-spin" style={{ animationDuration: '6s' }} />
-              <span>SAME-DAY SERVICE • ALL ACT SUBURBS</span>
+            {/* Small Uppercase Eyebrow Line */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#043d22] border border-emerald-600/40 text-[#facc15] text-xs font-black uppercase tracking-wider shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-[#facc15]" />
+              <span>TRUSTED CANBERRA CLEANERS SINCE 2008</span>
             </div>
 
-            {/* Main Title */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.05] uppercase">
-              CARPET, UPHOLSTERY,<br className="hidden sm:inline" />
-              <span className="text-sky-600">RUGS, TILES &</span><br />
-              <span className="text-lime-600">CURTAINS CLEANING</span>
+            {/* Large Bold Multi-line Headline (3 lines mixing solid white & highlighted yellow) */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.05] uppercase">
+              CARPET, UPHOLSTERY,<br />
+              <span className="text-[#facc15]">RUGS, TILES &</span><br />
+              CURTAINS CLEANING
             </h1>
 
-            {/* Subheading */}
-            <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto lg:mx-0 font-medium leading-relaxed">
-              Professional hot water steam extraction, 100% bond-back guarantee, sofa washing, and stain treatment across all Canberra ACT suburbs from just <strong className="text-slate-900 font-black">$27/room</strong>.
+            {/* Supporting Text (Short, 2 lines max) */}
+            <p className="text-base sm:text-lg text-emerald-100/90 max-w-xl font-medium leading-relaxed">
+              Professional hot water steam extraction, 100% bond-back guarantee, sofa washing, and stain treatment across all Canberra ACT suburbs.
             </p>
 
-            {/* Key Benefits Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs sm:text-sm font-bold text-slate-800">
-              <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-sky-200 shadow-xs">
-                <CheckCircle2 className="w-4 h-4 text-lime-600 flex-shrink-0" />
-                <span>100% Bond Back Guarantee</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-sky-200 shadow-xs">
-                <Zap className="w-4 h-4 text-sky-600 flex-shrink-0" />
-                <span>Same-Day Service</span>
-              </div>
-              <div className="flex items-center gap-2 bg-white p-3 rounded-xl border border-sky-200 col-span-2 sm:col-span-1 shadow-xs">
-                <Clock className="w-4 h-4 text-sky-700 flex-shrink-0" />
-                <span>2-4 Hr Rapid Drying</span>
-              </div>
-            </div>
+            {/* Two CTA Buttons Side-by-Side + Price Anchor Line */}
+            <div className="space-y-3 pt-2">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                {onOpenCalculator ? (
+                  <button
+                    onClick={onOpenCalculator}
+                    className="btn-yellow-pill px-8 py-4 text-sm uppercase tracking-wider shadow-xl flex items-center justify-center gap-3 group"
+                  >
+                    <span>Get Instant Quote</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                ) : (
+                  <Link
+                    href="/instant-quote"
+                    className="btn-yellow-pill px-8 py-4 text-sm uppercase tracking-wider shadow-xl flex items-center justify-center gap-3 group text-center"
+                  >
+                    <span>Get Instant Quote</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
 
-            {/* CTA Buttons Row */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-              {onOpenCalculator ? (
-                <button
-                  onClick={onOpenCalculator}
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-lime-500 hover:bg-lime-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-between gap-4 group"
-                >
-                  <span>Get A Quote</span>
-                  <span className="w-8 h-8 rounded-full bg-slate-950 text-lime-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
-                </button>
-              ) : (
                 <Link
-                  href="/instant-quote"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-lime-500 hover:bg-lime-400 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-between gap-4 group"
+                  href="/service-details"
+                  className="btn-white-ghost-pill px-8 py-4 text-sm uppercase tracking-wider text-center"
                 >
-                  <span>Get A Quote</span>
-                  <span className="w-8 h-8 rounded-full bg-slate-950 text-lime-400 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-                    <ArrowRight className="w-4 h-4" />
-                  </span>
+                  What We Can Do
                 </Link>
-              )}
+              </div>
 
-              <a
-                href={COMPANY_INFO.telLink}
-                className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm uppercase tracking-wider shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
-              >
-                <Phone className="w-4 h-4 text-white" />
-                <span>Call Now: {COMPANY_INFO.phone}</span>
-              </a>
+              {/* Price Anchor Line Underneath */}
+              <div className="text-xs font-bold text-emerald-200 flex items-center gap-2 pt-1">
+                <span className="w-2 h-2 rounded-full bg-[#facc15]"></span>
+                <span>Prices start from <strong>$27/room</strong> • 100% Bond Back Guarantee</span>
+              </div>
             </div>
 
-            {/* Google Rating Bar */}
-            <div className="pt-6 border-t border-slate-200 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-600 font-semibold">
+            {/* Key Trust Stats Pill Bar */}
+            <div className="pt-6 border-t border-emerald-800/80 flex flex-wrap items-center gap-6 text-xs text-emerald-100 font-semibold">
               <div className="flex items-center gap-1.5">
-                <div className="flex text-amber-500">
+                <div className="flex text-amber-400">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <span className="font-bold text-slate-900">5.0 Google Rating</span>
+                <span className="font-bold text-white">5.0 Google Rating</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <MapPin className="w-4 h-4 text-sky-600" />
-                <span>All Canberra Suburbs</span>
+                <ShieldCheck className="w-4 h-4 text-[#facc15]" />
+                <span>100k+ Canberra Jobs Done</span>
               </div>
             </div>
 
           </motion.div>
 
-          {/* Right Visual Card Column with Ken Burns Zoom */}
+          {/* Right Visual Photo with Organic Swooped Masking */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-5 relative"
           >
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
-              {/* Card Surface */}
-              <div className="relative rounded-3xl bg-white border border-slate-200 p-3 shadow-xl overflow-hidden">
-                
-                {/* Hero Image */}
-                <div className="relative h-64 sm:h-80 w-full rounded-2xl overflow-hidden bg-slate-100">
-                  <Image
-                    src="/images/hero-carpet.png"
-                    alt="Canberra Carpet Steam Cleaning Van Quality"
-                    fill
-                    className="object-cover object-center hover:scale-110 transition-transform duration-700"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent"></div>
+              {/* Organic Corner Masked Container */}
+              <div className="hero-organic-mask relative h-72 sm:h-96 lg:h-[460px] w-full overflow-hidden border-4 border-white/20 shadow-2xl bg-emerald-950">
+                <Image
+                  src="/images/hero-carpet.png"
+                  alt="Canberra Professional Carpet Steam Cleaning"
+                  fill
+                  className="object-cover object-center hover:scale-105 transition-transform duration-700"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#043d22]/80 via-transparent to-transparent"></div>
 
-                  <div className="absolute top-4 left-4 bg-lime-400 px-3 py-1.5 rounded-full text-xs font-black text-slate-950 shadow-md uppercase tracking-wider">
-                    SPECIAL OFFER: $27/ROOM
-                  </div>
+                {/* Floating Special Offer Tag */}
+                <div className="absolute top-6 right-6 bg-[#facc15] text-[#043d22] px-4 py-2 rounded-full text-xs font-black shadow-lg uppercase tracking-wider">
+                  DEALS FROM $27 / ROOM
                 </div>
 
-                {/* Stat Box */}
-                <div className="p-4 grid grid-cols-2 gap-3 mt-2 bg-slate-50 rounded-xl border border-slate-200">
-                  <div className="space-y-1">
-                    <div className="text-xs text-slate-500 font-bold">Canberra Jobs Done</div>
-                    <div className="text-xl font-black text-slate-900">100,000+</div>
-                  </div>
-
-                  <div className="space-y-1 border-l border-slate-200 pl-3">
-                    <div className="text-xs text-slate-500 font-bold">Response Time</div>
-                    <div className="text-xl font-black text-sky-600">&lt; 15 Mins</div>
-                  </div>
-                </div>
-
-                {/* Offer Strip */}
-                <div className="mt-3 p-3 rounded-xl bg-[#f0f9ff] border border-sky-200 flex items-center justify-between text-xs">
+                {/* Bottom Overlay Badge */}
+                <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl border border-white/40 shadow-xl text-slate-900 flex items-center justify-between">
                   <div>
-                    <div className="text-slate-900 font-extrabold">Carpet Steam Deal</div>
-                    <div className="text-lime-700 font-black text-sm">3 Rooms for $89</div>
+                    <div className="text-[11px] font-black uppercase text-[#085032] tracking-wider">CANBERRA STEAM CLEANERS</div>
+                    <div className="text-sm font-black text-slate-900">Same-Day Dispatch Available</div>
                   </div>
-                  {onOpenCalculator ? (
-                    <button
-                      onClick={onOpenCalculator}
-                      className="px-4 py-2 rounded-full bg-sky-600 text-white font-black hover:bg-sky-500 transition-all hover:scale-105 active:scale-95 shadow-md"
-                    >
-                      Book Now
-                    </button>
-                  ) : (
-                    <Link
-                      href="/instant-quote"
-                      className="px-4 py-2 rounded-full bg-sky-600 text-white font-black hover:bg-sky-500 transition-all hover:scale-105 active:scale-95 shadow-md"
-                    >
-                      Book Now
-                    </Link>
-                  )}
+                  <a
+                    href={COMPANY_INFO.telLink}
+                    className="w-10 h-10 rounded-full bg-[#085032] text-white flex items-center justify-center shadow-md hover:bg-[#043d22] transition-colors"
+                    aria-label="Call Now"
+                  >
+                    <Phone className="w-4 h-4" />
+                  </a>
                 </div>
 
               </div>
+
             </div>
           </motion.div>
 
@@ -183,4 +150,5 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
     </section>
   );
 }
+
 
