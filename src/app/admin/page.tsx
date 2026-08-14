@@ -1,4 +1,5 @@
 import connectToDatabase from '@/lib/mongodb';
+import { ensureDatabaseSeeded } from '@/lib/autoSeed';
 import QuoteSubmissionModel from '@/models/QuoteSubmission';
 import ContactSubmissionModel from '@/models/ContactSubmission';
 import ServiceModel from '@/models/Service';
@@ -13,7 +14,7 @@ import NewsletterSubscriberModel from '@/models/NewsletterSubscriber';
 import Link from 'next/link';
 import { 
   FileSpreadsheet, MessageSquare, Layers, MapPin, HelpCircle, Star, 
-  FileText, Image as ImageIcon, Video, Mail, ArrowRight, Settings 
+  FileText, Image as ImageIcon, Video, Mail, ArrowRight, Settings, Database, Sparkles 
 } from 'lucide-react';
 import { getAdminSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
@@ -25,6 +26,7 @@ export default async function AdminOverviewPage() {
   }
 
   await connectToDatabase().catch(() => {});
+  await ensureDatabaseSeeded().catch(() => {});
 
   const totalQuotes = await QuoteSubmissionModel.countDocuments().catch(() => 0);
   const totalContacts = await ContactSubmissionModel.countDocuments().catch(() => 0);
@@ -47,13 +49,24 @@ export default async function AdminOverviewPage() {
           <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Admin Overview Dashboard</h1>
           <p className="text-xs text-slate-500 font-medium">Manage all website content, suburbs, services, FAQs, reviews, and bookings from here.</p>
         </div>
-        <Link 
-          href="/admin/settings"
-          className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center gap-2 self-start sm:self-auto hover:bg-slate-800 transition-colors shadow-xs"
-        >
-          <Settings className="w-4 h-4 text-[#10b981]" />
-          <span>Edit Site Settings</span>
-        </Link>
+        <div className="flex items-center gap-3">
+          <form action="/api/admin/seed" method="POST">
+            <button
+              type="submit"
+              className="px-4 py-2 rounded-xl bg-[#10b981] hover:bg-[#059669] text-white font-black text-xs uppercase flex items-center gap-2 shadow-xs cursor-pointer"
+            >
+              <Database className="w-4 h-4" />
+              <span>Populate Database Now</span>
+            </button>
+          </form>
+          <Link 
+            href="/admin/settings"
+            className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center gap-2 hover:bg-slate-800 transition-colors shadow-xs"
+          >
+            <Settings className="w-4 h-4 text-[#10b981]" />
+            <span>Edit Settings</span>
+          </Link>
+        </div>
       </div>
 
       {/* Analytics Counter Grid (All 10 Content Collections) */}
