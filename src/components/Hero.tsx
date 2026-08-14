@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { COMPANY_INFO } from '@/data/cleaningData';
@@ -11,6 +12,31 @@ interface HeroProps {
 }
 
 export default function Hero({ onOpenCalculator }: HeroProps) {
+  const [settings, setSettings] = useState<any>({
+    phone: COMPANY_INFO.phone,
+    telLink: COMPANY_INFO.telLink,
+    heroHeadline: "WE'VE BUILT OUR CANBERRA BUSINESS ON 100,000+ CLEAN HOMES",
+    heroSubheadline: "Professional hot water steam extraction, 100% bond-back guarantee, sofa washing, and stain treatment across all Canberra ACT suburbs.",
+    heroImage: "/pictures/real_image_7.jpeg",
+  });
+
+  useEffect(() => {
+    fetch('/api/admin/settings')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error && data.heroHeadline) {
+          setSettings({
+            phone: data.phone || COMPANY_INFO.phone,
+            telLink: `tel:${(data.phone || COMPANY_INFO.phone).replace(/\s+/g, '')}`,
+            heroHeadline: data.heroHeadline,
+            heroSubheadline: data.heroSubheadline,
+            heroImage: data.heroImage || "/pictures/real_image_7.jpeg",
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section id="hero" className="relative overflow-hidden pt-10 pb-16 lg:pt-16 lg:pb-24 bg-gradient-to-r from-[#0c4a6e] via-[#0284c7] to-[#0c4a6e] text-white border-b border-sky-900">
       
@@ -34,16 +60,14 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
               <span>TRUSTED CANBERRA CLEANERS SINCE 2008</span>
             </div>
 
-            {/* Large Bold Multi-line Headline (3 lines mixing solid white & highlighted green) */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.05] uppercase">
-              WE'VE BUILT OUR<br />
-              <span className="text-[#34d399]">CANBERRA BUSINESS ON</span><br />
-              100,000+ CLEAN HOMES
+            {/* Large Bold Multi-line Headline */}
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[1.05] uppercase">
+              {settings.heroHeadline}
             </h1>
 
-            {/* Supporting Text (Short, 2 lines max) */}
+            {/* Supporting Text */}
             <p className="text-base sm:text-lg text-sky-100/90 max-w-xl font-medium leading-relaxed">
-              Professional hot water steam extraction, 100% bond-back guarantee, sofa washing, and stain treatment across all Canberra ACT suburbs.
+              {settings.heroSubheadline}
             </p>
 
             {/* Two CTA Buttons Side-by-Side + Price Anchor Line */}
@@ -100,7 +124,7 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
 
           </motion.div>
 
-          {/* Right Visual Photo with Organic Swooped Masking */}
+          {/* Right Visual Photo */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -111,12 +135,10 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
               
               {/* Organic Corner Masked Container */}
               <div className="hero-organic-mask relative h-72 sm:h-96 lg:h-[460px] w-full overflow-hidden border-4 border-white/20 shadow-2xl bg-sky-950">
-                <Image
-                  src="/pictures/real_image_7.jpeg"
+                <img
+                  src={settings.heroImage}
                   alt="Canberra Carpet Cleaning Deals branded service van and technician with high-pressure steam extraction equipment"
-                  fill
-                  className="object-cover object-center hover:scale-105 transition-transform duration-700"
-                  priority
+                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0c4a6e]/80 via-transparent to-transparent"></div>
 
@@ -132,7 +154,7 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
                     <div className="text-sm font-black text-slate-900">Same-Day Dispatch Available</div>
                   </div>
                   <a
-                    href={COMPANY_INFO.telLink}
+                    href={settings.telLink}
                     className="w-10 h-10 rounded-full bg-[#0284c7] text-white flex items-center justify-center shadow-md hover:bg-[#0369a1] transition-colors"
                     aria-label="Call Now"
                   >
@@ -150,6 +172,3 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
     </section>
   );
 }
-
-
-

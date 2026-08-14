@@ -1,11 +1,14 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Hero from '@/components/Hero';
 import ServiceCatalog from '@/components/ServiceCatalog';
 import ReviewsSection from '@/components/ReviewsSection';
-import { BUSINESS_INFO } from '@/data/canberraData';
+import RemoteImage from '@/components/RemoteImage';
+import { GALLERY_IMAGES } from '@/data/canberraData';
+import { COMPANY_INFO } from '@/data/cleaningData';
 import Link from 'next/link';
 import { 
   Truck, Award, Leaf, ShieldCheck, 
@@ -15,14 +18,34 @@ import {
 import { motion } from 'framer-motion';
 
 export default function HomePage() {
+  const [photos, setPhotos] = useState<any[]>(GALLERY_IMAGES);
+
+  useEffect(() => {
+    fetch('/api/admin/gallery')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const publishedOnly = data.filter((g: any) => g.published !== false);
+          if (publishedOnly.length > 0) {
+            setPhotos(publishedOnly);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const vanImage1 = photos[0]?.url || '/pictures/real_image_7.jpeg';
+  const vanImage2 = photos[1]?.url || '/pictures/real_image_15.jpeg';
+  const actionPhotos = photos.slice(0, 4);
+
   return (
     <main className="min-h-screen flex flex-col bg-white text-slate-900">
       <Header />
 
-      {/* 1. Hero Band (Bold Brand Blue #0c4a6e / #0284c7) */}
+      {/* 1. Hero Band */}
       <Hero />
 
-      {/* 2. Trust/Value Strip (Electrodry-Inspired 4-Icon Row on White Background) */}
+      {/* 2. Trust/Value Strip */}
       <section className="py-12 bg-white border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -71,7 +94,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEW ADDITIVE SECTION 2B: Our Branded Mobile Fleet */}
+      {/* 2B: Our Branded Mobile Fleet (Fetched dynamically from MongoDB) */}
       <section className="py-16 bg-[#0b132b] text-white border-b border-sky-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-12 gap-10 items-center">
@@ -104,15 +127,15 @@ export default function HomePage() {
 
             <div className="lg:col-span-6 grid grid-cols-2 gap-4">
               <div className="relative h-60 sm:h-72 rounded-3xl overflow-hidden border-2 border-sky-700 shadow-xl group">
-                <img
-                  src="/pictures/real_image_7.jpeg"
+                <RemoteImage
+                  src={vanImage1}
                   alt="Canberra Carpet Cleaning Deals branded service van and technician team"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               <div className="relative h-60 sm:h-72 rounded-3xl overflow-hidden border-2 border-sky-700 shadow-xl group mt-4 sm:mt-8">
-                <img
-                  src="/pictures/real_image_15.jpeg"
+                <RemoteImage
+                  src={vanImage2}
                   alt="Canberra Carpet Cleaning Deals mobile van dispatch setup"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
@@ -123,13 +146,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 3. Services Grid (Stain Busters Style A Minimal Text-Led Cards) */}
+      {/* 3. Services Grid */}
       <ServiceCatalog />
 
-      {/* 4. Reviews Section (Stain Busters Review Card Look) */}
+      {/* 4. Reviews Section */}
       <ReviewsSection />
 
-      {/* 5. "Trusted By" / Certified Quality Row */}
+      {/* 5. Certified Quality Row */}
       <section className="py-8 bg-white border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-around gap-6 text-center text-xs font-bold text-slate-500 uppercase tracking-wider">
           <div className="flex items-center gap-2 text-slate-700">
@@ -151,7 +174,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. "Who We Service" Section (Stain Busters 3-Column Grid) */}
+      {/* 6. Who We Service Section */}
       <section className="py-20 bg-[#f8fafc] border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
@@ -232,7 +255,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. Stats Band (Electrodry Style 4-Column Hairline Band) */}
+      {/* 7. Stats Band */}
       <section className="bg-white py-12 border-y border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -261,7 +284,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. "Why Choose Us" Section (Stain Busters 3x2 Icon Grid) */}
+      {/* 8. Why Choose Us Section */}
       <section className="py-20 bg-[#f8fafc] border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
@@ -342,7 +365,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* NEW ADDITIVE SECTION 8B: Behind The Scenes & Equipment in Action */}
+      {/* 8B: Behind The Scenes & Equipment in Action (Fetched dynamically from MongoDB) */}
       <section className="py-20 bg-white border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
@@ -357,159 +380,57 @@ export default function HomePage() {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
-              <div className="relative h-56 w-full">
-                <img
-                  src="/pictures/real_image_1.jpeg"
-                  alt="Truck-mounted carpet steam extraction in Belconnen"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+            {actionPhotos.map((photo: any, index: number) => (
+              <div key={photo._id || index} className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
+                <div className="relative h-56 w-full">
+                  <RemoteImage
+                    src={photo.url || `/pictures/real_image_${index + 1}.jpeg`}
+                    alt={photo.caption || "Canberra Carpet Cleaning Deals technician at work"}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-4 space-y-1">
+                  <div className="text-xs font-black text-[#0284c7]">CANBERRA JOB #{index + 1}</div>
+                  <div className="text-xs text-slate-700 font-bold line-clamp-2">{photo.caption || "Deep fiber steam extraction in progress."}</div>
+                </div>
               </div>
-              <div className="p-4 space-y-1">
-                <div className="text-xs font-black text-[#0284c7]">CARPET STEAM WASH</div>
-                <div className="text-xs text-slate-700 font-bold">Truck-mounted steam flushing out ground-in soil.</div>
-              </div>
-            </div>
-
-            <div className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
-              <div className="relative h-56 w-full">
-                <img
-                  src="/pictures/real_image_2.jpeg"
-                  alt="5-seater lounge upholstery steam clean"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-4 space-y-1">
-                <div className="text-xs font-black text-[#10b981]">LOUNGE RESTORATION</div>
-                <div className="text-xs text-slate-700 font-bold">Deep fabric extraction removing body oils & stains.</div>
-              </div>
-            </div>
-
-            <div className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
-              <div className="relative h-56 w-full">
-                <img
-                  src="/pictures/real_image_3.jpeg"
-                  alt="Tile and grout rotational steam hydro-scrubbing"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-4 space-y-1">
-                <div className="text-xs font-black text-[#0284c7]">TILE & GROUT SCRUB</div>
-                <div className="text-xs text-slate-700 font-bold">1000 PSI hydro-scrubbing restoring white grout lines.</div>
-              </div>
-            </div>
-
-            <div className="rounded-3xl overflow-hidden bg-[#f8fafc] border border-sky-100 shadow-xs group">
-              <div className="relative h-56 w-full">
-                <img
-                  src="/pictures/real_image_10.jpeg"
-                  alt="Living room carpet deep fiber cleaning in Tuggeranong"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-4 space-y-1">
-                <div className="text-xs font-black text-[#10b981]">BOND CLEAN PREP</div>
-                <div className="text-xs text-slate-700 font-bold">100% bond return guarantee inspection handover.</div>
-              </div>
-            </div>
-
+            ))}
           </div>
 
         </div>
       </section>
 
-      {/* 9. Cleaning Process (Stain Busters Numbered Step List) */}
-      <section className="py-20 bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
-          
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="text-xs font-black uppercase tracking-widest text-[#0284c7]">STEP-BY-STEP WORKFLOW</span>
-            <h2 className="text-3xl sm:text-4xl font-black text-slate-900">Our Cleaning Process</h2>
-          </div>
+      {/* 9. Final CTA Band */}
+      <section className="py-16 bg-[#043d22] text-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+          <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-800 text-[#facc15] text-xs font-black uppercase border border-emerald-700 shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-[#facc15]" />
+            <span>SAVE 20% WITH ONLINE BOOKING</span>
+          </span>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            
-            <div className="p-6 rounded-3xl bg-[#f8fafc] border border-sky-100 space-y-4 shadow-xs relative">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase px-3 py-1 bg-sky-100 text-[#0284c7] rounded-full border border-sky-200">Step 1</span>
-                <PhoneCall className="w-5 h-5 text-[#0284c7]" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-base font-black text-slate-900">Initial Contact & Quote</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">Call 0481 734 225 or calculate your instant estimate online in 60 seconds.</p>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-[#f8fafc] border border-sky-100 space-y-4 shadow-xs relative">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase px-3 py-1 bg-sky-100 text-[#0284c7] rounded-full border border-sky-200">Step 2</span>
-                <CalendarCheck className="w-5 h-5 text-[#0284c7]" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-base font-black text-slate-900">Schedule & Inspection</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">Select date & time slot. Our team conducts pre-inspection upon arrival.</p>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-[#f8fafc] border border-sky-100 space-y-4 shadow-xs relative">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase px-3 py-1 bg-emerald-100 text-[#10b981] rounded-full border border-emerald-200">Step 3</span>
-                <Sparkles className="w-5 h-5 text-[#10b981]" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-base font-black text-slate-900">Truck-Mounted Steam Wash</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">Hot water extraction deep cleans fibers, treats stains & sanitizes carpets.</p>
-              </div>
-            </div>
-
-            <div className="p-6 rounded-3xl bg-[#f8fafc] border border-sky-100 space-y-4 shadow-xs relative">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase px-3 py-1 bg-sky-100 text-[#0284c7] rounded-full border border-sky-200">Step 4</span>
-                <CreditCard className="w-5 h-5 text-[#0284c7]" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-base font-black text-slate-900">Inspection & Payment</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">Review final result, receive tax invoice, and pay via EFTPOS or cash after clean.</p>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* 10. High-Contrast Dark Navy Closing CTA Band (Matching Van Signage Black Service Panel) */}
-      <section className="py-20 bg-[#0b132b] text-white border-t border-sky-950">
-        <div className="max-w-4xl mx-auto px-4 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-900/60 text-[#10b981] text-xs font-black uppercase tracking-wider border border-sky-800">
-            <Sparkles className="w-3.5 h-3.5 text-[#10b981]" />
-            <span>Ready for Clean Carpets in Canberra?</span>
-          </div>
-
-          <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-            Get Your Instant Quote in 60 Seconds
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+            Ready to Refresh Your Canberra Carpets Today?
           </h2>
 
-          <p className="text-sky-200 font-medium text-base max-w-xl mx-auto">
-            Auto-apply your 20% online booking discount with zero deposit required. Prices start from $27/room.
+          <p className="text-emerald-100 text-base max-w-xl mx-auto font-medium leading-relaxed">
+            Get an instant price estimate with our online calculator or call our Canberra office for same-day dispatch.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
-            <Link 
-              href="/instant-quote" 
-              className="btn-primary-green px-8 py-4 text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2"
+            <Link
+              href="/instant-quote"
+              className="btn-yellow-pill px-8 py-4 text-xs uppercase tracking-wider shadow-lg flex items-center gap-2"
             >
-              <span>Get Instant Quote</span>
-              <ArrowRight className="w-4 h-4" />
+              <CalendarCheck className="w-4 h-4" />
+              <span>Instant Quote Calculator</span>
             </Link>
 
-            <a 
-              href={BUSINESS_INFO.telLink} 
-              className="btn-white-ghost-pill px-8 py-4 text-xs uppercase tracking-wider flex items-center justify-center gap-2"
+            <a
+              href={COMPANY_INFO.telLink}
+              className="btn-ghost-pill px-8 py-4 text-xs uppercase tracking-wider flex items-center gap-2 border-white/40 text-white hover:bg-white/10"
             >
-              <Phone className="w-4 h-4 text-white" />
-              <span>Call {BUSINESS_INFO.phone}</span>
+              <PhoneCall className="w-4 h-4" />
+              <span>Call {COMPANY_INFO.phone}</span>
             </a>
           </div>
         </div>
