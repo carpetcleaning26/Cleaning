@@ -64,22 +64,22 @@ export default function AdminVideosPage() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white">Video Showcase ({videos.length})</h1>
-          <p className="text-xs text-slate-400 font-medium">Upload new MP4 video clips to Cloudflare R2 storage.</p>
+          <h1 className="text-2xl font-black text-slate-900">Video Showcase ({videos.length})</h1>
+          <p className="text-xs text-slate-500 font-medium">Upload new MP4 video clips to Cloudflare R2 storage.</p>
         </div>
       </div>
 
-      <div className="bg-[#0b132b] border border-sky-900 rounded-3xl p-6 shadow-xl space-y-4 text-xs">
-        <h2 className="font-black text-white">Upload New MP4 Video</h2>
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4 text-xs font-bold">
+        <h2 className="font-black text-slate-900">Upload New MP4 Video</h2>
         <div className="flex flex-col sm:flex-row gap-3">
           <input
             type="text"
             placeholder="Video Title (e.g. Steam Hydro Scrubbing in Gungahlin)"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="flex-1 bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white"
+            className="flex-1 bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900"
           />
-          <label className="px-5 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-black uppercase rounded-xl cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap">
+          <label className="px-5 py-2.5 bg-[#0284c7] hover:bg-[#0369a1] text-white font-black uppercase rounded-xl cursor-pointer flex items-center justify-center gap-2 whitespace-nowrap shadow-xs">
             <Upload className="w-4 h-4" />
             <span>{uploading ? 'Uploading Video...' : 'Select MP4 Video'}</span>
             <input type="file" accept="video/mp4" onChange={handleUpload} className="hidden" />
@@ -89,11 +89,11 @@ export default function AdminVideosPage() {
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
         {videos.map((v) => (
-          <div key={v._id} className="bg-[#0b132b] border border-sky-900 rounded-2xl overflow-hidden p-4 space-y-3 text-xs">
-            <div className="font-bold text-white text-sm">{v.title}</div>
+          <div key={v._id} className="bg-white border border-slate-200 rounded-2xl overflow-hidden p-4 space-y-3 text-xs shadow-sm">
+            <div className="font-bold text-slate-900 text-sm">{v.title}</div>
             <video controls src={v.videoUrl} poster={v.thumbnail} className="w-full rounded-xl bg-black aspect-video" />
             <div className="flex justify-end">
-              <button onClick={() => handleDelete(v._id)} className="p-1.5 bg-red-950 text-red-300 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+              <button onClick={() => handleDelete(v._id)} className="p-1.5 bg-red-50 text-red-600 rounded-lg border border-red-200"><Trash2 className="w-4 h-4" /></button>
             </div>
           </div>
         ))}

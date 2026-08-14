@@ -57,12 +57,12 @@ export default function AdminBlogPage() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white">Blog Articles ({posts.length})</h1>
-          <p className="text-xs text-slate-400 font-medium">Create and publish ACT carpet cleaning articles and advice.</p>
+          <h1 className="text-2xl font-black text-slate-900">Blog Articles ({posts.length})</h1>
+          <p className="text-xs text-slate-500 font-medium">Create and publish ACT carpet cleaning articles and advice.</p>
         </div>
         <button
           onClick={() => setEditing({ id: `b-${Date.now()}`, slug: `article-${Date.now()}`, title: '', excerpt: '', content: '', author: 'Canberra Cleaning Expert', date: 'August 2026', readTime: '5 min read', category: 'Carpet Care', image: '/pictures/real_image_1.jpeg', published: true })}
-          className="px-4 py-2.5 rounded-xl bg-[#10b981] text-white font-black text-xs uppercase flex items-center gap-2"
+          className="px-4 py-2.5 rounded-xl bg-[#10b981] text-white font-black text-xs uppercase flex items-center gap-2 shadow-xs"
         >
           <Plus className="w-4 h-4" />
           <span>New Article</span>
@@ -70,34 +70,34 @@ export default function AdminBlogPage() {
       </div>
 
       {editing && (
-        <form onSubmit={handleSave} className="bg-[#0b132b] border border-sky-800 rounded-3xl p-6 shadow-xl space-y-4 text-xs">
-          <div className="flex items-center justify-between border-b border-sky-900 pb-2">
-            <h2 className="font-black text-white">{editing._id ? 'Edit Article' : 'New Article'}</h2>
+        <form onSubmit={handleSave} className="bg-white border border-slate-200 rounded-3xl p-6 shadow-xl space-y-4 text-xs">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+            <h2 className="font-black text-slate-900">{editing._id ? 'Edit Article' : 'New Article'}</h2>
             <button type="button" onClick={() => setEditing(null)}><X className="w-4 h-4 text-slate-400" /></button>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="font-bold text-slate-300">Title</label>
-              <input type="text" required value={editing.title} onChange={(e) => setEditing({ ...editing, title: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+              <label className="font-bold text-slate-700">Title</label>
+              <input type="text" required value={editing.title} onChange={(e) => setEditing({ ...editing, title: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 font-bold mt-1" />
             </div>
             <div>
-              <label className="font-bold text-slate-300">URL Slug</label>
-              <input type="text" required value={editing.slug} onChange={(e) => setEditing({ ...editing, slug: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+              <label className="font-bold text-slate-700">URL Slug</label>
+              <input type="text" required value={editing.slug} onChange={(e) => setEditing({ ...editing, slug: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 font-bold mt-1" />
             </div>
           </div>
           <div>
-            <label className="font-bold text-slate-300">Excerpt</label>
-            <textarea required rows={2} value={editing.excerpt} onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+            <label className="font-bold text-slate-700">Excerpt</label>
+            <textarea required rows={2} value={editing.excerpt} onChange={(e) => setEditing({ ...editing, excerpt: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 font-bold mt-1" />
           </div>
           <div>
-            <label className="font-bold text-slate-300">Full Content (Markdown / Text)</label>
-            <textarea required rows={6} value={editing.content} onChange={(e) => setEditing({ ...editing, content: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+            <label className="font-bold text-slate-700">Full Content (Markdown / Text)</label>
+            <textarea required rows={6} value={editing.content} onChange={(e) => setEditing({ ...editing, content: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 font-bold mt-1" />
           </div>
           <div>
-            <label className="font-bold text-slate-300">Cover Image URL (R2 Storage)</label>
+            <label className="font-bold text-slate-700">Cover Image URL (R2 Storage)</label>
             <div className="flex gap-2 items-center mt-1">
-              <input type="text" required value={editing.image} onChange={(e) => setEditing({ ...editing, image: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white" />
-              <label className="px-4 py-2.5 bg-sky-900 text-white rounded-xl cursor-pointer font-bold flex items-center gap-1.5 whitespace-nowrap">
+              <input type="text" required value={editing.image} onChange={(e) => setEditing({ ...editing, image: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 font-bold" />
+              <label className="px-4 py-2.5 bg-sky-600 text-white rounded-xl cursor-pointer font-bold flex items-center gap-1.5 whitespace-nowrap shadow-xs">
                 <Upload className="w-4 h-4" />
                 <span>{uploading ? 'Uploading...' : 'Upload'}</span>
                 <input type="file" accept="image/*" onChange={handleUpload} className="hidden" />
@@ -105,25 +105,25 @@ export default function AdminBlogPage() {
             </div>
           </div>
           <div className="flex justify-end gap-2">
-            <button type="button" onClick={() => setEditing(null)} className="px-4 py-2 bg-slate-800 rounded-xl">Cancel</button>
+            <button type="button" onClick={() => setEditing(null)} className="px-4 py-2 bg-slate-100 font-bold text-slate-700 rounded-xl">Cancel</button>
             <button type="submit" className="px-5 py-2 bg-[#10b981] font-black rounded-xl text-white">Save Article</button>
           </div>
         </form>
       )}
 
-      <div className="bg-[#0b132b] border border-sky-900 rounded-3xl p-6 shadow-xl space-y-4">
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
         {posts.map((post) => (
-          <div key={post._id} className="p-4 rounded-2xl bg-slate-900/80 border border-sky-900 flex items-center justify-between gap-4 text-xs">
+          <div key={post._id} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-4 text-xs">
             <div className="flex items-center gap-3">
-              <img src={post.image} alt={post.title} className="w-14 h-14 rounded-xl object-cover border border-sky-800" />
+              <img src={post.image} alt={post.title} className="w-14 h-14 rounded-xl object-cover border border-slate-200" />
               <div>
-                <h3 className="font-black text-white text-sm">{post.title}</h3>
-                <div className="text-[11px] text-slate-400">{post.category} • {post.date} • /blog/{post.slug}</div>
+                <h3 className="font-black text-slate-900 text-sm">{post.title}</h3>
+                <div className="text-[11px] text-slate-500">{post.category} • {post.date} • /blog/{post.slug}</div>
               </div>
             </div>
             <div className="flex gap-1">
-              <button onClick={() => setEditing(post)} className="p-1.5 bg-sky-900 text-sky-200 rounded-lg"><Edit2 className="w-4 h-4" /></button>
-              <button onClick={() => handleDelete(post._id)} className="p-1.5 bg-red-950 text-red-300 rounded-lg"><Trash2 className="w-4 h-4" /></button>
+              <button onClick={() => setEditing(post)} className="p-1.5 bg-sky-50 text-sky-700 rounded-lg border border-sky-200"><Edit2 className="w-4 h-4" /></button>
+              <button onClick={() => handleDelete(post._id)} className="p-1.5 bg-red-50 text-red-600 rounded-lg border border-red-200"><Trash2 className="w-4 h-4" /></button>
             </div>
           </div>
         ))}

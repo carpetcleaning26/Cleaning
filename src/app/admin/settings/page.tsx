@@ -38,51 +38,51 @@ export default function AdminSettingsPage() {
     <div className="space-y-6 max-w-4xl mx-auto">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white">Global Site Settings</h1>
-          <p className="text-xs text-slate-400 font-medium">Update business phone, email, address, operating hours, and hero text.</p>
+          <h1 className="text-2xl font-black text-slate-900">Global Site Settings</h1>
+          <p className="text-xs text-slate-500 font-medium">Update business phone, email, address, operating hours, and hero text.</p>
         </div>
       </div>
 
       {saved && (
-        <div className="p-4 rounded-xl bg-emerald-950 border border-emerald-800 text-emerald-200 text-xs font-bold text-center">
+        <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold text-center">
           ✓ Site settings saved successfully!
         </div>
       )}
 
-      <form onSubmit={handleSave} className="bg-[#0b132b] border border-sky-900 rounded-3xl p-6 shadow-xl space-y-4 text-xs">
+      <form onSubmit={handleSave} className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4 text-xs font-bold">
         <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="font-bold text-slate-300">Business Phone Number</label>
-            <input type="text" value={settings.phone || ''} onChange={(e) => setSettings({ ...settings, phone: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+            <label className="text-slate-700">Business Phone Number</label>
+            <input type="text" value={settings.phone || ''} onChange={(e) => setSettings({ ...settings, phone: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 mt-1 font-bold" />
           </div>
           <div>
-            <label className="font-bold text-slate-300">Business Email Address</label>
-            <input type="email" value={settings.email || ''} onChange={(e) => setSettings({ ...settings, email: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+            <label className="text-slate-700">Business Email Address</label>
+            <input type="email" value={settings.email || ''} onChange={(e) => setSettings({ ...settings, email: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 mt-1 font-bold" />
           </div>
         </div>
 
         <div>
-          <label className="font-bold text-slate-300">Office Address</label>
-          <input type="text" value={settings.address || ''} onChange={(e) => setSettings({ ...settings, address: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+          <label className="text-slate-700">Office Address</label>
+          <input type="text" value={settings.address || ''} onChange={(e) => setSettings({ ...settings, address: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 mt-1 font-bold" />
         </div>
 
         <div>
-          <label className="font-bold text-slate-300">Operating Hours</label>
-          <input type="text" value={settings.hours || ''} onChange={(e) => setSettings({ ...settings, hours: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+          <label className="text-slate-700">Operating Hours</label>
+          <input type="text" value={settings.hours || ''} onChange={(e) => setSettings({ ...settings, hours: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 mt-1 font-bold" />
         </div>
 
         <div>
-          <label className="font-bold text-slate-300">Homepage Hero Headline</label>
-          <input type="text" value={settings.heroHeadline || ''} onChange={(e) => setSettings({ ...settings, heroHeadline: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+          <label className="text-slate-700">Homepage Hero Headline</label>
+          <input type="text" value={settings.heroHeadline || ''} onChange={(e) => setSettings({ ...settings, heroHeadline: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 mt-1 font-bold" />
         </div>
 
         <div>
-          <label className="font-bold text-slate-300">Homepage Hero Subheadline</label>
-          <textarea rows={3} value={settings.heroSubheadline || ''} onChange={(e) => setSettings({ ...settings, heroSubheadline: e.target.value })} className="w-full bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white mt-1" />
+          <label className="text-slate-700">Homepage Hero Subheadline</label>
+          <textarea rows={3} value={settings.heroSubheadline || ''} onChange={(e) => setSettings({ ...settings, heroSubheadline: e.target.value })} className="w-full bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900 mt-1 font-bold" />
         </div>
 
         <div className="pt-2 flex justify-end">
-          <button type="submit" className="px-6 py-3 bg-[#10b981] hover:bg-[#059669] text-white font-black text-xs uppercase rounded-xl flex items-center gap-2 shadow-lg">
+          <button type="submit" className="px-6 py-3 bg-[#10b981] hover:bg-[#059669] text-white font-black text-xs uppercase rounded-xl flex items-center gap-2 shadow-md">
             <Save className="w-4 h-4" />
             <span>Save Settings</span>
           </button>

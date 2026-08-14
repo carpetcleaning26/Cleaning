@@ -50,43 +50,43 @@ export default function AdminContactsPage() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white">Contact Messages</h1>
-          <p className="text-xs text-slate-400 font-medium">Inquiries received from the Contact page form.</p>
+          <h1 className="text-2xl font-black text-slate-900">Contact Messages</h1>
+          <p className="text-xs text-slate-500 font-medium">Inquiries received from the Contact page form.</p>
         </div>
       </div>
 
-      <div className="bg-[#0b132b] border border-sky-900 rounded-3xl p-6 shadow-xl overflow-x-auto">
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm overflow-x-auto">
         {loading ? (
-          <div className="text-xs text-slate-400 py-8 text-center">Loading contact messages...</div>
+          <div className="text-xs text-slate-500 py-8 text-center">Loading contact messages...</div>
         ) : contacts.length === 0 ? (
-          <div className="text-xs text-slate-400 py-8 text-center">No contact messages received yet.</div>
+          <div className="text-xs text-slate-500 py-8 text-center">No contact messages received yet.</div>
         ) : (
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-sky-900 text-sky-300 font-black uppercase">
-                <th className="pb-3 px-3">Sender</th>
-                <th className="pb-3 px-3">Contact Details</th>
-                <th className="pb-3 px-3">Message Body</th>
-                <th className="pb-3 px-3">Date</th>
-                <th className="pb-3 px-3">Status</th>
-                <th className="pb-3 px-3 text-right">Actions</th>
+              <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 font-black uppercase">
+                <th className="py-3 px-3">Sender</th>
+                <th className="py-3 px-3">Contact Details</th>
+                <th className="py-3 px-3">Message Body</th>
+                <th className="py-3 px-3">Date</th>
+                <th className="py-3 px-3">Status</th>
+                <th className="py-3 px-3 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-sky-900/60 font-medium">
+            <tbody className="divide-y divide-slate-100 font-medium">
               {contacts.map((c) => (
-                <tr key={c._id} className="hover:bg-sky-900/20 transition-colors">
-                  <td className="py-4 px-3 font-bold text-white">{c.name}</td>
-                  <td className="py-4 px-3 text-slate-300">
+                <tr key={c._id} className="hover:bg-slate-50 transition-colors">
+                  <td className="py-4 px-3 font-bold text-slate-900">{c.name}</td>
+                  <td className="py-4 px-3 text-slate-700">
                     <div>{c.email}</div>
-                    <div className="text-[11px] text-slate-400">{c.phone || 'No phone'} • {c.suburb || 'No suburb'}</div>
+                    <div className="text-[11px] text-slate-500">{c.phone || 'No phone'} • {c.suburb || 'No suburb'}</div>
                   </td>
-                  <td className="py-4 px-3 text-slate-300 max-w-xs leading-relaxed">{c.message}</td>
-                  <td className="py-4 px-3 text-slate-400">{new Date(c.createdAt).toLocaleDateString()}</td>
+                  <td className="py-4 px-3 text-slate-700 max-w-xs leading-relaxed">{c.message}</td>
+                  <td className="py-4 px-3 text-slate-500">{new Date(c.createdAt).toLocaleDateString()}</td>
                   <td className="py-4 px-3">
                     <select
                       value={c.status}
                       onChange={(e) => updateStatus(c._id, e.target.value)}
-                      className="bg-slate-900 border border-sky-800 text-white rounded-lg px-2 py-1 text-xs font-bold"
+                      className="bg-slate-50 border border-slate-300 text-slate-900 rounded-lg px-2.5 py-1 text-xs font-bold"
                     >
                       <option value="new">New</option>
                       <option value="read">Read</option>
@@ -96,7 +96,7 @@ export default function AdminContactsPage() {
                   <td className="py-4 px-3 text-right">
                     <button
                       onClick={() => deleteContact(c._id)}
-                      className="p-1.5 rounded-lg bg-red-950/60 text-red-300 hover:bg-red-900 transition-colors"
+                      className="p-1.5 rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 transition-colors"
                       title="Delete"
                     >
                       <Trash2 className="w-4 h-4" />

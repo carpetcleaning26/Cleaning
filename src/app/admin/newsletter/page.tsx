@@ -29,28 +29,28 @@ export default function AdminNewsletterPage() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white">Newsletter Subscribers ({subscribers.length})</h1>
-          <p className="text-xs text-slate-400 font-medium">Subscribers captured from the footer signup form.</p>
+          <h1 className="text-2xl font-black text-slate-900">Newsletter Subscribers ({subscribers.length})</h1>
+          <p className="text-xs text-slate-500 font-medium">Subscribers captured from the footer signup form.</p>
         </div>
-        <button onClick={exportCSV} className="px-4 py-2.5 bg-[#10b981] hover:bg-[#059669] text-white rounded-xl text-xs font-black uppercase flex items-center gap-2">
+        <button onClick={exportCSV} className="px-4 py-2.5 bg-[#10b981] hover:bg-[#059669] text-white rounded-xl text-xs font-black uppercase flex items-center gap-2 shadow-xs">
           <Download className="w-4 h-4" />
           <span>Export CSV</span>
         </button>
       </div>
 
-      <div className="bg-[#0b132b] border border-sky-900 rounded-3xl p-6 shadow-xl overflow-x-auto">
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm overflow-x-auto">
         <table className="w-full text-left text-xs">
           <thead>
-            <tr className="border-b border-sky-900 text-sky-300 font-black uppercase">
-              <th className="pb-3 px-3">Subscriber Email</th>
-              <th className="pb-3 px-3">Subscribed Date</th>
+            <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 font-black uppercase">
+              <th className="py-3 px-3">Subscriber Email</th>
+              <th className="py-3 px-3">Subscribed Date</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-sky-900/60 font-medium">
+          <tbody className="divide-y divide-slate-100 font-medium">
             {subscribers.map((s) => (
-              <tr key={s._id}>
-                <td className="py-3.5 px-3 text-white font-bold">{s.email}</td>
-                <td className="py-3.5 px-3 text-slate-400">{new Date(s.subscribedAt).toLocaleDateString()}</td>
+              <tr key={s._id} className="hover:bg-slate-50 transition-colors">
+                <td className="py-3.5 px-3 text-slate-900 font-bold">{s.email}</td>
+                <td className="py-3.5 px-3 text-slate-500">{new Date(s.subscribedAt).toLocaleDateString()}</td>
               </tr>
             ))}
           </tbody>

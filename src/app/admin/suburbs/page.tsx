@@ -41,20 +41,20 @@ export default function AdminSuburbsPage() {
     <div className="space-y-6 max-w-7xl mx-auto">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-black text-white">Service Suburbs ({suburbs.length})</h1>
-          <p className="text-xs text-slate-400 font-medium">Manage ACT service coverage suburbs and same-day availability.</p>
+          <h1 className="text-2xl font-black text-slate-900">Service Suburbs ({suburbs.length})</h1>
+          <p className="text-xs text-slate-500 font-medium">Manage ACT service coverage suburbs and same-day availability.</p>
         </div>
       </div>
 
       {/* Add Form */}
-      <form onSubmit={handleAdd} className="bg-[#0b132b] border border-sky-900 rounded-3xl p-6 shadow-xl grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs">
+      <form onSubmit={handleAdd} className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs font-bold">
         <input
           type="text"
           required
           placeholder="Suburb Name (e.g. Belconnen)"
           value={newSub.name}
           onChange={(e) => setNewSub({ ...newSub, name: e.target.value })}
-          className="bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white"
+          className="bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900"
         />
         <input
           type="text"
@@ -62,12 +62,12 @@ export default function AdminSuburbsPage() {
           placeholder="Postcode (e.g. 2617)"
           value={newSub.postcode}
           onChange={(e) => setNewSub({ ...newSub, postcode: e.target.value })}
-          className="bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white"
+          className="bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900"
         />
         <select
           value={newSub.region}
           onChange={(e) => setNewSub({ ...newSub, region: e.target.value })}
-          className="bg-slate-900 border border-sky-800 rounded-xl p-2.5 text-white"
+          className="bg-slate-50 border border-slate-300 rounded-xl p-2.5 text-slate-900"
         >
           <option value="North Canberra">North Canberra</option>
           <option value="Belconnen">Belconnen</option>
@@ -78,40 +78,40 @@ export default function AdminSuburbsPage() {
           <option value="Molonglo Valley">Molonglo Valley</option>
           <option value="Queanbeyan Region">Queanbeyan Region</option>
         </select>
-        <button type="submit" className="py-2.5 rounded-xl bg-[#10b981] text-white font-black uppercase">Add Suburb</button>
+        <button type="submit" className="py-2.5 rounded-xl bg-[#10b981] hover:bg-[#059669] text-white font-black uppercase shadow-xs">Add Suburb</button>
       </form>
 
       {/* Search Input */}
       <div className="relative max-w-sm">
-        <Search className="w-4 h-4 text-sky-400 absolute left-3.5 top-3" />
+        <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
         <input
           type="text"
           placeholder="Search suburb or postcode..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full bg-[#0b132b] border border-sky-900 rounded-xl pl-10 pr-4 py-2.5 text-white text-xs"
+          className="w-full bg-white border border-slate-300 rounded-xl pl-10 pr-4 py-2.5 text-slate-900 text-xs font-bold"
         />
       </div>
 
       {/* Suburbs Table */}
-      <div className="bg-[#0b132b] border border-sky-900 rounded-3xl p-6 shadow-xl overflow-x-auto">
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm overflow-x-auto">
         <table className="w-full text-left text-xs">
           <thead>
-            <tr className="border-b border-sky-900 text-sky-300 font-black uppercase">
-              <th className="pb-3 px-3">Suburb</th>
-              <th className="pb-3 px-3">Postcode</th>
-              <th className="pb-3 px-3">Region</th>
-              <th className="pb-3 px-3 text-right">Actions</th>
+            <tr className="border-b border-slate-200 bg-slate-50 text-slate-700 font-black uppercase">
+              <th className="py-3 px-3">Suburb</th>
+              <th className="py-3 px-3">Postcode</th>
+              <th className="py-3 px-3">Region</th>
+              <th className="py-3 px-3 text-right">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-sky-900/60">
+          <tbody className="divide-y divide-slate-100">
             {filtered.map((s) => (
-              <tr key={s._id}>
-                <td className="py-3 px-3 font-bold text-white">{s.name}</td>
-                <td className="py-3 px-3 text-slate-300">{s.postcode}</td>
-                <td className="py-3 px-3 text-[#0284c7] font-semibold">{s.region}</td>
+              <tr key={s._id} className="hover:bg-slate-50 transition-colors">
+                <td className="py-3 px-3 font-bold text-slate-900">{s.name}</td>
+                <td className="py-3 px-3 text-slate-600 font-semibold">{s.postcode}</td>
+                <td className="py-3 px-3 text-[#0284c7] font-bold">{s.region}</td>
                 <td className="py-3 px-3 text-right">
-                  <button onClick={() => handleDelete(s._id)} className="p-1.5 rounded-lg bg-red-950/60 text-red-300 hover:bg-red-900"><Trash2 className="w-4 h-4" /></button>
+                  <button onClick={() => handleDelete(s._id)} className="p-1.5 rounded-lg bg-red-50 border border-red-200 text-red-600 hover:bg-red-100"><Trash2 className="w-4 h-4" /></button>
                 </td>
               </tr>
             ))}
