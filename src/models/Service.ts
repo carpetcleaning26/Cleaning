@@ -4,6 +4,7 @@ export interface IService extends Document {
   id: string;
   slug: string;
   name: string;
+  title?: string;
   navTitle: string;
   category: 'GENERAL' | 'CARPET' | 'UPHOLSTERY' | 'RUG' | 'TILES' | 'COMMERCIAL';
   shortDesc: string;
@@ -24,6 +25,7 @@ const ServiceSchema: Schema = new Schema(
     id: { type: String, required: true, unique: true },
     slug: { type: String, required: true, unique: true },
     name: { type: String, required: true },
+    title: { type: String },
     navTitle: { type: String, required: true },
     category: { type: String, required: true, default: 'GENERAL' },
     shortDesc: { type: String, required: true },

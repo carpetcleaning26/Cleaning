@@ -99,7 +99,7 @@ export default function ServiceCatalog({ onOpenCalculator }: ServiceCatalogProps
                 {/* Service Title */}
                 <div>
                   <h3 className="text-xl font-black text-slate-900 group-hover:text-[#0284c7] transition-colors">
-                    {service.title}
+                    {service.title || service.name}
                   </h3>
                 </div>
 

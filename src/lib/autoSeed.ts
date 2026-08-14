@@ -21,7 +21,13 @@ export async function ensureDatabaseSeeded() {
     if (serviceCount === 0) {
       console.log('[AutoSeed] Seeding Services...');
       await ServiceModel.insertMany(
-        SERVICES.map((s, idx) => ({ ...s, displayOrder: idx, published: true }))
+        SERVICES.map((s: any, idx) => ({
+          ...s,
+          name: s.name || s.title,
+          title: s.title || s.name,
+          displayOrder: idx,
+          published: true,
+        }))
       );
     }
 

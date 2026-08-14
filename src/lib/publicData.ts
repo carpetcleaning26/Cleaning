@@ -16,12 +16,21 @@ export async function getPublicServices() {
     await connectToDatabase();
     const docs = await ServiceModel.find({ published: true }).sort({ displayOrder: 1, createdAt: -1 }).lean();
     if (docs && docs.length > 0) {
-      return docs.map((d: any) => ({ ...d, _id: d._id.toString() }));
+      return docs.map((d: any) => ({
+        ...d,
+        _id: d._id.toString(),
+        name: d.name || d.title,
+        title: d.title || d.name,
+      }));
     }
   } catch (err) {
     console.warn('[PublicData] Error reading services from DB, fallback to default:', err);
   }
-  return SERVICES;
+  return SERVICES.map((s: any) => ({
+    ...s,
+    name: s.name || s.title,
+    title: s.title || s.name,
+  }));
 }
 
 export async function getServiceBySlug(slug: string) {
@@ -29,12 +38,23 @@ export async function getServiceBySlug(slug: string) {
     await connectToDatabase();
     const doc = await ServiceModel.findOne({ slug, published: true }).lean();
     if (doc) {
-      return { ...doc, _id: (doc as any)._id.toString() };
+      return {
+        ...doc,
+        _id: (doc as any)._id.toString(),
+        name: (doc as any).name || (doc as any).title,
+        title: (doc as any).title || (doc as any).name,
+      };
     }
   } catch (err) {
     console.warn('[PublicData] Error reading service slug from DB:', err);
   }
-  return SERVICES.find((s) => s.slug === slug) || null;
+  const fallback = SERVICES.find((s) => s.slug === slug);
+  if (!fallback) return null;
+  return {
+    ...fallback,
+    name: (fallback as any).name || (fallback as any).title,
+    title: (fallback as any).title || (fallback as any).name,
+  };
 }
 
 export async function getPublicSuburbs() {
