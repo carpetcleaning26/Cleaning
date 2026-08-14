@@ -194,7 +194,7 @@ export default function AboutPage() {
         <div className="space-y-6 pt-6">
           <div className="text-center space-y-2">
             <span className="text-xs font-black uppercase tracking-wider text-[#085032]">SPECIALIZED CARE</span>
-            <h2 className="text-2xl sm:text-4xl font-black text-slate-900">Discover All 9 Cleaning Services</h2>
+            <h2 className="text-2xl sm:text-4xl font-black text-slate-900">Discover All {serviceList.length} Cleaning Services</h2>
             <p className="text-slate-600 text-xs sm:text-sm font-medium">Click any service to view full specifications, process steps, and pricing details.</p>
           </div>
 

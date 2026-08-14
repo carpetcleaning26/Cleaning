@@ -196,7 +196,7 @@ export default async function IndividualServicePage({ params }: ServiceSlugProps
             
             {/* Sidebar Navigation */}
             <div className="bg-white border border-sky-100 rounded-3xl p-6 shadow-xs space-y-4">
-              <div className="text-xs font-black uppercase text-slate-400 tracking-wider">All 9 Cleaning Services</div>
+              <div className="text-xs font-black uppercase text-slate-400 tracking-wider">All {allServices.length} Cleaning Services</div>
               <div className="space-y-1.5 text-xs font-bold">
                 {allServices.map((s: any) => (
                   <Link
