@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { SERVICES, ServiceItem } from '@/data/cleaningData';
+import RemoteImage from '@/components/RemoteImage';
+import { SERVICES } from '@/data/cleaningData';
 import { Sparkles, ArrowRight, ShieldCheck, Armchair, Layers, Droplets, Grid, Bed, Bug } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -28,7 +29,7 @@ export default function ServiceCatalog({ onOpenCalculator }: ServiceCatalogProps
   }, []);
 
   const renderIcon = (name: string) => {
-    const iconClass = "w-6 h-6 text-[#0284c7] stroke-[1.75]";
+    const iconClass = "w-5 h-5 text-[#0284c7] stroke-[2]";
     switch (name) {
       case 'Armchair':
         return <Armchair className={iconClass} />;
@@ -73,52 +74,66 @@ export default function ServiceCatalog({ onOpenCalculator }: ServiceCatalogProps
           </p>
         </motion.div>
 
-        {/* Style A — Minimal Text-Led Services Cards Grid */}
+        {/* Services Cards Grid with Real Client Images */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {serviceList.map((service, index) => (
             <motion.div
-              key={service.id}
+              key={service.id || service._id || index}
               id={`service-${service.id}`}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.06 }}
-              className="group relative rounded-3xl bg-white border border-sky-100/80 hover:border-[#0284c7] p-7 flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-1"
+              className="group relative rounded-3xl bg-white border border-slate-200 hover:border-[#0284c7] overflow-hidden flex flex-col justify-between transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1"
             >
-              <div className="space-y-4">
-                {/* Icon & Category Tag Header */}
-                <div className="flex items-center justify-between">
-                  <div className="p-2.5 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center">
-                    {renderIcon(service.iconName)}
+              <div>
+                {/* Real Service Image Container */}
+                <div className="relative h-52 w-full bg-slate-100 overflow-hidden">
+                  <RemoteImage
+                    src={service.image || `/pictures/real_image_${(index % 25) + 1}.jpeg`}
+                    alt={service.title || service.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent"></div>
+                  
+                  {/* Top Badges Overlay */}
+                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
+                    <div className="p-2 rounded-xl bg-white/95 backdrop-blur-md border border-white/40 shadow-sm flex items-center justify-center">
+                      {renderIcon(service.iconName)}
+                    </div>
+                    <span className="text-[11px] font-black px-3 py-1 rounded-full bg-[#10b981] text-white shadow-md uppercase tracking-wider">
+                      From {service.startingPrice}
+                    </span>
                   </div>
-                  <span className="text-[11px] font-extrabold px-3 py-1 rounded-full bg-emerald-50 text-[#059669] border border-emerald-200">
-                    From {service.startingPrice}
-                  </span>
+
+                  {/* Category Pill at Bottom of Image */}
+                  <div className="absolute bottom-3 left-3">
+                    <span className="px-2.5 py-0.5 rounded-md bg-white/90 backdrop-blur-xs text-slate-900 text-[10px] font-black uppercase tracking-wider shadow-xs">
+                      {service.category || 'CANBERRA SERVICE'}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Service Title */}
-                <div>
-                  <h3 className="text-xl font-black text-slate-900 group-hover:text-[#0284c7] transition-colors">
+                {/* Card Body */}
+                <div className="p-6 space-y-3">
+                  <h3 className="text-xl font-black text-slate-900 group-hover:text-[#0284c7] transition-colors leading-tight">
                     {service.title || service.name}
                   </h3>
+
+                  <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed font-medium">
+                    {service.shortDesc}
+                  </p>
                 </div>
-
-                {/* 2-3 Line Description */}
-                <p className="text-xs sm:text-sm text-slate-600 line-clamp-3 leading-relaxed font-medium">
-                  {service.shortDesc}
-                </p>
-
-                {/* Thin Blue/Green Divider Line */}
-                <div className="w-full border-b border-[#0284c7]/20 pt-2"></div>
               </div>
 
-              {/* Arrow Link Bottom */}
-              <div className="pt-4">
+              {/* Bottom Action Link */}
+              <div className="p-6 pt-0">
+                <div className="w-full border-t border-slate-100 mb-4"></div>
                 <Link
                   href={`/services/${service.slug}`}
                   className="flex items-center justify-between text-[#0284c7] font-black text-xs uppercase tracking-wider group-hover:text-[#0369a1] transition-colors"
                 >
-                  <span>Learn more</span>
+                  <span>Learn more & pricing</span>
                   <ArrowRight className="w-4 h-4 text-[#10b981] group-hover:translate-x-1.5 transition-transform" />
                 </Link>
               </div>
@@ -131,6 +146,3 @@ export default function ServiceCatalog({ onOpenCalculator }: ServiceCatalogProps
     </section>
   );
 }
-
-
-
