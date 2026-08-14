@@ -112,7 +112,7 @@ export default function HomePage() {
               </div>
               <div className="relative h-60 sm:h-72 rounded-3xl overflow-hidden border-2 border-sky-700 shadow-xl group mt-4 sm:mt-8">
                 <img
-                  src="/pictures/real_image_20.jpeg"
+                  src="/pictures/real_image_15.jpeg"
                   alt="Canberra Carpet Cleaning Deals mobile van dispatch setup"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
