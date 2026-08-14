@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { SERVICES, ServiceItem } from '@/data/cleaningData';
 import { Sparkles, ArrowRight, ShieldCheck, Armchair, Layers, Droplets, Grid, Bed, Bug } from 'lucide-react';
@@ -11,6 +11,21 @@ interface ServiceCatalogProps {
 }
 
 export default function ServiceCatalog({ onOpenCalculator }: ServiceCatalogProps) {
+  const [serviceList, setServiceList] = useState<any[]>(SERVICES);
+
+  useEffect(() => {
+    fetch('/api/admin/services')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const publishedOnly = data.filter((s: any) => s.published !== false);
+          if (publishedOnly.length > 0) {
+            setServiceList(publishedOnly);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const renderIcon = (name: string) => {
     const iconClass = "w-6 h-6 text-[#0284c7] stroke-[1.75]";
@@ -60,7 +75,7 @@ export default function ServiceCatalog({ onOpenCalculator }: ServiceCatalogProps
 
         {/* Style A — Minimal Text-Led Services Cards Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {SERVICES.map((service, index) => (
+          {serviceList.map((service, index) => (
             <motion.div
               key={service.id}
               id={`service-${service.id}`}

@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
-import { REVIEWS, ReviewItem } from '@/data/cleaningData';
-
-const reviewsList: ReviewItem[] = [...REVIEWS];
+import connectToDatabase from '@/lib/mongodb';
+import TestimonialModel from '@/models/Testimonial';
+import { getPublicTestimonials } from '@/lib/publicData';
 
 export async function GET() {
+  const reviews = await getPublicTestimonials();
   return NextResponse.json({
     success: true,
-    reviews: reviewsList
+    reviews,
   });
 }
 
@@ -22,7 +23,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const newReview: ReviewItem = {
+    await connectToDatabase();
+
+    const newReview = await TestimonialModel.create({
       id: `r-${Date.now()}`,
       author,
       suburb,
@@ -30,17 +33,17 @@ export async function POST(request: Request) {
       date: 'Just now',
       service: service || 'Carpet Steam Cleaning',
       comment,
-      avatarBg: 'from-teal-500 to-cyan-600'
-    };
-
-    reviewsList.unshift(newReview);
+      avatarBg: 'from-[#0284c7] to-sky-600',
+      published: true,
+    });
 
     return NextResponse.json({
       success: true,
       message: 'Thank you! Your review has been published.',
-      review: newReview
+      review: newReview,
     });
   } catch (error: any) {
+    console.error('Error submitting review:', error);
     return NextResponse.json(
       { success: false, error: error.message || 'Internal server error' },
       { status: 500 }

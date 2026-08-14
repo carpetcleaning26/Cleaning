@@ -1,7 +1,8 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import RemoteImage from '@/components/RemoteImage';
-import { SERVICES, BUSINESS_INFO, GALLERY_IMAGES } from '@/data/canberraData';
+import { BUSINESS_INFO, GALLERY_IMAGES } from '@/data/canberraData';
+import { getServiceBySlug, getPublicServices } from '@/lib/publicData';
 import { notFound } from 'next/navigation';
 import { CheckCircle2, Tag, Camera, Sparkles } from 'lucide-react';
 import Link from 'next/link';
@@ -13,7 +14,7 @@ interface ServiceSlugProps {
 
 export async function generateMetadata({ params }: ServiceSlugProps): Promise<Metadata> {
   const { slug } = await params;
-  const service = SERVICES.find((s) => s.slug === slug);
+  const service = await getServiceBySlug(slug);
   if (!service) return { title: "Service Not Found" };
   return {
     title: `${service.name} Canberra | Canberra Carpet Cleaning Deals`,
@@ -22,12 +23,14 @@ export async function generateMetadata({ params }: ServiceSlugProps): Promise<Me
 }
 
 export async function generateStaticParams() {
-  return SERVICES.map((s) => ({ slug: s.slug }));
+  const services = await getPublicServices();
+  return services.map((s: any) => ({ slug: s.slug }));
 }
 
 export default async function IndividualServicePage({ params }: ServiceSlugProps) {
   const { slug } = await params;
-  const service = SERVICES.find((s) => s.slug === slug);
+  const service = await getServiceBySlug(slug);
+  const allServices = await getPublicServices();
 
   if (!service) {
     notFound();
@@ -195,15 +198,15 @@ export default async function IndividualServicePage({ params }: ServiceSlugProps
             <div className="bg-white border border-sky-100 rounded-3xl p-6 shadow-xs space-y-4">
               <div className="text-xs font-black uppercase text-slate-400 tracking-wider">All 9 Cleaning Services</div>
               <div className="space-y-1.5 text-xs font-bold">
-                {SERVICES.map((s) => (
+                {allServices.map((s: any) => (
                   <Link
-                    key={s.id}
+                    key={s.id || s._id}
                     href={`/services/${s.slug}`}
                     className={`block p-2.5 rounded-xl transition-colors ${
                       s.slug === slug ? 'bg-[#0284c7] text-white font-black' : 'text-slate-700 hover:bg-[#f8fafc]'
                     }`}
                   >
-                    {s.navTitle}
+                    {s.navTitle || s.name}
                   </Link>
                 ))}
               </div>

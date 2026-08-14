@@ -1,7 +1,7 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { VIDEOS_LIST } from '@/data/canberraData';
-import { Video, Sparkles, Play } from 'lucide-react';
+import { getPublicVideos } from '@/lib/publicData';
+import { Video, Calendar } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
   description: "Watch video demonstrations of our truck-mounted hot water extraction, stain removal, and tile hydro-scrubbing in action."
 };
 
-export default function VideosPage() {
+export default async function VideosPage() {
+  const videos = await getPublicVideos();
+
   return (
     <main className="min-h-screen flex flex-col bg-white text-slate-900">
       <Header />
@@ -30,8 +32,8 @@ export default function VideosPage() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {VIDEOS_LIST.map((v) => (
-            <div key={v.id} className="bg-[#f8fafc] border border-sky-100 rounded-3xl overflow-hidden shadow-xs space-y-3 hover:border-[#0284c7] transition-all duration-300 flex flex-col justify-between">
+          {videos.map((v: any) => (
+            <div key={v.id || v._id} className="bg-[#f8fafc] border border-sky-100 rounded-3xl overflow-hidden shadow-xs space-y-3 hover:border-[#0284c7] transition-all duration-300 flex flex-col justify-between">
               
               <div className="relative w-full bg-slate-950 aspect-video overflow-hidden rounded-t-3xl">
                 <video 
@@ -58,20 +60,20 @@ export default function VideosPage() {
         </div>
 
         {/* CTA Band */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#0b132b] text-white text-center space-y-4 border-l-8 border-[#10b981] shadow-xl">
-          <h3 className="text-xl sm:text-2xl font-black text-white">Ready for clean carpets in your Canberra home?</h3>
-          <p className="text-xs text-sky-200">Book online in 60 seconds with our 20% online booking discount auto-applied.</p>
-          <div className="flex justify-center gap-3 whitespace-nowrap pt-2">
-            <Link href="/instant-quote" className="btn-primary-green px-8 py-4 text-xs uppercase tracking-wider shadow-lg">
-              INSTANT QUOTE CALCULATOR
-            </Link>
+        <div className="p-8 rounded-3xl bg-[#0b132b] text-white flex flex-col sm:flex-row items-center justify-between gap-6 border border-sky-900">
+          <div className="space-y-1 text-center sm:text-left">
+            <h2 className="text-xl font-black">Impressed by Our Hot Water Extraction Power?</h2>
+            <p className="text-xs text-sky-200 font-medium">Book your home steam clean in under 60 seconds with our instant calculator.</p>
           </div>
+          <Link href="/instant-quote" className="px-6 py-3 rounded-full bg-[#10b981] hover:bg-[#059669] text-white font-black text-xs uppercase flex items-center gap-2 tracking-wider shadow-md whitespace-nowrap">
+            <Calendar className="w-4 h-4" />
+            <span>Instant Quote Calculator</span>
+          </Link>
         </div>
+
       </div>
 
       <Footer />
     </main>
   );
 }
-
-

@@ -2,9 +2,19 @@ import connectToDatabase from '@/lib/mongodb';
 import QuoteSubmissionModel from '@/models/QuoteSubmission';
 import ContactSubmissionModel from '@/models/ContactSubmission';
 import ServiceModel from '@/models/Service';
+import SuburbModel from '@/models/Suburb';
+import FaqModel from '@/models/Faq';
+import TestimonialModel from '@/models/Testimonial';
 import BlogPostModel from '@/models/BlogPost';
+import GalleryItemModel from '@/models/GalleryItem';
+import VideoItemModel from '@/models/VideoItem';
+import NewsletterSubscriberModel from '@/models/NewsletterSubscriber';
+
 import Link from 'next/link';
-import { FileSpreadsheet, MessageSquare, Layers, FileText, ArrowRight } from 'lucide-react';
+import { 
+  FileSpreadsheet, MessageSquare, Layers, MapPin, HelpCircle, Star, 
+  FileText, Image as ImageIcon, Video, Mail, ArrowRight, Settings 
+} from 'lucide-react';
 import { getAdminSession } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
@@ -19,66 +29,163 @@ export default async function AdminOverviewPage() {
   const totalQuotes = await QuoteSubmissionModel.countDocuments().catch(() => 0);
   const totalContacts = await ContactSubmissionModel.countDocuments().catch(() => 0);
   const totalServices = await ServiceModel.countDocuments().catch(() => 0);
+  const totalSuburbs = await SuburbModel.countDocuments().catch(() => 0);
+  const totalFaqs = await FaqModel.countDocuments().catch(() => 0);
+  const totalReviews = await TestimonialModel.countDocuments().catch(() => 0);
   const totalPosts = await BlogPostModel.countDocuments().catch(() => 0);
+  const totalPhotos = await GalleryItemModel.countDocuments().catch(() => 0);
+  const totalVideos = await VideoItemModel.countDocuments().catch(() => 0);
+  const totalSubscribers = await NewsletterSubscriberModel.countDocuments().catch(() => 0);
 
   const recentQuotes = await QuoteSubmissionModel.find().sort({ createdAt: -1 }).limit(5).catch(() => []);
 
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       
-      <div className="space-y-1">
-        <h1 className="text-2xl sm:text-3xl font-black text-slate-900">Dashboard Overview</h1>
-        <p className="text-xs text-slate-500 font-medium">Welcome back, {session.email}. Here is your business activity breakdown.</p>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Admin Overview Dashboard</h1>
+          <p className="text-xs text-slate-500 font-medium">Manage all website content, suburbs, services, FAQs, reviews, and bookings from here.</p>
+        </div>
+        <Link 
+          href="/admin/settings"
+          className="px-4 py-2 rounded-xl bg-slate-900 text-white font-bold text-xs flex items-center gap-2 self-start sm:self-auto hover:bg-slate-800 transition-colors shadow-xs"
+        >
+          <Settings className="w-4 h-4 text-[#10b981]" />
+          <span>Edit Site Settings</span>
+        </Link>
       </div>
 
-      {/* Analytics Counter Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* Analytics Counter Grid (All 10 Content Collections) */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         
-        <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3">
+        {/* 1. Services */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-sky-300 transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-500 uppercase">Quote Submissions</span>
-            <FileSpreadsheet className="w-5 h-5 text-[#10b981]" />
+            <span className="text-[11px] font-bold text-slate-500 uppercase">Services</span>
+            <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0284c7] flex items-center justify-center"><Layers className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-black text-slate-900">{totalQuotes}</div>
-          <Link href="/admin/quotes" className="text-xs font-bold text-[#10b981] hover:underline flex items-center gap-1">
-            <span>View all submissions</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+          <div className="text-2xl font-black text-slate-900">{totalServices}</div>
+          <Link href="/admin/services" className="text-[11px] font-bold text-[#0284c7] hover:underline flex items-center gap-1">
+            <span>Manage Services</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
-        <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3">
+        {/* 2. Suburbs */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-emerald-300 transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-500 uppercase">Contact Messages</span>
-            <MessageSquare className="w-5 h-5 text-[#0284c7]" />
+            <span className="text-[11px] font-bold text-slate-500 uppercase">ACT Suburbs</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#10b981] flex items-center justify-center"><MapPin className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-black text-slate-900">{totalContacts}</div>
-          <Link href="/admin/contacts" className="text-xs font-bold text-[#0284c7] hover:underline flex items-center gap-1">
-            <span>View messages</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+          <div className="text-2xl font-black text-slate-900">{totalSuburbs}</div>
+          <Link href="/admin/suburbs" className="text-[11px] font-bold text-[#10b981] hover:underline flex items-center gap-1">
+            <span>Manage Suburbs</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
-        <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3">
+        {/* 3. FAQs */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-sky-300 transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-500 uppercase">Published Services</span>
-            <Layers className="w-5 h-5 text-[#10b981]" />
+            <span className="text-[11px] font-bold text-slate-500 uppercase">FAQs</span>
+            <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0284c7] flex items-center justify-center"><HelpCircle className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-black text-slate-900">{totalServices}</div>
-          <Link href="/admin/services" className="text-xs font-bold text-[#10b981] hover:underline flex items-center gap-1">
-            <span>Manage services</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+          <div className="text-2xl font-black text-slate-900">{totalFaqs}</div>
+          <Link href="/admin/faqs" className="text-[11px] font-bold text-[#0284c7] hover:underline flex items-center gap-1">
+            <span>Manage FAQs</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
-        <div className="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-3">
+        {/* 4. Testimonials */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-emerald-300 transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-bold text-slate-500 uppercase">Blog Articles</span>
-            <FileText className="w-5 h-5 text-[#0284c7]" />
+            <span className="text-[11px] font-bold text-slate-500 uppercase">Reviews</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#10b981] flex items-center justify-center"><Star className="w-4 h-4 fill-amber-400 text-amber-400" /></div>
           </div>
-          <div className="text-3xl font-black text-slate-900">{totalPosts}</div>
-          <Link href="/admin/blog" className="text-xs font-bold text-[#0284c7] hover:underline flex items-center gap-1">
-            <span>Manage blog</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+          <div className="text-2xl font-black text-slate-900">{totalReviews}</div>
+          <Link href="/admin/testimonials" className="text-[11px] font-bold text-[#10b981] hover:underline flex items-center gap-1">
+            <span>Manage Reviews</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* 5. Blog Posts */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-sky-300 transition-colors">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-slate-500 uppercase">Blog Articles</span>
+            <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0284c7] flex items-center justify-center"><FileText className="w-4 h-4" /></div>
+          </div>
+          <div className="text-2xl font-black text-slate-900">{totalPosts}</div>
+          <Link href="/admin/blog" className="text-[11px] font-bold text-[#0284c7] hover:underline flex items-center gap-1">
+            <span>Manage Blog</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* 6. Photo Gallery */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-emerald-300 transition-colors">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-slate-500 uppercase">Gallery Photos</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#10b981] flex items-center justify-center"><ImageIcon className="w-4 h-4" /></div>
+          </div>
+          <div className="text-2xl font-black text-slate-900">{totalPhotos}</div>
+          <Link href="/admin/gallery" className="text-[11px] font-bold text-[#10b981] hover:underline flex items-center gap-1">
+            <span>Manage Gallery</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* 7. Videos */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-sky-300 transition-colors">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-slate-500 uppercase">Video Clips</span>
+            <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0284c7] flex items-center justify-center"><Video className="w-4 h-4" /></div>
+          </div>
+          <div className="text-2xl font-black text-slate-900">{totalVideos}</div>
+          <Link href="/admin/videos" className="text-[11px] font-bold text-[#0284c7] hover:underline flex items-center gap-1">
+            <span>Manage Videos</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* 8. Quote Requests */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-emerald-300 transition-colors">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-slate-500 uppercase">Quote Requests</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#10b981] flex items-center justify-center"><FileSpreadsheet className="w-4 h-4" /></div>
+          </div>
+          <div className="text-2xl font-black text-slate-900">{totalQuotes}</div>
+          <Link href="/admin/quotes" className="text-[11px] font-bold text-[#10b981] hover:underline flex items-center gap-1">
+            <span>View Quotes</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* 9. Contact Messages */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-sky-300 transition-colors">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-slate-500 uppercase">Messages</span>
+            <div className="w-8 h-8 rounded-lg bg-sky-50 text-[#0284c7] flex items-center justify-center"><MessageSquare className="w-4 h-4" /></div>
+          </div>
+          <div className="text-2xl font-black text-slate-900">{totalContacts}</div>
+          <Link href="/admin/contacts" className="text-[11px] font-bold text-[#0284c7] hover:underline flex items-center gap-1">
+            <span>View Messages</span>
+            <ArrowRight className="w-3 h-3" />
+          </Link>
+        </div>
+
+        {/* 10. Newsletter */}
+        <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2 hover:border-emerald-300 transition-colors">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-bold text-slate-500 uppercase">Subscribers</span>
+            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-[#10b981] flex items-center justify-center"><Mail className="w-4 h-4" /></div>
+          </div>
+          <div className="text-2xl font-black text-slate-900">{totalSubscribers}</div>
+          <Link href="/admin/newsletter" className="text-[11px] font-bold text-[#10b981] hover:underline flex items-center gap-1">
+            <span>View Subscribers</span>
+            <ArrowRight className="w-3 h-3" />
           </Link>
         </div>
 
@@ -92,7 +199,7 @@ export default async function AdminOverviewPage() {
         </div>
 
         {recentQuotes.length === 0 ? (
-          <div className="text-xs text-slate-500 py-6 text-center">No quote submissions recorded yet.</div>
+          <div className="text-xs text-slate-500 py-6 text-center font-medium">No quote submissions recorded yet.</div>
         ) : (
           <div className="divide-y divide-slate-100">
             {recentQuotes.map((q: any) => (

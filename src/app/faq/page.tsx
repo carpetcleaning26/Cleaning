@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { FAQS, BUSINESS_INFO } from '@/data/canberraData';
@@ -9,10 +9,22 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function FaqPage() {
+  const [faqList, setFaqList] = useState<any[]>(FAQS);
   const [openId, setOpenId] = useState<string | null>('faq1');
   const [activeCategory, setActiveCategory] = useState<'all' | 'pricing' | 'process'>('all');
 
-  const filteredFaqs = FAQS.filter((f) => activeCategory === 'all' || f.category === activeCategory);
+  useEffect(() => {
+    fetch('/api/admin/faqs')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setFaqList(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
+  const filteredFaqs = faqList.filter((f) => activeCategory === 'all' || f.category === activeCategory);
 
   return (
     <main className="min-h-screen flex flex-col bg-white text-slate-900">

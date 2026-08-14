@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ACT_SUBURBS } from '@/data/cleaningData';
 import { MapPin, Search, Zap, ShieldCheck, Clock, ArrowRight, Sparkles } from 'lucide-react';
@@ -11,12 +11,24 @@ interface SuburbFinderProps {
 }
 
 export default function SuburbFinder({ onOpenCalculator }: SuburbFinderProps) {
+  const [suburbList, setSuburbList] = useState<any[]>(ACT_SUBURBS);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedRegion, setSelectedRegion] = useState<string>('All');
 
+  useEffect(() => {
+    fetch('/api/admin/suburbs')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setSuburbList(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const regions = ['All', 'North Canberra', 'Belconnen', 'Gungahlin', 'South Canberra', 'Woden Valley', 'Tuggeranong', 'Molonglo Valley', 'Queanbeyan Region'];
 
-  const filteredSuburbs = ACT_SUBURBS.filter((sub) => {
+  const filteredSuburbs = suburbList.filter((sub) => {
     const matchesSearch =
       sub.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       sub.postcode.includes(searchTerm);
