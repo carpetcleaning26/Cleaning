@@ -1,28 +1,60 @@
 import { NextResponse } from 'next/server';
+import { z } from 'zod';
+import connectToDatabase from '@/lib/mongodb';
+import ContactSubmissionModel from '@/models/ContactSubmission';
+import { sendMail, generateContactEmail } from '@/lib/mailer';
 
-export async function POST(request: Request) {
+const ContactSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  email: z.string().email('Invalid email address'),
+  phone: z.string().optional(),
+  suburb: z.string().optional(),
+  message: z.string().min(1, 'Message is required'),
+  websiteHoneypot: z.string().optional(),
+});
+
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
-    const { name, phone, service, message } = body;
+    const body = await req.json();
+    const parsed = ContactSchema.safeParse(body);
 
-    if (!name || !phone) {
+    if (!parsed.success) {
       return NextResponse.json(
-        { success: false, error: 'Name and phone number are required.' },
+        { error: 'Invalid contact input', details: parsed.error.format() },
         { status: 400 }
       );
     }
 
-    const ticketId = `CALL-${Math.floor(1000 + Math.random() * 9000)}`;
+    const { name, email, phone, suburb, message, websiteHoneypot } = parsed.data;
 
-    return NextResponse.json({
-      success: true,
-      ticketId,
-      message: `Thank you ${name}! Our Canberra dispatch team will call you at ${phone} within 15 minutes.`
+    // Honeypot spam check
+    if (websiteHoneypot && websiteHoneypot.trim() !== '') {
+      console.warn('[Spam Rejection] Bot honeypot triggered on contact form');
+      return NextResponse.json({ success: true });
+    }
+
+    await connectToDatabase();
+
+    const contactDoc = await ContactSubmissionModel.create({
+      name,
+      email,
+      phone,
+      suburb,
+      message,
+      status: 'new',
     });
-  } catch (error: any) {
-    return NextResponse.json(
-      { success: false, error: error.message || 'Internal server error' },
-      { status: 500 }
-    );
+
+    const notificationEmail = process.env.NOTIFICATION_EMAIL_TO || 'info@canberracarpetcleaningdeals.com.au';
+
+    sendMail({
+      to: notificationEmail,
+      subject: `📩 Website Contact Message from ${name}`,
+      html: generateContactEmail(contactDoc),
+    });
+
+    return NextResponse.json({ success: true, message: 'Message sent successfully' });
+  } catch (err: any) {
+    console.error('Contact submission error:', err);
+    return NextResponse.json({ error: 'Server error sending message' }, { status: 500 });
   }
 }

@@ -108,30 +108,43 @@ export default function InteractiveCalculator() {
 
     setIsSubmitting(true);
 
+    const selectedServicesList = [];
+    if (bedrooms > 0) selectedServicesList.push({ name: 'Bedrooms Steam Clean', quantity: bedrooms, price: bedrooms * 27 });
+    if (livingRooms > 0) selectedServicesList.push({ name: 'Living / Dining Areas', quantity: livingRooms, price: livingRooms * 46 });
+    if (hallways > 0) selectedServicesList.push({ name: 'Hallway', quantity: hallways, price: hallways * 27 });
+    if (stairs > 0) selectedServicesList.push({ name: 'Stairs', quantity: stairs, price: stairs * 27 });
+    if (upholsterySeats > 0) selectedServicesList.push({ name: 'Upholstery Couch Seats', quantity: upholsterySeats, price: upholsterySeats * 41 });
+    if (rugs > 0) selectedServicesList.push({ name: 'Area Rugs', quantity: rugs, price: rugs * 32 });
+    if (pestFleaTreatment) selectedServicesList.push({ name: 'End of Lease Flea Spray', quantity: 1, price: 79 });
+
+    if (selectedServicesList.length === 0) {
+      selectedServicesList.push({ name: 'Standard Carpet Steam Package (3 Rooms)', quantity: 1, price: priceMath.grandTotal });
+    }
+
     try {
-      const res = await fetch('/api/bookings', {
+      const res = await fetch('/api/quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           customerName: name,
-          email,
+          email: email || 'no-email@customer.com',
           phone,
-          address: `${streetAddress}, ${suburb}`,
-          suburb,
-          serviceId: 'custom-calculator',
-          serviceTitle: 'Carpet & Upholstery Package Clean',
-          roomsCount: bedrooms + livingRooms,
-          preferredDate: bookingDate,
-          preferredTime,
-          estimatedPrice: priceMath.grandTotal
+          address: streetAddress || 'Canberra ACT',
+          suburb: suburb || 'Canberra',
+          propertyType: propertyType === 'house' ? 'House / Townhouse' : 'Apartment / Unit',
+          selectedServices: selectedServicesList,
+          totalAmount: priceMath.grandTotal,
+          discountApplied: true,
         })
       });
       const data = await res.json();
       if (data.success) {
-        setBookingRef(data.referenceId || `ACT-${Math.floor(100000 + Math.random() * 900000)}`);
+        setBookingRef(data.referenceId || `CCCD-${Math.floor(100000 + Math.random() * 900000)}`);
+      } else {
+        setBookingRef(`CCCD-${Math.floor(100000 + Math.random() * 900000)}`);
       }
     } catch (err) {
-      setBookingRef(`ACT-${Math.floor(100000 + Math.random() * 900000)}`);
+      setBookingRef(`CCCD-${Math.floor(100000 + Math.random() * 900000)}`);
     } finally {
       setIsSubmitting(false);
     }
