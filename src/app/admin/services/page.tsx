@@ -57,16 +57,29 @@ export default function AdminServicesPage() {
       const url = isNew ? '/api/admin/services' : `/api/admin/services/${editingItem._id}`;
       const method = isNew ? 'POST' : 'PUT';
 
-      await fetch(url, {
+      const payload = {
+        ...editingItem,
+        navTitle: editingItem.navTitle || editingItem.name,
+        title: editingItem.title || editingItem.name,
+      };
+
+      const res = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(editingItem),
+        body: JSON.stringify(payload),
       });
+
+      const data = await res.json();
+      if (!res.ok || data.error) {
+        alert(`Failed to save service: ${data.error || 'Server error'}`);
+        return;
+      }
 
       setEditingItem(null);
       fetchServices();
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
+      alert(`Error saving service: ${err.message}`);
     }
   };
 
