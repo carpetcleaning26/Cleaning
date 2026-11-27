@@ -111,11 +111,6 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/carpet-cleaning-prices-canberra" className="hover:text-[#10b981] transition-colors flex items-center gap-1.5">
-                <span className="text-[#10b981] font-bold">•</span> Prices & Deals
-              </Link>
-            </li>
-            <li>
               <Link href="/suburbs" className="hover:text-[#10b981] transition-colors flex items-center gap-1.5">
                 <span className="text-[#10b981] font-bold">•</span> Service Areas (40+ Suburbs)
               </Link>

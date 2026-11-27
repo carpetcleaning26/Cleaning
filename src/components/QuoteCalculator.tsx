@@ -33,34 +33,36 @@ export default function QuoteCalculator({ isOpen = true, onClose }: QuoteCalcula
   const [bookingSuccess, setBookingSuccess] = useState<BookingRecord | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  // Price Calculation Logic
+  // Price Calculation Logic ($90 out-call fee applies automatically + 20% online discount)
   const calculatedPrice = useMemo(() => {
-    let base = 89;
+    const outCallFee = 90;
+    let servicesBase = 0;
     if (selectedService === 'carpet-steam') {
-      if (roomsCount <= 3) base = 89;
-      else base = 89 + (roomsCount - 3) * 27;
+      servicesBase = roomsCount * 30;
     } else if (selectedService === 'end-of-lease') {
-      base = 149 + (roomsCount > 3 ? (roomsCount - 3) * 35 : 0);
+      servicesBase = 149 + (roomsCount > 3 ? (roomsCount - 3) * 30 : 0);
     } else if (selectedService === 'upholstery-couch') {
-      base = roomsCount * 39;
+      servicesBase = roomsCount * 55;
     } else if (selectedService === 'tile-grout') {
-      base = roomsCount * 45;
+      servicesBase = roomsCount * 10;
     } else if (selectedService === 'mattress-sanitizing') {
-      base = roomsCount * 59;
+      servicesBase = roomsCount * 59;
     } else if (selectedService === 'rug-cleaning') {
-      base = roomsCount * 45;
+      servicesBase = roomsCount * 25;
     } else if (selectedService === 'pest-control') {
-      base = 79;
+      servicesBase = roomsCount * 30;
     } else {
-      base = 120;
+      servicesBase = 120;
     }
 
-    if (selectedAddons.includes('pet-odor')) base += 25;
-    if (selectedAddons.includes('deodorizer')) base += 15;
-    if (selectedAddons.includes('fabric-protection')) base += 35;
-    if (selectedAddons.includes('flea-spray')) base += 45;
+    if (selectedAddons.includes('pet-odor')) servicesBase += 25;
+    if (selectedAddons.includes('deodorizer')) servicesBase += 15;
+    if (selectedAddons.includes('fabric-protection')) servicesBase += 35;
+    if (selectedAddons.includes('flea-spray')) servicesBase += 45;
 
-    return Math.round(base);
+    const subtotal = outCallFee + servicesBase;
+    const afterDiscount = subtotal - Math.round(subtotal * 0.20);
+    return Math.round(afterDiscount);
   }, [selectedService, roomsCount, selectedAddons]);
 
   const toggleAddon = (id: string) => {

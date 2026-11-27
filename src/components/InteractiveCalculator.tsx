@@ -18,16 +18,20 @@ export default function InteractiveCalculator() {
 
   // Step 2: Service Quantities
   const [bedrooms, setBedrooms] = useState<number>(3);
+  const [familyRooms, setFamilyRooms] = useState<number>(0);
   const [livingRooms, setLivingRooms] = useState<number>(1);
-  const [hallways, setHallways] = useState<number>(1);
-  const [stairs, setStairs] = useState<number>(0);
-  const [walkinRobes, setWalkinRobes] = useState<number>(0);
-  const [rugs, setRugs] = useState<number>(0);
-  const [upholsterySeats, setUpholsterySeats] = useState<number>(0);
-  const [mattresses, setMattresses] = useState<number>(0);
+  const [stairsUpTo16, setStairsUpTo16] = useState<number>(0);
+  const [stairsOver16, setStairsOver16] = useState<number>(0);
+  const [sofaSeats, setSofaSeats] = useState<number>(0);
+  const [armchairs, setArmchairs] = useState<number>(0);
+  const [diningChairs, setDiningChairs] = useState<number>(0);
+  const [smallRugs, setSmallRugs] = useState<number>(0);
+  const [mediumRugs, setMediumRugs] = useState<number>(0);
+  const [largeRugs, setLargeRugs] = useState<number>(0);
+  const [fleaBedrooms, setFleaBedrooms] = useState<number>(0);
+  const [fleaLivingRooms, setFleaLivingRooms] = useState<number>(0);
+  const [curtainsSqm, setCurtainsSqm] = useState<number>(0);
   const [tileSqm, setTileSqm] = useState<number>(0);
-  const [curtains, setCurtains] = useState<number>(0);
-  const [pestFleaTreatment, setPestFleaTreatment] = useState<boolean>(false);
 
   // Step 3: Customer Info
   const [name, setName] = useState('');
@@ -47,24 +51,28 @@ export default function InteractiveCalculator() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingRef, setBookingRef] = useState<string | null>(null);
 
-  // Pricing Logic
+  // Pricing Logic ($90 out-call fee applies automatically + 20% discount auto-deducted)
   const priceMath = useMemo(() => {
-    const basePropertyFee = 73;
+    const outCallFee = 90;
     let servicesTotal = 0;
 
-    servicesTotal += bedrooms * 27;
-    servicesTotal += livingRooms * 46;
-    servicesTotal += hallways * 27;
-    servicesTotal += walkinRobes * 5;
-    servicesTotal += stairs * 27;
-    servicesTotal += rugs * 32;
-    servicesTotal += upholsterySeats * 41;
-    servicesTotal += mattresses * 59;
-    servicesTotal += tileSqm * 4.5;
-    servicesTotal += curtains * 35;
-    if (pestFleaTreatment) servicesTotal += 79;
+    servicesTotal += bedrooms * 30;
+    servicesTotal += familyRooms * 56;
+    servicesTotal += livingRooms * 56;
+    servicesTotal += stairsUpTo16 * 25;
+    servicesTotal += stairsOver16 * 40;
+    servicesTotal += sofaSeats * 55;
+    servicesTotal += armchairs * 65;
+    servicesTotal += diningChairs * 18;
+    servicesTotal += smallRugs * 25;
+    servicesTotal += mediumRugs * 30;
+    servicesTotal += largeRugs * 40;
+    servicesTotal += fleaBedrooms * 30;
+    servicesTotal += fleaLivingRooms * 45;
+    servicesTotal += curtainsSqm * 25;
+    servicesTotal += tileSqm * 10;
 
-    const subtotalBeforeDiscount = basePropertyFee + servicesTotal;
+    const subtotalBeforeDiscount = outCallFee + servicesTotal;
     const onlineDiscountAmount = Math.round(subtotalBeforeDiscount * 0.20);
     const extraCouponDiscount = couponApplied ? 15 : 0;
     const discountedSubtotal = Math.max(0, subtotalBeforeDiscount - onlineDiscountAmount - extraCouponDiscount);
@@ -72,7 +80,7 @@ export default function InteractiveCalculator() {
     const grandTotal = Math.round(discountedSubtotal + gstAmount);
 
     return {
-      basePropertyFee,
+      outCallFee,
       servicesTotal,
       subtotalBeforeDiscount,
       onlineDiscountAmount,
@@ -82,9 +90,9 @@ export default function InteractiveCalculator() {
       grandTotal
     };
   }, [
-    bedrooms, livingRooms, hallways, walkinRobes, stairs, rugs,
-    upholsterySeats, mattresses, tileSqm, curtains, pestFleaTreatment,
-    couponApplied
+    bedrooms, familyRooms, livingRooms, stairsUpTo16, stairsOver16,
+    sofaSeats, armchairs, diningChairs, smallRugs, mediumRugs, largeRugs,
+    fleaBedrooms, fleaLivingRooms, curtainsSqm, tileSqm, couponApplied
   ]);
 
   const completionPercent = useMemo(() => {
@@ -108,18 +116,24 @@ export default function InteractiveCalculator() {
 
     setIsSubmitting(true);
 
-    const selectedServicesList = [];
-    if (bedrooms > 0) selectedServicesList.push({ name: 'Bedrooms Steam Clean', quantity: bedrooms, price: bedrooms * 27 });
-    if (livingRooms > 0) selectedServicesList.push({ name: 'Living / Dining Areas', quantity: livingRooms, price: livingRooms * 46 });
-    if (hallways > 0) selectedServicesList.push({ name: 'Hallway', quantity: hallways, price: hallways * 27 });
-    if (stairs > 0) selectedServicesList.push({ name: 'Stairs', quantity: stairs, price: stairs * 27 });
-    if (upholsterySeats > 0) selectedServicesList.push({ name: 'Upholstery Couch Seats', quantity: upholsterySeats, price: upholsterySeats * 41 });
-    if (rugs > 0) selectedServicesList.push({ name: 'Area Rugs', quantity: rugs, price: rugs * 32 });
-    if (pestFleaTreatment) selectedServicesList.push({ name: 'End of Lease Flea Spray', quantity: 1, price: 79 });
-
-    if (selectedServicesList.length === 0) {
-      selectedServicesList.push({ name: 'Standard Carpet Steam Package (3 Rooms)', quantity: 1, price: priceMath.grandTotal });
-    }
+    const selectedServicesList: { name: string; quantity: number; price: number }[] = [
+      { name: 'Standard Out-Call Fee', quantity: 1, price: 90 }
+    ];
+    if (bedrooms > 0) selectedServicesList.push({ name: 'Carpet Cleaning - Bedrooms', quantity: bedrooms, price: bedrooms * 30 });
+    if (familyRooms > 0) selectedServicesList.push({ name: 'Carpet Cleaning - Family Room', quantity: familyRooms, price: familyRooms * 56 });
+    if (livingRooms > 0) selectedServicesList.push({ name: 'Carpet Cleaning - Living / Lounge Room', quantity: livingRooms, price: livingRooms * 56 });
+    if (stairsUpTo16 > 0) selectedServicesList.push({ name: 'Staircase (up to 16 steps)', quantity: stairsUpTo16, price: stairsUpTo16 * 25 });
+    if (stairsOver16 > 0) selectedServicesList.push({ name: 'Staircase (more than 16 steps)', quantity: stairsOver16, price: stairsOver16 * 40 });
+    if (sofaSeats > 0) selectedServicesList.push({ name: 'Sofa & Upholstery Seats', quantity: sofaSeats, price: sofaSeats * 55 });
+    if (armchairs > 0) selectedServicesList.push({ name: 'Armchairs', quantity: armchairs, price: armchairs * 65 });
+    if (diningChairs > 0) selectedServicesList.push({ name: 'Dining Chairs', quantity: diningChairs, price: diningChairs * 18 });
+    if (smallRugs > 0) selectedServicesList.push({ name: 'Rugs - Small', quantity: smallRugs, price: smallRugs * 25 });
+    if (mediumRugs > 0) selectedServicesList.push({ name: 'Rugs - Medium', quantity: mediumRugs, price: mediumRugs * 30 });
+    if (largeRugs > 0) selectedServicesList.push({ name: 'Rugs - Large', quantity: largeRugs, price: largeRugs * 40 });
+    if (fleaBedrooms > 0) selectedServicesList.push({ name: 'Fleas Treatment - Bedrooms', quantity: fleaBedrooms, price: fleaBedrooms * 30 });
+    if (fleaLivingRooms > 0) selectedServicesList.push({ name: 'Fleas Treatment - Living Room', quantity: fleaLivingRooms, price: fleaLivingRooms * 45 });
+    if (curtainsSqm > 0) selectedServicesList.push({ name: 'Curtain & Blinds (m²)', quantity: curtainsSqm, price: curtainsSqm * 25 });
+    if (tileSqm > 0) selectedServicesList.push({ name: 'Tiles & Grout Cleaning (m²)', quantity: tileSqm, price: tileSqm * 10 });
 
     try {
       const res = await fetch('/api/quote', {
@@ -344,97 +358,53 @@ export default function InteractiveCalculator() {
                   className="space-y-4"
                 >
                   <div className="text-xs font-bold text-slate-500 mb-2">
-                    Adjust quantity (+/-) for your home. Prices update in real-time in the sidebar summary.
+                    Adjust quantity (+/-) for your home. A standard $90 out-call fee applies per booking and 20% online discount is deducted automatically.
                   </div>
 
                   {/* Quantity Items List */}
-                  <div className="space-y-2 max-h-96 overflow-y-auto pr-1">
-                    
-                    <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                      <div>
-                        <div className="text-xs font-black text-slate-900">Bedrooms (Carpet)</div>
-                        <div className="text-[11px] text-slate-500">$27 / room after discount</div>
+                  <div className="space-y-2.5 max-h-[28rem] overflow-y-auto pr-1">
+                    {[
+                      { group: 'Carpet Cleaning', label: 'Bedrooms (Carpet)', sub: '$30 per bedroom', val: bedrooms, set: setBedrooms },
+                      { group: 'Carpet Cleaning', label: 'Family Room', sub: '$56 per room', val: familyRooms, set: setFamilyRooms },
+                      { group: 'Carpet Cleaning', label: 'Living / Lounge Room', sub: '$56 per room', val: livingRooms, set: setLivingRooms },
+                      { group: 'Staircase', label: 'Staircase (up to 16 steps)', sub: '$25 per staircase', val: stairsUpTo16, set: setStairsUpTo16 },
+                      { group: 'Staircase', label: 'Staircase (more than 16 steps)', sub: '$40 per staircase', val: stairsOver16, set: setStairsOver16 },
+                      { group: 'Sofa & Upholstery', label: 'Sofa & Upholstery Seats', sub: '$55 per seat', val: sofaSeats, set: setSofaSeats },
+                      { group: 'Sofa & Upholstery', label: 'Armchair', sub: '$65 each', val: armchairs, set: setArmchairs },
+                      { group: 'Sofa & Upholstery', label: 'Dining Chair', sub: '$18 each', val: diningChairs, set: setDiningChairs },
+                      { group: 'Rugs', label: 'Small Size Rug', sub: '$25 each', val: smallRugs, set: setSmallRugs },
+                      { group: 'Rugs', label: 'Medium Size Rug', sub: '$30 each', val: mediumRugs, set: setMediumRugs },
+                      { group: 'Rugs', label: 'Large Size Rug', sub: '$40 each', val: largeRugs, set: setLargeRugs },
+                      { group: 'Fleas Treatment', label: 'Fleas Treatment (Bedroom)', sub: '$30 per bedroom', val: fleaBedrooms, set: setFleaBedrooms },
+                      { group: 'Fleas Treatment', label: 'Fleas Treatment (Living Room)', sub: '$45 each', val: fleaLivingRooms, set: setFleaLivingRooms },
+                      { group: 'Curtain & Blinds', label: 'Curtain & Blinds Cleaning (m²)', sub: '$25 per square metre', val: curtainsSqm, set: setCurtainsSqm },
+                      { group: 'Tiles & Grout', label: 'Tiles & Grout Cleaning (m²)', sub: '$10 per square metre', val: tileSqm, set: setTileSqm },
+                    ].map((item) => (
+                      <div key={item.label} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                        <div>
+                          <div className="text-[10px] font-black uppercase tracking-wider text-sky-600">{item.group}</div>
+                          <div className="text-xs font-black text-slate-900">{item.label}</div>
+                          <div className="text-[11px] text-slate-500">{item.sub}</div>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <button type="button" onClick={() => item.set(Math.max(0, item.val - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
+                          <span className="w-7 text-center font-black text-sm text-sky-700">{item.val}</span>
+                          <button type="button" onClick={() => item.set(item.val + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
+                        </div>
                       </div>
-                      <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setBedrooms(Math.max(0, bedrooms - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
-                        <span className="w-6 text-center font-black text-sm text-sky-700">{bedrooms}</span>
-                        <button type="button" onClick={() => setBedrooms(bedrooms + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
-                      </div>
-                    </div>
+                    ))}
+                  </div>
 
-                    <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                      <div>
-                        <div className="text-xs font-black text-slate-900">Living / Dining / Family Rooms</div>
-                        <div className="text-[11px] text-slate-500">$46 / area after discount</div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setLivingRooms(Math.max(0, livingRooms - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
-                        <span className="w-6 text-center font-black text-sm text-sky-700">{livingRooms}</span>
-                        <button type="button" onClick={() => setLivingRooms(livingRooms + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
-                      </div>
+                  {/* Other Services Email Notice */}
+                  <div className="p-3.5 rounded-2xl bg-sky-50 border border-sky-200 text-xs text-slate-700 flex items-start gap-2.5">
+                    <Mail className="w-4 h-4 text-sky-600 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <span className="font-black text-slate-900">Need Office Cleaning or Flood Damage Restoration?</span>{' '}
+                      For other services, please email us at{' '}
+                      <a href={`mailto:${BUSINESS_INFO.email}`} className="font-black text-sky-700 underline">
+                        {BUSINESS_INFO.email}
+                      </a>.
                     </div>
-
-                    <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                      <div>
-                        <div className="text-xs font-black text-slate-900">Hallway</div>
-                        <div className="text-[11px] text-slate-500">$27 / hallway</div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setHallways(Math.max(0, hallways - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
-                        <span className="w-6 text-center font-black text-sm text-sky-700">{hallways}</span>
-                        <button type="button" onClick={() => setHallways(hallways + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                      <div>
-                        <div className="text-xs font-black text-slate-900">Stairs (flight of 8-16 steps)</div>
-                        <div className="text-[11px] text-slate-500">$27 / flight</div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setStairs(Math.max(0, stairs - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
-                        <span className="w-6 text-center font-black text-sm text-sky-700">{stairs}</span>
-                        <button type="button" onClick={() => setStairs(stairs + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                      <div>
-                        <div className="text-xs font-black text-slate-900">Upholstery Couch Seats</div>
-                        <div className="text-[11px] text-slate-500">$41 / seat</div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setUpholsterySeats(Math.max(0, upholsterySeats - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
-                        <span className="w-6 text-center font-black text-sm text-sky-700">{upholsterySeats}</span>
-                        <button type="button" onClick={() => setUpholsterySeats(upholsterySeats + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                      <div>
-                        <div className="text-xs font-black text-slate-900">Area Rugs</div>
-                        <div className="text-[11px] text-slate-500">From $32 / rug</div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button type="button" onClick={() => setRugs(Math.max(0, rugs - 1))} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Minus className="w-3.5 h-3.5" /></button>
-                        <span className="w-6 text-center font-black text-sm text-sky-700">{rugs}</span>
-                        <button type="button" onClick={() => setRugs(rugs + 1)} className="w-8 h-8 rounded-full bg-white border border-slate-300 flex items-center justify-center font-black text-sm text-slate-800 shadow-xs"><Plus className="w-3.5 h-3.5" /></button>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
-                      <div>
-                        <div className="text-xs font-black text-slate-900">End-of-Lease Pet Flea Spray</div>
-                        <div className="text-[11px] text-slate-500">Certified exit certificate ($79)</div>
-                      </div>
-                      <input
-                        type="checkbox"
-                        checked={pestFleaTreatment}
-                        onChange={(e) => setPestFleaTreatment(e.target.checked)}
-                        className="w-5 h-5 accent-lime-600 rounded"
-                      />
-                    </div>
-
                   </div>
 
                   <div className="flex justify-between pt-4">
@@ -569,8 +539,8 @@ export default function InteractiveCalculator() {
                 >
                   <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">
                     <div className="flex justify-between text-slate-600 font-semibold">
-                      <span>Property Base Call-out Fee:</span>
-                      <span>${priceMath.basePropertyFee}.00 AUD</span>
+                      <span>Standard Out-Call Fee (Every Booking):</span>
+                      <span>${priceMath.outCallFee}.00 AUD</span>
                     </div>
                     <div className="flex justify-between text-slate-600 font-semibold">
                       <span>Cleaning Services Subtotal:</span>
@@ -653,29 +623,85 @@ export default function InteractiveCalculator() {
 
             <div className="space-y-2 text-xs text-slate-300">
               <div className="flex justify-between">
-                <span>Bedrooms ({bedrooms}):</span>
-                <span className="font-bold text-white">${bedrooms * 27}</span>
+                <span>Out-Call Fee (Standard):</span>
+                <span className="font-bold text-white">$90</span>
               </div>
-              <div className="flex justify-between">
-                <span>Living Rooms ({livingRooms}):</span>
-                <span className="font-bold text-white">${livingRooms * 46}</span>
-              </div>
-              <div className="flex justify-between">
-                <span>Hallways ({hallways}):</span>
-                <span className="font-bold text-white">${hallways * 27}</span>
-              </div>
-              {upholsterySeats > 0 && (
+              {bedrooms > 0 && (
+                <div className="flex justify-between">
+                  <span>Carpet Bedrooms ({bedrooms}):</span>
+                  <span className="font-bold text-white">${bedrooms * 30}</span>
+                </div>
+              )}
+              {familyRooms > 0 && (
+                <div className="flex justify-between">
+                  <span>Family Rooms ({familyRooms}):</span>
+                  <span className="font-bold text-white">${familyRooms * 56}</span>
+                </div>
+              )}
+              {livingRooms > 0 && (
+                <div className="flex justify-between">
+                  <span>Living / Lounge ({livingRooms}):</span>
+                  <span className="font-bold text-white">${livingRooms * 56}</span>
+                </div>
+              )}
+              {stairsUpTo16 > 0 && (
+                <div className="flex justify-between">
+                  <span>Stairs ≤16 steps ({stairsUpTo16}):</span>
+                  <span className="font-bold text-white">${stairsUpTo16 * 25}</span>
+                </div>
+              )}
+              {stairsOver16 > 0 && (
+                <div className="flex justify-between">
+                  <span>Stairs &gt;16 steps ({stairsOver16}):</span>
+                  <span className="font-bold text-white">${stairsOver16 * 40}</span>
+                </div>
+              )}
+              {sofaSeats > 0 && (
                 <div className="flex justify-between text-sky-400 font-semibold">
-                  <span>Couch Seats ({upholsterySeats}):</span>
-                  <span>${upholsterySeats * 41}</span>
+                  <span>Sofa Seats ({sofaSeats}):</span>
+                  <span>${sofaSeats * 55}</span>
                 </div>
               )}
-              {pestFleaTreatment && (
+              {armchairs > 0 && (
+                <div className="flex justify-between text-sky-400 font-semibold">
+                  <span>Armchairs ({armchairs}):</span>
+                  <span>${armchairs * 65}</span>
+                </div>
+              )}
+              {diningChairs > 0 && (
+                <div className="flex justify-between text-sky-400 font-semibold">
+                  <span>Dining Chairs ({diningChairs}):</span>
+                  <span>${diningChairs * 18}</span>
+                </div>
+              )}
+              {smallRugs + mediumRugs + largeRugs > 0 && (
+                <div className="flex justify-between text-sky-400 font-semibold">
+                  <span>Rugs ({smallRugs + mediumRugs + largeRugs}):</span>
+                  <span>${smallRugs * 25 + mediumRugs * 30 + largeRugs * 40}</span>
+                </div>
+              )}
+              {fleaBedrooms + fleaLivingRooms > 0 && (
                 <div className="flex justify-between text-lime-400 font-semibold">
-                  <span>Flea Spray Cert:</span>
-                  <span>$79</span>
+                  <span>Fleas Treatment:</span>
+                  <span>${fleaBedrooms * 30 + fleaLivingRooms * 45}</span>
                 </div>
               )}
+              {curtainsSqm > 0 && (
+                <div className="flex justify-between text-sky-400 font-semibold">
+                  <span>Curtains & Blinds ({curtainsSqm}m²):</span>
+                  <span>${curtainsSqm * 25}</span>
+                </div>
+              )}
+              {tileSqm > 0 && (
+                <div className="flex justify-between text-sky-400 font-semibold">
+                  <span>Tiles & Grout ({tileSqm}m²):</span>
+                  <span>${tileSqm * 10}</span>
+                </div>
+              )}
+              <div className="flex justify-between text-lime-400 font-bold pt-2 border-t border-slate-800">
+                <span>20% Online Discount:</span>
+                <span>-${priceMath.onlineDiscountAmount}</span>
+              </div>
             </div>
 
             {/* Total Display with AnimatedCounter */}

@@ -190,13 +190,6 @@ export default function Header() {
             {isActive('/faq') && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#10b981] rounded-full"></span>}
           </Link>
           <Link
-            href="/carpet-cleaning-prices-canberra"
-            className={`transition-colors relative py-1 ${isActive('/carpet-cleaning-prices-canberra') ? 'text-[#0284c7] font-black' : 'hover:text-[#0284c7]'}`}
-          >
-            Prices
-            {isActive('/carpet-cleaning-prices-canberra') && <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#10b981] rounded-full"></span>}
-          </Link>
-          <Link
             href="/blog"
             className={`transition-colors relative py-1 ${isActive('/blog') ? 'text-[#0284c7] font-black' : 'hover:text-[#0284c7]'}`}
           >
@@ -284,9 +277,6 @@ export default function Header() {
               </Link>
               <Link href="/faq" onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-lg hover:bg-[#f4f8f5]">
                 FAQs
-              </Link>
-              <Link href="/carpet-cleaning-prices-canberra" onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-lg hover:bg-[#f4f8f5]">
-                Prices
               </Link>
               <Link href="/blog" onClick={() => setMobileMenuOpen(false)} className="p-2 rounded-lg hover:bg-[#f4f8f5]">
                 Blog

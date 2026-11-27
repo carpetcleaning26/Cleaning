@@ -356,7 +356,7 @@ export default function HomePage() {
               </div>
               <h3 className="text-lg font-black text-slate-900">Upfront Price Transparency</h3>
               <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                Prices start from $27/room with our 20% online booking discount auto-applied. Zero hidden fees or deposit requirements.
+                Bedrooms from $30, upholstery from $55/seat, with our 20% online booking discount auto-applied ($90 out-call fee per booking).
               </p>
             </div>
 

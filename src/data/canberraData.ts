@@ -56,9 +56,9 @@ export const BUSINESS_INFO = {
   rating: "5.0★",
   reviewCount: "80+",
   logos: {
-    main: "https://www.canberracarpetcleaningdeals.com.au/assets/images/main-logo.png",
-    alt: "https://www.canberracarpetcleaningdeals.com.au/assets/images/canberracarpetcleaningdeals-logo.png",
-    white: "https://www.canberracarpetcleaningdeals.com.au/assets/images/logo-white.png"
+    main: "/images/logo/logo-white-bg.png",
+    alt: "/images/logo/logo-blue-bg.png",
+    white: "/images/logo/logo-green-bg.png"
   }
 };
 
@@ -71,9 +71,9 @@ export const SERVICES: ServiceItem[] = [
     category: "GENERAL",
     shortDesc: "On-site curtain and blind cleaning across Canberra ACT, no removal needed. Restores freshness of window treatments.",
     fullDesc: "Our on-site curtain and blind steam cleaning service removes airborne dust, allergens, moisture stains, and odors directly while your drapes remain hanging. Eliminates the hassle of taking down heavy curtains or taking them to dry cleaners.",
-    startingPrice: "$35",
-    unit: "per panel / drop",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80",
+    startingPrice: "$25",
+    unit: "per m²",
+    image: "/pictures/curtain-cleaning.jpg",
     differentiators: [
       "Cleaned directly on-site with zero drapes removal needed",
       "Removes trapped dust, mold spores, and pollen allergens",
@@ -89,9 +89,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Deodorize & Groom", desc: "Antimicrobial deodorizer leaves window drapery fresh." }
     ],
     pricingNotes: [
-      "Standard drapes from $35 per drop after online discount",
-      "Blockout thermal blinds quoted on inspection",
-      "Zero travel surcharge across all ACT suburbs"
+      "Curtains & Blinds Cleaning: $25 per square metre (m²)",
+      "$90 out-call fee applies automatically per booking",
+      "20% online booking discount auto-applied in the Instant Quote calculator"
     ]
   },
   {
@@ -100,11 +100,11 @@ export const SERVICES: ServiceItem[] = [
     name: "Carpet Cleaning",
     navTitle: "Carpet Cleaning",
     category: "CARPET",
-    shortDesc: "Truck-mounted hot water extraction from $27/room. Deeper clean, faster drying within 1-2 hours across all Canberra suburbs.",
-    fullDesc: "Looking for trusted carpet cleaning in Canberra? We've been steam-cleaning Canberra carpets since 2008 — that's over 17 years and 100,000+ jobs across every ACT suburb. Today, we're rated 5.0★ verified Google reviews, with prices starting from just $27 per room after our auto-applied 20% online booking discount. Whether you're a Canberra homeowner booking your annual carpet refresh, a busy family dealing with kids and pets, or a tenant preparing for end-of-lease inspection, our team delivers a deeper, faster-drying clean than portable cleaning equipment can achieve.",
-    startingPrice: "$27",
-    unit: "per room",
-    image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800&auto=format&fit=crop&q=80",
+    shortDesc: "Truck-mounted hot water extraction from $30/bedroom. Deeper clean, faster drying within 1-2 hours across all Canberra suburbs.",
+    fullDesc: "Looking for trusted carpet cleaning in Canberra? We've been steam-cleaning Canberra carpets since 2008 — that's over 17 years and 100,000+ jobs across every ACT suburb. Today, we're rated 5.0★ verified Google reviews, with bedrooms from $30, family/living rooms at $56, and an auto-applied 20% online booking discount ($90 out-call fee applies per booking). Whether you're a Canberra homeowner booking your annual carpet refresh, a busy family dealing with kids and pets, or a tenant preparing for end-of-lease inspection, our team delivers a deeper, faster-drying clean than portable cleaning equipment can achieve.",
+    startingPrice: "$30",
+    unit: "per bedroom",
+    image: "/pictures/carpet-steam-wand-2026-11-27.jpeg",
     differentiators: [
       "Truck-mounted hot water extraction (deeper clean, walk-on dry in 1-2 hours)",
       "17 years cleaning Canberra carpets, knows local building & wool carpet styles",
@@ -122,12 +122,11 @@ export const SERVICES: ServiceItem[] = [
       { title: "Carpet Grooming", desc: "Resetting carpet pile for ultra-fast airflow drying." }
     ],
     pricingNotes: [
-      "Bedroom (up to 12m²) from $27 (after 20% discount)",
-      "Living / Dining / Family Room from $46",
-      "Hallway from $27 | Walk-in Robe from $5 | Stairs (8-16 steps) from $27",
-      "Property base fee ~$73",
-      "Sample 3-bedroom house + hallway: ~$235+GST",
-      "Sample 2-bedroom apartment: ~$173+GST"
+      "Bedroom: $30 per bedroom",
+      "Family Room: $56 | Living / Lounge Room: $56",
+      "Staircase: $25 (up to 16 steps) | $40 (more than 16 steps)",
+      "$90 out-call fee applies automatically per booking",
+      "20% online booking discount auto-applied at checkout"
     ]
   },
   {
@@ -167,14 +166,14 @@ export const SERVICES: ServiceItem[] = [
     name: "Upholstery Cleaning",
     navTitle: "Upholstery Cleaning",
     category: "UPHOLSTERY",
-    shortDesc: "From $41 per seat after 20% discount. No call-out fee for upholstery-only bookings. Steam cleaning for couches, lounges, armchairs.",
+    shortDesc: "Sofa & upholstery steam cleaning: $55 per seat, armchairs $65, dining chairs $18 each. Fast drying across Canberra.",
     fullDesc: "Revive your favorite living room furniture. Our upholstery steam cleaning removes food spills, body oils, pet dander, and odors from fabric sofas, sectional recliners, armchairs, and dining seats.",
-    startingPrice: "$41",
-    unit: "per seat",
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&auto=format&fit=crop&q=80",
+    startingPrice: "$55",
+    unit: "per sofa seat",
+    image: "/pictures/whatsapp-nov27/WhatsApp Image 2026-11-26 at 9.11.04 PM.jpeg",
     differentiators: [
-      "From $41 per seat after 20% online booking discount",
-      "Zero call-out fee for upholstery-only bookings",
+      "Sofa & Upholstery: $55 per seat | Armchair: $65 | Dining Chair: $18 each",
+      "20% online booking discount auto-applied at checkout",
       "Fabric-safe heat controlled steam extraction",
       "Deodorizes pet body oils and spilled beverages",
       "Optional Scotchgard stain protection barrier",
@@ -187,9 +186,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Fabric Conditioning", desc: "Restoring soft texture and fresh room fragrance." }
     ],
     pricingNotes: [
-      "Recliner / Armchair from $41 per seat",
-      "3-Seater Sofa from $123 (after 20% discount)",
-      "5-Seater Modular Corner Lounge from $205"
+      "Sofa & Upholstery: $55 per seat",
+      "Armchair: $65 each | Dining Chair: $18 each",
+      "$90 out-call fee applies per booking (20% online discount auto-applied)"
     ]
   },
   {
@@ -198,11 +197,11 @@ export const SERVICES: ServiceItem[] = [
     name: "Rug Cleaning",
     navTitle: "Rug Cleaning",
     category: "RUG",
-    shortDesc: "Persian, oriental, wool, synthetic rugs, on-site or off-site. From $32 after discount. 17 years experience, same-day available.",
+    shortDesc: "Persian, oriental, wool & synthetic rugs: Small $25, Medium $30, Large $40. 17 years experience, same-day available.",
     fullDesc: "Area rugs add warmth to your home but trap severe grit at the backing. We provide expert gentle washing for valuable wool, Persian, shag pile, and synthetic rugs.",
-    startingPrice: "$32",
-    unit: "per rug",
-    image: "https://images.unsplash.com/photo-1600121848594-d8644e57abab?w=800&auto=format&fit=crop&q=80",
+    startingPrice: "$25",
+    unit: "per small rug",
+    image: "/pictures/rug-2.jpg",
     differentiators: [
       "Specialized dye-safe pH-balanced washing",
       "Suitable for fine wool, Persian, silk, and synthetic rugs",
@@ -218,9 +217,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Fringe Grooming & Dry", desc: "Hanging or flat drying to retain shape." }
     ],
     pricingNotes: [
-      "Small Accent Rug from $32 (after 20% discount)",
-      "Medium Living Room Rug from $55",
-      "Large Persian / Wool Rug from $85"
+      "Small Rug: $25 | Medium Rug: $30 | Large Rug: $40",
+      "$90 out-call fee applies per booking",
+      "20% online booking discount auto-applied at checkout"
     ]
   },
   {
@@ -231,7 +230,7 @@ export const SERVICES: ServiceItem[] = [
     category: "CARPET",
     shortDesc: "Emergency flood/water damage restoration, 24/7 response, truck-mounted water extraction, carpet & sub-floor drying, industrial dehumidifiers.",
     fullDesc: "Immediate emergency response for burst pipes, roof leaks, or washing machine overflows. Our truck-mounted extractors remove standing water fast, followed by structural drying and dehumidification to prevent toxic black mold growth.",
-    startingPrice: "Emergency Quote",
+    startingPrice: "Email Us",
     unit: "24/7 Dispatch",
     image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80",
     differentiators: [
@@ -249,9 +248,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Drying Equipment Setup", desc: "Installing dehumidifiers and turbo blowers for 48 hrs." }
     ],
     pricingNotes: [
-      "Emergency response callout available 24/7",
+      "For Flood & Water Damage Restoration, please email us at info@canberracarpetcleaningdeals.com.au",
       "Direct insurance billing supported",
-      "No extra travel surcharge anywhere in ACT"
+      "Emergency response callout available 24/7 across Canberra ACT"
     ]
   },
   {
@@ -262,7 +261,7 @@ export const SERVICES: ServiceItem[] = [
     category: "COMMERCIAL",
     shortDesc: "Commercial cleaning with flexible after-hours scheduling, high-traffic office carpet steam washing, and desk area sanitization.",
     fullDesc: "Keep your commercial workplace presentable and healthy. We steam clean office carpet tiles, executive chairs, waiting room sofas, and boardroom floors across Canberra CBD, Belconnen, and Parliamentary zone offices.",
-    startingPrice: "Custom Quote",
+    startingPrice: "Email Us",
     unit: "commercial rate",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&auto=format&fit=crop&q=80",
     differentiators: [
@@ -280,7 +279,7 @@ export const SERVICES: ServiceItem[] = [
       { title: "Final Inspection", desc: "Ensuring all desk areas and corridors are pristine." }
     ],
     pricingNotes: [
-      "Custom per-sq-meter pricing for commercial properties",
+      "For Office & Commercial Cleaning, please email us at info@canberracarpetcleaningdeals.com.au",
       "Recurring monthly maintenance plans available",
       "Includes tax invoice for business accounting"
     ]
@@ -291,11 +290,11 @@ export const SERVICES: ServiceItem[] = [
     name: "Tiles & Grout Cleaning",
     navTitle: "Tiles & Grout Cleaning",
     category: "TILES",
-    shortDesc: "High-pressure rotational steam washing that restores stained kitchen floors, bathroom tiles, and black grout lines.",
+    shortDesc: "High-pressure rotational steam washing ($10/m²) that restores stained kitchen floors, bathroom tiles, and black grout lines.",
     fullDesc: "Standard mopping only pushes dirty water into porous grout lines. Our specialized rotational tile cleaners use heated pressure up to 1000 PSI to strip years of buildup from kitchen tiles, bathrooms, and entryways.",
-    startingPrice: "$4.50",
-    unit: "per sq meter",
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop&q=80",
+    startingPrice: "$10",
+    unit: "per m²",
+    image: "/pictures/tile-cleaning-pic.jpg",
     differentiators: [
       "Rotational high-pressure steam scrubbing (up to 1000 PSI)",
       "Strips embedded grime from porous cement grout",
@@ -311,22 +310,22 @@ export const SERVICES: ServiceItem[] = [
       { title: "Grout Sealant (Optional)", desc: "Sealing grout lines to block future stains." }
     ],
     pricingNotes: [
-      "Kitchen / Living Tile areas from $4.50/m²",
-      "Bathroom & Shower Tile scrub from $99 per room",
-      "Combined carpet & tile discount deals"
+      "Tiles & Grout Cleaning: $10 per square metre (m²)",
+      "$90 out-call fee applies per booking",
+      "20% online booking discount auto-applied at checkout"
     ]
   },
   {
     id: "pest-control",
     slug: "pest-control",
-    name: "Pest Control",
-    navTitle: "Pest Control",
+    name: "Fleas Treatment & Pest Control",
+    navTitle: "Fleas Treatment & Pest Control",
     category: "GENERAL",
-    shortDesc: "Flea treatment, bed bug eradication, cockroach control, ant treatment, spider control. Pet-safe and family-safe certified products.",
+    shortDesc: "Carpet fleas treatment ($30/bedroom, $45/living room) & pet-safe pest control. Official end-of-lease certificates.",
     fullDesc: "Mandatory end-of-lease pet flea sprays and general residential pest treatments. We supply official pest certificates required by Canberra real estate agents when moving out with pets.",
-    startingPrice: "$79",
-    unit: "per property",
-    image: "https://www.canberracarpetcleaningdeals.com.au/assets/images/services/pest-full-service.jpg",
+    startingPrice: "$30",
+    unit: "per bedroom",
+    image: "/pictures/carpet-flea-treatment.jpg",
     differentiators: [
       "Official Real Estate End-of-Lease Flea Certificate provided",
       "Targeted extermination for fleas, spiders, cockroaches, and ants",
@@ -342,9 +341,9 @@ export const SERVICES: ServiceItem[] = [
       { title: "Certificate Issuance", desc: "Handing over official lease exit certificate." }
     ],
     pricingNotes: [
-      "End of Lease Flea Spray from $79",
-      "Full House Pest Control (Fleas + Spiders + Ants) from $129",
-      "Combined carpet clean + flea spray bundle savings"
+      "Fleas Treatment: $30 per bedroom | $45 per living room size",
+      "$90 out-call fee applies per booking",
+      "20% online booking discount auto-applied at checkout"
     ]
   }
 ];
@@ -437,8 +436,8 @@ export const FAQS: FaqItem[] = [
   },
   {
     id: "faq4",
-    question: "Is the price shown on your website Deals page a fixed price?",
-    answer: "Our online prices serve as an accurate guide with our 20% online booking discount applied. A standard property call-out base fee of ~$73 + GST applies. Final pricing may adjust depending on severe soiling, pet urine deep extraction needs, stain complexity, or heavy furniture moving.",
+    question: "How is the online instant quote calculated?",
+    answer: "Our Instant Quote Calculator uses transparent per-item rates with a $90 out-call fee applied automatically to every booking, plus an automatic 20% online booking discount. Final pricing may adjust only for severe soiling or special stain treatments.",
     category: "pricing"
   },
   {
@@ -533,6 +532,13 @@ export const ACT_SUBURBS_LIST = [
 ];
 
 export const GALLERY_IMAGES = [
+  { url: "/pictures/carpet-steam-wand-2026-11-27.jpeg", caption: "Deep Carpet Steam Extraction Wand Results in Canberra" },
+  { url: "/pictures/whatsapp-nov27/WhatsApp Image 2026-11-26 at 9.11.04 PM.jpeg", caption: "Fabric Sofa Armrest & Cushion Steam Extraction" },
+  { url: "/pictures/whatsapp-nov27/WhatsApp Image 2026-11-26 at 9.11.05 PM.jpeg", caption: "Upholstery Lounge Deep Steam Detailing" },
+  { url: "/pictures/tile-cleaning-pic.jpg", caption: "High-Pressure Rotational Tile & Patio Hydro-Scrubbing" },
+  { url: "/pictures/rug-2.jpg", caption: "Vibrant Area Rug Deep Cleaning & Fiber Restoration" },
+  { url: "/pictures/curtain-cleaning.jpg", caption: "On-Site Curtain & Drapery Steam Sanitizing" },
+  { url: "/pictures/carpet-flea-treatment.jpg", caption: "Certified Carpet Flea Treatment & Pest Spraying" },
   { url: "/pictures/real_image_1.jpeg", caption: "Truck-Mounted Carpet Steam Extraction in Belconnen" },
   { url: "/pictures/real_image_2.jpeg", caption: "5-Seater Lounge Steam Clean & Stain Removal in Gungahlin" },
   { url: "/pictures/real_image_3.jpeg", caption: "High-Pressure Kitchen Tile & Grout Hydro-Scrubbing" },
@@ -561,6 +567,9 @@ export const GALLERY_IMAGES = [
 ];
 
 export const VIDEOS_LIST = [
+  { id: "v0", title: "Live Carpet & Upholstery Steam Extraction Session", duration: "1:30", videoUrl: "/pictures/cleaning-video-2026-11-26.mp4", thumbnail: "/pictures/carpet-steam-wand-2026-11-27.jpeg" },
+  { id: "v0b", title: "Sofa & Lounge Fabric Steam Wand Close-Up", duration: "1:10", videoUrl: "/pictures/whatsapp-nov27/WhatsApp Video 2026-11-26 at 9.11.04 PM.mp4", thumbnail: "/pictures/whatsapp-nov27/WhatsApp Image 2026-11-26 at 9.11.04 PM.jpeg" },
+  { id: "v0c", title: "Upholstery Deep Stain & Cushion Extraction", duration: "0:55", videoUrl: "/pictures/whatsapp-nov27/WhatsApp Video 2026-11-26 at 9.11.05 PM.mp4", thumbnail: "/pictures/whatsapp-nov27/WhatsApp Image 2026-11-26 at 9.11.05 PM.jpeg" },
   { id: "v1", title: "Industrial Truck-Mounted Carpet Steam Extraction Demonstration", duration: "1:45", videoUrl: "/pictures/video_26.mp4", thumbnail: "/pictures/real_image_1.jpeg" },
   { id: "v2", title: "Deep Pet Stain & Urine Odour Neutralization In Action", duration: "1:15", videoUrl: "/pictures/video_27.mp4", thumbnail: "/pictures/real_image_2.jpeg" },
   { id: "v3", title: "Rotational High-Pressure Tile & Grout Hydro-Scrubbing", duration: "2:10", videoUrl: "/pictures/video_28.mp4", thumbnail: "/pictures/real_image_3.jpeg" },

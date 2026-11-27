@@ -102,7 +102,7 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
               {/* Price Anchor Line Underneath */}
               <div className="text-xs font-bold text-sky-100 flex items-center gap-2 pt-1">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#10b981]"></span>
-                <span>Prices start from <strong>$27/room</strong> • 100% Bond Back Guarantee</span>
+                <span>Bedrooms from <strong>$30</strong> • 20% Online Discount Auto-Applied</span>
               </div>
             </div>
 
@@ -144,7 +144,7 @@ export default function Hero({ onOpenCalculator }: HeroProps) {
 
                 {/* Floating Special Offer Tag */}
                 <div className="absolute top-6 right-6 bg-[#10b981] text-white px-4 py-2 rounded-full text-xs font-black shadow-lg uppercase tracking-wider">
-                  DEALS FROM $27 / ROOM
+                  20% OFF ONLINE BOOKING
                 </div>
 
                 {/* Bottom Overlay Badge */}
