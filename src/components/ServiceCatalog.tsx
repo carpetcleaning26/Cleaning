@@ -22,11 +22,18 @@ export default function ServiceCatalog({ onOpenCalculator }: ServiceCatalogProps
           const publishedOnly = data
             .filter((s: any) => s.published !== false)
             .map((s: any) => {
-              const fallback = SERVICES.find((f) => f.slug === s.slug);
+              const fallback = SERVICES.find(
+                (f) =>
+                  f.slug === s.slug ||
+                  f.id === s.id ||
+                  (s.name && f.name === s.name) ||
+                  (s.title && f.name === s.title)
+              );
               const isLegacyImage =
                 typeof s.image === 'string' &&
                 (s.image.includes('images.unsplash.com') ||
-                  s.image.includes('canberracarpetcleaningdeals.com.au'));
+                  s.image.includes('canberracarpetcleaningdeals.com.au') ||
+                  !s.image);
               return isLegacyImage && fallback ? { ...s, image: fallback.image } : s;
             });
           if (publishedOnly.length > 0) {

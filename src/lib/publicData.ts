@@ -13,7 +13,13 @@ import { SERVICES, FAQS, BLOG_POSTS, GALLERY_IMAGES, VIDEOS_LIST, BUSINESS_INFO 
 import { ACT_SUBURBS, REVIEWS } from '@/data/cleaningData';
 
 function normalizeService(doc: any) {
-  const fallback = SERVICES.find((s) => s.slug === doc?.slug);
+  const fallback = SERVICES.find(
+    (s) =>
+      s.slug === doc?.slug ||
+      s.id === doc?.id ||
+      (doc?.name && s.name === doc.name) ||
+      (doc?.title && s.name === doc.title)
+  );
   const name = doc?.name || doc?.title || fallback?.name || 'Cleaning Service';
   const rawImage = doc?.image || '';
   const isLegacyExternalImage =

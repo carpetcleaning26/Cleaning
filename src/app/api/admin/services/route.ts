@@ -2,12 +2,28 @@ import { NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import ServiceModel from '@/models/Service';
 import { verifyAdminSessionOrThrow } from '@/lib/auth';
+import { SERVICES } from '@/data/canberraData';
 
 export async function GET() {
   try {
     await connectToDatabase();
-    const services = await ServiceModel.find().sort({ displayOrder: 1, createdAt: -1 });
-    return NextResponse.json(services);
+    const services = await ServiceModel.find().sort({ displayOrder: 1, createdAt: -1 }).lean();
+    const normalized = services.map((s: any) => {
+      const fallback = SERVICES.find(
+        (f) =>
+          f.slug === s.slug ||
+          f.id === s.id ||
+          (s.name && f.name === s.name) ||
+          (s.title && f.name === s.title)
+      );
+      const isLegacyImage =
+        typeof s.image === 'string' &&
+        (s.image.includes('images.unsplash.com') ||
+          s.image.includes('canberracarpetcleaningdeals.com.au') ||
+          !s.image);
+      return isLegacyImage && fallback ? { ...s, image: fallback.image } : s;
+    });
+    return NextResponse.json(normalized);
   } catch (err: any) {
     return NextResponse.json({ error: err.message }, { status: 500 });
   }
