@@ -27,46 +27,43 @@ export async function POST(req: Request) {
     let authenticated = false;
     let adminUserId = 'admin-fallback-id';
 
-    // 1. First check against environment credentials for instant fallback guarantee
+    // 1. First check against environment credentials for instant login
     if (inputEmail === envAdminEmail && password === envAdminPass) {
       authenticated = true;
     }
 
-    // 2. Try MongoDB authentication & auto-seeding
-    try {
-      await connectToDatabase();
+    // 2. Only query MongoDB if not already authenticated via env credentials
+    if (!authenticated) {
+      try {
+        await connectToDatabase();
 
-      let admin = await AdminUserModel.findOne({ email: inputEmail });
+        let admin = await AdminUserModel.findOne({ email: inputEmail });
 
-      if (!admin) {
-        // If no admin user exists in DB at all, auto-create default admin user
-        const totalAdmins = await AdminUserModel.countDocuments();
-        if (totalAdmins === 0 || inputEmail === envAdminEmail) {
-          const passHash = await hashPassword(envAdminPass);
-          admin = await AdminUserModel.create({
-            email: envAdminEmail,
-            passwordHash: passHash,
-            role: 'admin',
-            lastLogin: new Date(),
-          });
+        if (!admin) {
+          const totalAdmins = await AdminUserModel.countDocuments();
+          if (totalAdmins === 0) {
+            const passHash = await hashPassword(envAdminPass);
+            admin = await AdminUserModel.create({
+              email: envAdminEmail,
+              passwordHash: passHash,
+              role: 'admin',
+              lastLogin: new Date(),
+            });
+          }
         }
-      }
 
-      if (admin) {
-        adminUserId = admin._id.toString();
-        if (!authenticated) {
+        if (admin) {
+          adminUserId = admin._id.toString();
           const isMatch = await verifyPassword(password, admin.passwordHash);
           if (isMatch) {
             authenticated = true;
+            admin.lastLogin = new Date();
+            admin.save().catch(() => {});
           }
         }
-        if (authenticated) {
-          admin.lastLogin = new Date();
-          await admin.save().catch(() => {});
-        }
+      } catch (dbErr) {
+        console.warn('[Admin Auth] MongoDB connection warning during login:', dbErr);
       }
-    } catch (dbErr) {
-      console.warn('[Admin Auth] MongoDB connection warning during login:', dbErr);
     }
 
     if (!authenticated) {
