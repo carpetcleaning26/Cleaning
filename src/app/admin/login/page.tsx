@@ -99,8 +99,11 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <div className="text-center text-[11px] text-slate-400 font-semibold border-t border-slate-100 pt-4">
-          Canberra Carpet Cleaning Deals • Protected Admin Portal
+        <div className="text-center text-[11px] text-slate-500 font-semibold border-t border-slate-100 pt-4 space-y-1">
+          <div className="text-slate-700 font-bold">Default Admin Credentials:</div>
+          <div>Email: <span className="font-mono text-slate-900">admin@canberracarpetcleaningdeals.com.au</span></div>
+          <div>Password: <span className="font-mono text-slate-900">AdminPass2026!</span></div>
+          <div className="text-slate-400 pt-1">Canberra Carpet Cleaning Deals • Protected Admin Portal</div>
         </div>
 
       </div>
