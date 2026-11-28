@@ -17,9 +17,9 @@ export default function InteractiveCalculator() {
   const [floorNumber, setFloorNumber] = useState<string>('1');
 
   // Step 2: Service Quantities
-  const [bedrooms, setBedrooms] = useState<number>(3);
+  const [bedrooms, setBedrooms] = useState<number>(0);
   const [familyRooms, setFamilyRooms] = useState<number>(0);
-  const [livingRooms, setLivingRooms] = useState<number>(1);
+  const [livingRooms, setLivingRooms] = useState<number>(0);
   const [stairsUpTo16, setStairsUpTo16] = useState<number>(0);
   const [stairsOver16, setStairsOver16] = useState<number>(0);
   const [sofaSeats, setSofaSeats] = useState<number>(0);
@@ -51,9 +51,9 @@ export default function InteractiveCalculator() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingRef, setBookingRef] = useState<string | null>(null);
 
-  // Pricing Logic ($90 out-call fee applies automatically + 20% discount auto-deducted)
+  // Pricing Logic ($90 house / $150 unit-apartment out-call fee + 20% discount auto-deducted)
   const priceMath = useMemo(() => {
-    const outCallFee = 90;
+    const outCallFee = propertyType === 'apartment' ? 150 : 90;
     let servicesTotal = 0;
 
     servicesTotal += bedrooms * 30;
@@ -90,7 +90,7 @@ export default function InteractiveCalculator() {
       grandTotal
     };
   }, [
-    bedrooms, familyRooms, livingRooms, stairsUpTo16, stairsOver16,
+    propertyType, bedrooms, familyRooms, livingRooms, stairsUpTo16, stairsOver16,
     sofaSeats, armchairs, diningChairs, smallRugs, mediumRugs, largeRugs,
     fleaBedrooms, fleaLivingRooms, curtainsSqm, tileSqm, couponApplied
   ]);
@@ -117,7 +117,11 @@ export default function InteractiveCalculator() {
     setIsSubmitting(true);
 
     const selectedServicesList: { name: string; quantity: number; price: number }[] = [
-      { name: 'Standard Out-Call Fee', quantity: 1, price: 90 }
+      {
+        name: propertyType === 'apartment' ? 'Apartment / Unit Out-Call Fee' : 'House Out-Call Fee',
+        quantity: 1,
+        price: priceMath.outCallFee,
+      }
     ];
     if (bedrooms > 0) selectedServicesList.push({ name: 'Carpet Cleaning - Bedrooms', quantity: bedrooms, price: bedrooms * 30 });
     if (familyRooms > 0) selectedServicesList.push({ name: 'Carpet Cleaning - Family Room', quantity: familyRooms, price: familyRooms * 56 });
@@ -358,7 +362,7 @@ export default function InteractiveCalculator() {
                   className="space-y-4"
                 >
                   <div className="text-xs font-bold text-slate-500 mb-2">
-                    Adjust quantity (+/-) for your home. A standard $90 out-call fee applies per booking and 20% online discount is deducted automatically.
+                    Adjust quantity (+/-) for your home. Out-call fee is $90 for houses or $150 for apartments/units, with 20% online discount deducted automatically.
                   </div>
 
                   {/* Quantity Items List */}
@@ -539,7 +543,7 @@ export default function InteractiveCalculator() {
                 >
                   <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">
                     <div className="flex justify-between text-slate-600 font-semibold">
-                      <span>Standard Out-Call Fee (Every Booking):</span>
+                      <span>Out-Call Fee ({propertyType === 'apartment' ? 'Apartment / Unit' : 'House'}):</span>
                       <span>${priceMath.outCallFee}.00 AUD</span>
                     </div>
                     <div className="flex justify-between text-slate-600 font-semibold">
@@ -623,8 +627,8 @@ export default function InteractiveCalculator() {
 
             <div className="space-y-2 text-xs text-slate-300">
               <div className="flex justify-between">
-                <span>Out-Call Fee (Standard):</span>
-                <span className="font-bold text-white">$90</span>
+                <span>Out-Call Fee ({propertyType === 'apartment' ? 'Unit / Apt' : 'House'}):</span>
+                <span className="font-bold text-white">${priceMath.outCallFee}</span>
               </div>
               {bedrooms > 0 && (
                 <div className="flex justify-between">

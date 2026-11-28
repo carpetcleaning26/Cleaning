@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { ShieldCheck, Lock, Mail, ArrowRight } from 'lucide-react';
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('admin@canberracarpetcleaningdeals.com.au');
-  const [password, setPassword] = useState('AdminPass2026!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -64,9 +64,10 @@ export default function AdminLoginPage() {
               <input
                 type="email"
                 required
+                autoComplete="off"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@canberracarpetcleaningdeals.com.au"
+                placeholder="Enter admin email"
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-4 py-3 text-slate-900 text-xs font-bold placeholder-slate-400 focus:outline-none focus:border-[#10b981] focus:bg-white transition-all"
               />
             </div>
@@ -79,9 +80,10 @@ export default function AdminLoginPage() {
               <input
                 type="password"
                 required
+                autoComplete="new-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••••••"
+                placeholder="Enter password"
                 className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-10 pr-4 py-3 text-slate-900 text-xs font-bold placeholder-slate-400 focus:outline-none focus:border-[#10b981] focus:bg-white transition-all"
               />
             </div>
