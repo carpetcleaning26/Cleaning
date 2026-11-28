@@ -206,7 +206,7 @@ export default function InteractiveCalculator() {
                   key={s.num}
                   type="button"
                   onClick={() => setStep(s.num)}
-                  className={`relative flex-1 py-2.5 rounded-xl text-xs font-black flex items-center justify-center transition-colors z-10 ${
+                  className={`relative flex-1 py-2 sm:py-2.5 px-1 rounded-xl text-[11px] sm:text-xs font-black flex items-center justify-center transition-colors z-10 ${
                     isCurrent ? 'text-white' : 'text-slate-600'
                   }`}
                 >
@@ -261,7 +261,7 @@ export default function InteractiveCalculator() {
                 >
                   <div className="space-y-3">
                     <label className="block text-xs font-black uppercase text-slate-700">Property Type</label>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <button
                         type="button"
                         onClick={() => setPropertyType('house')}
@@ -288,7 +288,7 @@ export default function InteractiveCalculator() {
 
                   <div className="space-y-3">
                     <label className="block text-xs font-black uppercase text-slate-700">Property State</label>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <button
                         type="button"
                         onClick={() => setOccupancy('empty')}
@@ -571,7 +571,7 @@ export default function InteractiveCalculator() {
                   </div>
 
                   {/* Coupon Input */}
-                  <div className="flex gap-2">
+                  <div className="flex flex-col sm:flex-row gap-2">
                     <input
                       type="text"
                       placeholder="Coupon Code (e.g. CANBERRA15)"

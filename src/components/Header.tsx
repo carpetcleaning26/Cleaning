@@ -56,28 +56,28 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
       
       {/* Top Utility Bar */}
-      <div className="bg-[#0b132b] text-sky-100 text-xs py-2 px-4 border-b border-sky-950">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
+      <div className="bg-[#0b132b] text-sky-100 text-[11px] sm:text-xs py-2 px-3 sm:px-4 border-b border-sky-950">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-1.5 md:gap-2">
           
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-4 gap-y-1">
             <div className="flex items-center gap-1.5 font-medium text-sky-100">
-              <MapPin className="w-3.5 h-3.5 text-[#10b981]" />
+              <MapPin className="w-3.5 h-3.5 text-[#10b981] flex-shrink-0" />
               <span>{settings.address}</span>
             </div>
             <div className="hidden sm:flex items-center gap-1.5 font-medium text-sky-100">
-              <Clock className="w-3.5 h-3.5 text-sky-300" />
+              <Clock className="w-3.5 h-3.5 text-sky-300 flex-shrink-0" />
               <span>{settings.hours}</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-4 font-semibold">
-            <a href={`mailto:${settings.email}`} className="hover:text-white transition-colors flex items-center gap-1 text-sky-100">
-              <Mail className="w-3.5 h-3.5 text-sky-300" />
-              <span>{settings.email}</span>
+          <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 font-semibold max-w-full">
+            <a href={`mailto:${settings.email}`} className="hover:text-white transition-colors flex items-center gap-1 text-sky-100 truncate max-w-[260px] sm:max-w-none">
+              <Mail className="w-3.5 h-3.5 text-sky-300 flex-shrink-0" />
+              <span className="truncate">{settings.email}</span>
             </a>
-            <span className="opacity-30 text-sky-700">|</span>
-            <a href={settings.telLink} className="text-[#10b981] hover:text-white transition-colors flex items-center gap-1 font-black">
-              <Phone className="w-3.5 h-3.5 text-[#10b981]" />
+            <span className="hidden sm:inline opacity-30 text-sky-700">|</span>
+            <a href={settings.telLink} className="text-[#10b981] hover:text-white transition-colors flex items-center gap-1 font-black whitespace-nowrap">
+              <Phone className="w-3.5 h-3.5 text-[#10b981] flex-shrink-0" />
               <span>{settings.phone}</span>
             </a>
           </div>

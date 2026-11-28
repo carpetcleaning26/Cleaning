@@ -15,6 +15,15 @@ import { ACT_SUBURBS, REVIEWS } from '@/data/cleaningData';
 function normalizeService(doc: any) {
   const fallback = SERVICES.find((s) => s.slug === doc?.slug);
   const name = doc?.name || doc?.title || fallback?.name || 'Cleaning Service';
+  const rawImage = doc?.image || '';
+  const isLegacyExternalImage =
+    rawImage.includes('images.unsplash.com') ||
+    rawImage.includes('canberracarpetcleaningdeals.com.au');
+  const resolvedImage =
+    isLegacyExternalImage && fallback?.image
+      ? fallback.image
+      : (rawImage || fallback?.image || '/pictures/real_image_1.jpeg');
+
   return {
     ...doc,
     ...(doc?._id ? { _id: doc._id.toString() } : {}),
@@ -23,7 +32,7 @@ function normalizeService(doc: any) {
     navTitle: doc?.navTitle || name,
     shortDesc: doc?.shortDesc || fallback?.shortDesc || '',
     fullDesc: doc?.fullDesc || fallback?.fullDesc || doc?.shortDesc || '',
-    image: doc?.image || fallback?.image || '/pictures/real_image_1.jpeg',
+    image: resolvedImage,
     differentiators: Array.isArray(doc?.differentiators)
       ? doc.differentiators
       : (fallback?.differentiators ?? []),

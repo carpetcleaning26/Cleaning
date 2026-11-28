@@ -19,7 +19,16 @@ export default function ServiceCatalog({ onOpenCalculator }: ServiceCatalogProps
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
-          const publishedOnly = data.filter((s: any) => s.published !== false);
+          const publishedOnly = data
+            .filter((s: any) => s.published !== false)
+            .map((s: any) => {
+              const fallback = SERVICES.find((f) => f.slug === s.slug);
+              const isLegacyImage =
+                typeof s.image === 'string' &&
+                (s.image.includes('images.unsplash.com') ||
+                  s.image.includes('canberracarpetcleaningdeals.com.au'));
+              return isLegacyImage && fallback ? { ...s, image: fallback.image } : s;
+            });
           if (publishedOnly.length > 0) {
             setServiceList(publishedOnly);
           }

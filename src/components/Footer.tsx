@@ -156,7 +156,7 @@ export default function Footer() {
       </div>
 
       {/* Copyright & Social Bar */}
-      <div className="border-t border-sky-950 py-6 px-4 text-center text-xs text-sky-300 font-medium bg-[#040814]">
+      <div className="border-t border-sky-950 py-6 pb-24 sm:pb-6 px-4 text-center text-xs text-sky-300 font-medium bg-[#040814]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             © 2026 Canberra Carpet Cleaning Deals. All Rights Reserved.

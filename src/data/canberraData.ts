@@ -232,7 +232,7 @@ export const SERVICES: ServiceItem[] = [
     fullDesc: "Immediate emergency response for burst pipes, roof leaks, or washing machine overflows. Our truck-mounted extractors remove standing water fast, followed by structural drying and dehumidification to prevent toxic black mold growth.",
     startingPrice: "Email Us",
     unit: "24/7 Dispatch",
-    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&auto=format&fit=crop&q=80",
+    image: "/pictures/flood-restoration.jpg",
     differentiators: [
       "24/7 Emergency rapid dispatch across Canberra ACT",
       "Industrial truck-mounted heavy water extraction units",
